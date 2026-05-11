@@ -6,7 +6,7 @@
     "enabled": true
   },
   "assets": {
-    "directory": "Portfolio"
+    "directory": "Portfolio/dist"
   },
   "compatibility_flags": [
     "nodejs_compat"
