@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react"
+
 const projects = [
   {
     title: "SneakerHub",
@@ -7,6 +9,11 @@ const projects = [
     github: "https://github.com/FranCalvoDev/SneakerHub-Final",
     demo: null,
     status: "finished",
+    images: [
+      "/projects/sneakerhub-1.jpg",
+      "/projects/sneakerhub-2.jpg",
+      "/projects/sneakerhub-3.jpg",
+    ],
   },
   {
     title: "Portfolio Personal",
@@ -16,6 +23,11 @@ const projects = [
     github: "https://github.com/FranCalvoDev/Portfolio",
     demo: null,
     status: "finished",
+    images: [
+      "/projects/portfolio-1.jpg",
+      "/projects/portfolio-2.jpg",
+      "/projects/portfolio-3.jpg",
+    ],
   },
   {
     title: "Migración de Software PHP",
@@ -25,8 +37,67 @@ const projects = [
     github: null,
     demo: null,
     status: "inprogress",
+    images: [
+      "/projects/php-1.jpg",
+      "/projects/php-2.jpg",
+      "/projects/php-3.jpg",
+    ],
   },
 ]
+
+const ProjectCarousel = ({ images, title }: { images: string[]; title: string }) => {
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [images.length])
+
+  return (
+    <div className="relative w-full h-44 rounded-lg overflow-hidden border border-border mb-4 bg-muted">
+      {images.map((src, index) => (
+        <img
+          key={index}
+          src={src}
+          alt={`${title} screenshot ${index + 1}`}
+          onError={(e) => {
+            const target = e.currentTarget
+            target.style.display = "none"
+            const parent = target.parentElement
+            if (parent) {
+              const placeholder = parent.querySelector(".placeholder")
+              if (placeholder) (placeholder as HTMLElement).style.display = "flex"
+            }
+          }}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+            index === current ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      ))}
+
+      {/* Placeholder visible si no hay imágenes */}
+      <div className="placeholder absolute inset-0 flex-col items-center justify-center text-muted-foreground text-sm gap-2 hidden">
+        <span className="text-3xl">🖼️</span>
+        <span>Imagen próximamente</span>
+      </div>
+
+      {/* Dots */}
+      <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrent(index)}
+            className={`w-1.5 h-1.5 rounded-full transition-all ${
+              index === current ? "bg-primary w-3" : "bg-muted-foreground opacity-50"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 const Projects = () => {
   return (
@@ -43,6 +114,9 @@ const Projects = () => {
               key={project.title}
               className="bg-secondary border border-border rounded-xl p-6 flex flex-col justify-between"
             >
+              {/* Carrusel de imágenes */}
+              <ProjectCarousel images={project.images} title={project.title} />
+
               {/* Header */}
               <div>
                 <div className="flex justify-between items-center mb-3">
