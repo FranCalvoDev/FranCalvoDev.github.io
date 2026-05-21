@@ -1,3 +1,4 @@
+import { LanguageProvider } from './context/LanguageContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero.tsx'
 import About from './components/About'
@@ -9,16 +10,18 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <main className="bg-primary text-white font-main">
-      <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Contact />
-      <Footer />
-    </main>
+    <LanguageProvider>
+      <main className="bg-primary text-white font-main">
+        <Navbar />
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Contact />
+        <Footer />
+      </main>
+    </LanguageProvider>
   )
 }
 

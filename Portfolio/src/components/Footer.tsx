@@ -1,4 +1,10 @@
+import { useLanguage } from "../context/LanguageContext"
+import { translations } from "../translations/translations"
+
 const Footer = () => {
+  const { language } = useLanguage()
+  const t = translations[language].footer
+
   return (
     <footer className="bg-secondary border-t border-border py-8 px-8">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
@@ -10,7 +16,7 @@ const Footer = () => {
 
         {/* Copy */}
         <p className="text-muted-foreground text-sm">
-          © {new Date().getFullYear()} — Todos los derechos reservados
+          © {new Date().getFullYear()} — {t.rights}
         </p>
 
         {/* Links */}

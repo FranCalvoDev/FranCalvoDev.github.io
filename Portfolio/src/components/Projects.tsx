@@ -1,52 +1,11 @@
 import { useState, useEffect } from "react"
-
-const projects = [
-  {
-    title: "SneakerHub",
-    description:
-      "Aplicación web de e-commerce orientada a la venta de zapatillas. Desarrollo Full-Stack con interfaz dinámica y gestión de productos.",
-    techs: ["JavaScript", "React.js", "MySQL", "CSS"],
-    github: "https://github.com/FranCalvoDev/SneakerHub-Final",
-    demo: null,
-    status: "finished",
-    images: [
-      "/projects/sneakerhub-1.jpg",
-      "/projects/sneakerhub-2.jpg",
-      "/projects/sneakerhub-3.jpg",
-    ],
-  },
-  {
-    title: "Portfolio Personal",
-    description:
-      "Portfolio profesional desarrollado con React y TypeScript. Muestra de proyectos, habilidades y experiencia laboral.",
-    techs: ["React.js", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/FranCalvoDev/Portfolio",
-    demo: null,
-    status: "finished",
-    images: [
-      "/projects/portfolio-1.jpg",
-      "/projects/portfolio-2.jpg",
-      "/projects/portfolio-3.jpg",
-    ],
-  },
-  {
-    title: "Migración de Software PHP",
-    description:
-      "Migración y modernización de sistema legacy desarrollado en PHP. Proyecto en proceso de desarrollo activo.",
-    techs: ["PHP", "MySQL", "JavaScript"],
-    github: null,
-    demo: null,
-    status: "inprogress",
-    images: [
-      "/projects/php-1.jpg",
-      "/projects/php-2.jpg",
-      "/projects/php-3.jpg",
-    ],
-  },
-]
+import { useLanguage } from "../context/LanguageContext"
+import { translations } from "../translations/translations"
 
 const ProjectCarousel = ({ images, title }: { images: string[]; title: string }) => {
   const [current, setCurrent] = useState(0)
+  const { language } = useLanguage()
+  const imageSoon = translations[language].projects.imageSoon
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -80,7 +39,7 @@ const ProjectCarousel = ({ images, title }: { images: string[]; title: string })
       {/* Placeholder visible si no hay imágenes */}
       <div className="placeholder absolute inset-0 flex-col items-center justify-center text-muted-foreground text-sm gap-2 hidden">
         <span className="text-3xl">🖼️</span>
-        <span>Imagen próximamente</span>
+        <span>{imageSoon}</span>
       </div>
 
       {/* Dots */}
@@ -100,16 +59,19 @@ const ProjectCarousel = ({ images, title }: { images: string[]; title: string })
 }
 
 const Projects = () => {
+  const { language } = useLanguage()
+  const t = translations[language].projects
+
   return (
     <section id="projects" className="bg-background py-24 px-8">
       <div className="max-w-5xl mx-auto">
 
         <h2 className="text-3xl font-bold text-primary mb-12 text-center">
-          Proyectos
+          {t.title}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
+          {t.items.map((project) => (
             <div
               key={project.title}
               className="bg-secondary border border-border rounded-xl p-6 flex flex-col justify-between"
@@ -125,7 +87,7 @@ const Projects = () => {
                   </h3>
                   {project.status === "inprogress" && (
                     <span className="text-xs bg-muted text-primary border border-primary px-2 py-1 rounded-full">
-                      En proceso
+                      {t.inProgress}
                     </span>
                   )}
                 </div>
@@ -168,7 +130,7 @@ const Projects = () => {
                 )}
                 {!project.github && !project.demo && (
                   <span className="text-xs text-muted-foreground italic">
-                    Links disponibles próximamente
+                    {t.linksSoon}
                   </span>
                 )}
               </div>

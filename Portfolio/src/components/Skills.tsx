@@ -1,37 +1,20 @@
-const skills = [
-  {
-    category: "Lenguajes",
-    items: ["Python", "JavaScript", "SQL", "HTML", "CSS", "JSON"],
-  },
-  {
-    category: "Frameworks & Librerías",
-    items: ["React.js", "Vue.js", "Angular"],
-  },
-  {
-    category: "Bases de Datos",
-    items: ["MySQL", "MongoDB"],
-  },
-  {
-    category: "Herramientas",
-    items: ["Git", "GitHub", "GitLab", "Docker", "Figma", "Notion", "Miro"],
-  },
-  {
-    category: "Desarrollo Web",
-    items: ["Sitios responsivos", "Manipulación del DOM", "APIs REST", "UX/UI"],
-  },
-]
+import { useLanguage } from "../context/LanguageContext"
+import { translations } from "../translations/translations"
 
 const Skills = () => {
+  const { language } = useLanguage()
+  const t = translations[language].skills
+
   return (
     <section id="skills" className="bg-background py-24 px-8">
       <div className="max-w-5xl mx-auto">
 
         <h2 className="text-3xl font-bold text-primary mb-12 text-center">
-          Habilidades Técnicas
+          {t.title}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skills.map((group) => (
+          {t.categories.map((group) => (
             <div
               key={group.category}
               className="bg-secondary border border-border rounded-xl p-6"

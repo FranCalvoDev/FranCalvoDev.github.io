@@ -1,29 +1,33 @@
-import { useEffect, useState } from "react"
-
-const links = [
-  { label: "Inicio", href: "#home" },
-  { label: "Sobre mí", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Proyectos", href: "#projects" },
-  { label: "Experiencia", href: "#experience" },
-  { label: "Contacto", href: "#contact" },
-]
+import { useEffect, useMemo, useState } from "react"
+import { useLanguage } from "../context/LanguageContext"
+import { translations } from "../translations/translations"
 
 const Navbar = () => {
+  const { language, toggleLanguage } = useLanguage()
+  const t = translations[language].nav
+
+  const links = useMemo(
+    () => [
+      { label: t.home, href: "#home" },
+      { label: t.about, href: "#about" },
+      { label: t.skills, href: "#skills" },
+      { label: t.projects, href: "#projects" },
+      { label: t.experience, href: "#experience" },
+      { label: t.contact, href: "#contact" },
+    ],
+    [t]
+  )
+
   const [activeSection, setActiveSection] = useState("")
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  // Sticky shadow al hacer scroll
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Detectar sección activa
   useEffect(() => {
     const sectionIds = links.map((l) => l.href.replace("#", ""))
     const observers: IntersectionObserver[] = []
@@ -42,9 +46,8 @@ const Navbar = () => {
     })
 
     return () => observers.forEach((o) => o.disconnect())
-  }, [])
+  }, [links])
 
-  // Cerrar menú al hacer click en un link
   const handleLinkClick = () => setMenuOpen(false)
 
   return (
@@ -78,13 +81,23 @@ const Navbar = () => {
                 `}
               >
                 {link.label}
-                {/* Indicador de sección activa */}
                 {activeSection === link.href.replace("#", "") && (
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full" />
                 )}
               </a>
             </li>
           ))}
+
+          {/* Botón de traducción — desktop */}
+          <li>
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-md border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-200"
+              aria-label="Cambiar idioma"
+            >
+              🌐 {language === "es" ? "EN" : "ES"}
+            </button>
+          </li>
         </ul>
 
         {/* Botón hamburguesa — solo mobile */}
@@ -134,6 +147,17 @@ const Navbar = () => {
               </a>
             </li>
           ))}
+
+          {/* Botón de traducción — mobile */}
+          <li>
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 text-sm font-medium py-2 text-primary hover:opacity-80 transition"
+              aria-label="Cambiar idioma"
+            >
+              🌐 {language === "es" ? "Switch to English" : "Cambiar a Español"}
+            </button>
+          </li>
         </ul>
       </div>
 

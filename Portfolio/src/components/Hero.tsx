@@ -1,5 +1,7 @@
 import { motion } from "framer-motion"
 import { fadeUp, fadeLeft, fadeRight, scaleIn, staggerContainer, staggerItem } from "../utils/animations"
+import { useLanguage } from "../context/LanguageContext"
+import { translations } from "../translations/translations"
 
 const photos = [
   "/Foto1.jpg",
@@ -20,6 +22,9 @@ const PhotoCarousel = () => {
 }
 
 const Hero = () => {
+  const { language } = useLanguage()
+  const t = translations[language].hero
+
   return (
     <section
       id="home"
@@ -37,7 +42,7 @@ const Hero = () => {
           {/* Saludo + Nombre */}
           <motion.div variants={fadeLeft} className="flex flex-col gap-1">
             <span className="text-primary text-sm font-medium tracking-widest uppercase">
-              Hola, soy
+              {t.greeting}
             </span>
             <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
               Francisco <br />
@@ -50,10 +55,10 @@ const Hero = () => {
             variants={fadeRight}
             className="gap-1 text-xl md:text-2xl text-muted-foreground font-medium"
           >
-            -Desarrollador Web{" "}
-            <span className="text-primary">Full-Stack </span> <br />
-            -Analista de{" "}
-            <span className="text-primary">Sistemas</span>
+            {t.titleLine1}{" "}
+            <span className="text-primary">{t.titleLine1Highlight} </span> <br />
+            {t.titleLine2}{" "}
+            <span className="text-primary">{t.titleLine2Highlight}</span>
           </motion.h2>
 
           {/* Descripción */}
@@ -61,11 +66,10 @@ const Hero = () => {
             variants={fadeUp}
             className="text-foreground text-base leading-relaxed max-w-md"
           >
-            Analizo y creo los requerimientos para convertirlos en soluciones. Como Analista en Sistemas y Desarrollador Full-Stack, diseño
-            y construyo soluciones web modernas, escalables y eficientes.
+            {t.descPart1}
             <span className="mt-2 block">
-              Bilingüe —{" "}
-              <span className="text-primary">Español / Inglés B2</span>.
+              {t.descBilingual}
+              <span className="text-primary">{t.descBilingualHighlight}</span>.
             </span>
           </motion.p>
 
@@ -90,13 +94,13 @@ const Hero = () => {
               href="#projects"
               className="bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition"
             >
-              Ver proyectos
+              {t.viewProjects}
             </a>
             <a
               href="#contact"
               className="border border-primary text-primary font-semibold px-6 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground transition"
             >
-              Contactame
+              {t.contactMe}
             </a>
           </motion.div>
 
@@ -114,38 +118,38 @@ const Hero = () => {
           </motion.div>
 
           {/* Pirámide de botones */}
-<div className="flex flex-col items-center gap-3 w-full">
+          <div className="flex flex-col items-center gap-3 w-full">
 
-  {/* Punta — Descargar CV destacado */}
-  <a
-    href="/FranciscoCalvo-CV-(Español).pdf"
-    download
-    className="bg-primary text-primary-foreground font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition text-center w-48"
-  >
-    Descargar CV
-  </a>
+            {/* Punta — Descargar CV destacado */}
+            <a
+              href="/FranciscoCalvo-CV-(Español).pdf"
+              download
+              className="bg-primary text-primary-foreground font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition text-center w-48"
+            >
+              {t.downloadCV}
+            </a>
 
-  {/* Base — GitHub + LinkedIn más chicos */}
-  <div className="flex gap-3">
-    <a
-      href="https://github.com/FranCalvoDev"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center gap-1.5 border border-border text-foreground text-sm px-4 py-2 rounded-lg hover:border-primary hover:text-primary transition"
-    >
-      🐙 GitHub ↗
-    </a>
-    <a
-      href="https://www.linkedin.com/in/francisco-calvo-5445582ba/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center gap-1.5 border border-border text-foreground text-sm px-4 py-2 rounded-lg hover:border-primary hover:text-primary transition"
-    >
-      💼 LinkedIn ↗
-    </a>
-  </div>
+            {/* Base — GitHub + LinkedIn más chicos */}
+            <div className="flex gap-3">
+              <a
+                href="https://github.com/FranCalvoDev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 border border-border text-foreground text-sm px-4 py-2 rounded-lg hover:border-primary hover:text-primary transition"
+              >
+                🐙 GitHub ↗
+              </a>
+              <a
+                href="https://www.linkedin.com/in/francisco-calvo-5445582ba/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 border border-border text-foreground text-sm px-4 py-2 rounded-lg hover:border-primary hover:text-primary transition"
+              >
+                💼 LinkedIn ↗
+              </a>
+            </div>
 
-</div>
+          </div>
 
         </motion.div>
 
