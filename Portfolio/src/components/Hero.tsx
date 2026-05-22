@@ -25,6 +25,11 @@ const Hero = () => {
   const { language } = useLanguage()
   const t = translations[language].hero
 
+  const cvFile =
+    language === "es"
+      ? "/FranciscoCalvo-CV-(Español).pdf"
+      : "/FranciscoCalvo-CV-(English).pdf"
+
   return (
     <section
       id="home"
@@ -122,7 +127,7 @@ const Hero = () => {
 
             {/* Punta — Descargar CV destacado */}
             <a
-              href="/FranciscoCalvo-CV-(Español).pdf"
+              href={cvFile}
               download
               className="bg-primary text-primary-foreground font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition text-center w-48"
             >
