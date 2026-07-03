@@ -1,5 +1,9 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://francalvodev.github.io",
+      "permanent": true
+    }
   ]
 }
