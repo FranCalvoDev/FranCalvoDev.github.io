@@ -6,7 +6,7 @@ const Footer = () => {
   const t = translations[language].footer
 
   return (
-    <footer className="bg-secondary/90 border-t border-border py-8 px-8">
+    <footer className="bg-secondary/70 border-t border-border py-8 px-8">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
 
         {/* Nombre */}

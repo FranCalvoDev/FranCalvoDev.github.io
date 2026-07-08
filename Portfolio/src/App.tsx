@@ -15,14 +15,14 @@ function App() {
       <div className="relative">
         {/* Video de fondo fijo — no se mueve al hacer scroll */}
         <video
-          className="fixed inset-0 -z-10 h-full w-full object-cover opacity-20"
+          className="fixed inset-0 -z-10 h-full w-full object-cover opacity-40"
           src={backgroundVideo}
           autoPlay
           loop
           muted
           playsInline
         />
-        <div className="fixed inset-0 -z-10 bg-background/70" />
+        <div className="fixed inset-0 -z-10 bg-background/45" />
 
         <main className="relative z-10 text-white font-main">
           <Navbar />

@@ -6,7 +6,7 @@ const Skills = () => {
   const t = translations[language].skills
 
   return (
-    <section id="skills" className="bg-background/80 py-24 px-8">
+    <section id="skills" className="bg-background/55 py-24 px-8">
       <div className="max-w-5xl mx-auto">
 
         <h2 className="text-3xl font-bold text-primary mb-12 text-center">
