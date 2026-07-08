@@ -6,7 +6,7 @@ const Experience = () => {
   const t = translations[language].experience
 
   return (
-    <section id="experience" className="bg-background py-24 px-8">
+    <section id="experience" className="bg-background/80 py-24 px-8">
       <div className="max-w-4xl mx-auto">
 
         <h2 className="text-3xl font-bold text-primary mb-12 text-center">

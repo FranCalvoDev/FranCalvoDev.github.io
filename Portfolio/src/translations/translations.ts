@@ -1,3 +1,9 @@
+import sneakerhub1 from "../assets/projects/sneakerhub-1.png"
+import sneakerhub2 from "../assets/projects/sneakerhub-2.png"
+import sneakerhub3 from "../assets/projects/sneakerhub-3.png"
+import sneakerhub4 from "../assets/projects/sneakerhub-4.png"
+import sneakerhub5 from "../assets/projects/sneakerhub-5.png"
+
 export type ProjectItem = {
   title: string
   description: string
@@ -95,7 +101,7 @@ export const translations = {
           github: "https://github.com/FranCalvoDev/SneakerHub-Final",
           demo: null,
           status: "finished",
-          images: ["/projects/sneakerhub-1.jpg", "/projects/sneakerhub-2.jpg", "/projects/sneakerhub-3.jpg"],
+          images: [sneakerhub1, sneakerhub2, sneakerhub3, sneakerhub4, sneakerhub5],
         },
         {
           title: "Portfolio Personal",
@@ -234,7 +240,7 @@ export const translations = {
           github: "https://github.com/FranCalvoDev/SneakerHub-Final",
           demo: null,
           status: "finished",
-          images: ["/projects/sneakerhub-1.jpg", "/projects/sneakerhub-2.jpg", "/projects/sneakerhub-3.jpg"],
+          images: [sneakerhub1, sneakerhub2, sneakerhub3, sneakerhub4, sneakerhub5],
         },
         {
           title: "Personal Portfolio",

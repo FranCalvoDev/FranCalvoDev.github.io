@@ -1,6 +1,21 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
+
+const HomeIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="w-4 h-4"
+  >
+    <path d="M3 9.5 12 3l9 6.5" />
+    <path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10" />
+  </svg>
+)
 
 const Navbar = () => {
   const { language, toggleLanguage } = useLanguage()
@@ -21,9 +36,19 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("")
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [visible, setVisible] = useState(true)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
+    const handleScroll = () => {
+      const { scrollY } = window
+      setScrolled(scrollY > 20)
+
+      const scrollingDown = scrollY > lastScrollY.current
+      setVisible(scrollY <= 20 ? true : !scrollingDown)
+
+      lastScrollY.current = scrollY
+    }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -52,27 +77,30 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 bg-secondary transition-all duration-300 ${
-        scrolled ? "shadow-lg shadow-black/30 border-b border-border" : ""
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center transition-all duration-300 ${
+        visible || menuOpen
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-3 pointer-events-none"
       }`}
     >
-      <div className="max-w-5xl mx-auto px-8 py-4 flex justify-between items-center">
 
-        {/* Logo / Nombre */}
-        <a
-          href="#home"
-          className="text-primary font-bold text-xl hover:opacity-80 transition"
-        >
-          Francisco Calvo 
-        </a>
+      {/* Cápsula que envuelve únicamente los enlaces */}
+      <div
+        className={`flex items-center gap-5 md:gap-6 px-4 py-2 rounded-full transition-all duration-300 ${
+          scrolled
+            ? "bg-secondary/80 backdrop-blur-md shadow-lg shadow-black/30 border border-border"
+            : "bg-secondary/40 backdrop-blur-sm border border-border/50"
+        }`}
+      >
 
         {/* Links desktop */}
-        <ul className="hidden md:flex gap-8 items-center">
+        <ul className="hidden md:flex gap-6 items-center">
           {links.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className={`text-sm font-medium transition-all duration-200 relative pb-1
+                aria-label={link.label}
+                className={`text-sm font-medium transition-all duration-200 relative pb-1 flex items-center
                   ${
                     activeSection === link.href.replace("#", "")
                       ? "text-primary"
@@ -80,30 +108,28 @@ const Navbar = () => {
                   }
                 `}
               >
-                {link.label}
+                {link.href === "#home" ? <HomeIcon /> : link.label}
                 {activeSection === link.href.replace("#", "") && (
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full" />
                 )}
               </a>
             </li>
           ))}
-
-          {/* Botón de traducción — desktop */}
-          <li>
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-md border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-200"
-              aria-label="Cambiar idioma"
-            >
-              🌐 {language === "es" ? "EN" : "ES"}
-            </button>
-          </li>
         </ul>
+
+        {/* Botón de traducción — desktop */}
+        <button
+          onClick={toggleLanguage}
+          className="hidden md:flex items-center gap-1.5 text-sm font-medium px-3 py-1 rounded-full border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-200"
+          aria-label="Cambiar idioma"
+        >
+          🌐 {language === "es" ? "EN" : "ES"}
+        </button>
 
         {/* Botón hamburguesa — solo mobile */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2 focus:outline-none"
+          className="md:hidden flex flex-col gap-1.5 p-1 focus:outline-none"
           aria-label="Abrir menú"
         >
           <span
@@ -127,22 +153,25 @@ const Navbar = () => {
 
       {/* Menú mobile desplegable */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
-          menuOpen ? "max-h-96 border-t border-border" : "max-h-0"
+        className={`md:hidden w-56 overflow-hidden transition-all duration-300 rounded-2xl mt-2 ${
+          menuOpen
+            ? "max-h-96 bg-secondary/90 backdrop-blur-md border border-border"
+            : "max-h-0"
         }`}
       >
-        <ul className="flex flex-col px-8 py-4 gap-4">
+        <ul className="flex flex-col px-6 py-4 gap-4">
           {links.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 onClick={handleLinkClick}
-                className={`block text-sm font-medium py-2 transition-all duration-200 ${
+                className={`flex items-center gap-2 text-sm font-medium py-2 transition-all duration-200 ${
                   activeSection === link.href.replace("#", "")
                     ? "text-primary"
                     : "text-foreground hover:text-primary"
                 }`}
               >
+                {link.href === "#home" && <HomeIcon />}
                 {link.label}
               </a>
             </li>

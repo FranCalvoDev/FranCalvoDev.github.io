@@ -6,7 +6,7 @@ const Contact = () => {
   const t = translations[language].contact
 
   return (
-    <section id="contact" className="bg-background py-24 px-8">
+    <section id="contact" className="bg-background/80 py-24 px-8">
       <div className="max-w-3xl mx-auto">
 
         <h2 className="text-3xl font-bold text-primary mb-4 text-center">

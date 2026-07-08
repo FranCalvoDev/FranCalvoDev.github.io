@@ -7,20 +7,34 @@ import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import backgroundVideo from './assets/background-viddd4mb.mp4'
 
 function App() {
   return (
     <LanguageProvider>
-      <main className="bg-primary text-white font-main">
-        <Navbar />
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
-        <Footer />
-      </main>
+      <div className="relative">
+        {/* Video de fondo fijo — no se mueve al hacer scroll */}
+        <video
+          className="fixed inset-0 -z-10 h-full w-full object-cover opacity-20"
+          src={backgroundVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        <div className="fixed inset-0 -z-10 bg-background/70" />
+
+        <main className="relative z-10 text-white font-main">
+          <Navbar />
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Experience />
+          <Contact />
+          <Footer />
+        </main>
+      </div>
     </LanguageProvider>
   )
 }

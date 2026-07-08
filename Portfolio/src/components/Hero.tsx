@@ -2,12 +2,11 @@ import { motion } from "framer-motion"
 import { fadeUp, fadeLeft, fadeRight, scaleIn, staggerContainer, staggerItem } from "../utils/animations"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
+import foto1 from "../assets/hero/Foto1.jpg"
+import foto2 from "../assets/hero/Foto2.jpg"
+import foto3 from "../assets/hero/Foto3.jpg"
 
-const photos = [
-  "/Foto1.jpg",
-  "/Foto2.jpg",
-  "/Foto3.jpg",
-]
+const photos = [foto1, foto2, foto3]
 
 const PhotoCarousel = () => {
   return (
@@ -33,7 +32,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="bg-background min-h-screen flex items-center px-8 pt-24"
+      className="bg-background/80 min-h-screen flex items-center px-8 pt-24"
     >
       <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
