@@ -6,6 +6,16 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "SF Pro Display",
+          "SF Pro Icons",
+          "Helvetica Neue",
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
+      },
       colors: {
         background: "#0D0D0D",
         foreground: "#A6A6A6",

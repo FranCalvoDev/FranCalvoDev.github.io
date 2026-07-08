@@ -49,7 +49,7 @@ const Hero = () => {
             <span className="text-primary text-sm font-medium tracking-widest uppercase">
               {t.greeting}
             </span>
-            <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-[80px] font-semibold text-foreground leading-tight lg:leading-[84px] lg:tracking-[-1.2px]">
               Francisco <br />
               <span className="text-primary">Calvo</span>
             </h1>
@@ -97,13 +97,13 @@ const Hero = () => {
           <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
             <a
               href="#projects"
-              className="bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition"
+              className="bg-primary text-primary-foreground font-semibold text-base px-6 py-3 rounded-lg hover:opacity-90 transition"
             >
               {t.viewProjects}
             </a>
             <a
               href="#contact"
-              className="border border-primary text-primary font-semibold px-6 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground transition"
+              className="border border-primary text-primary font-semibold text-base px-6 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground transition"
             >
               {t.contactMe}
             </a>
@@ -129,7 +129,7 @@ const Hero = () => {
             <a
               href={cvFile}
               download
-              className="bg-primary text-primary-foreground font-semibold px-6 py-2.5 rounded-lg hover:opacity-90 transition text-center w-48"
+              className="bg-primary text-primary-foreground font-semibold text-base px-6 py-2.5 rounded-lg hover:opacity-90 transition text-center w-48"
             >
               {t.downloadCV}
             </a>
