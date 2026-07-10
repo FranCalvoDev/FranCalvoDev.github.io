@@ -44,7 +44,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="bg-background/55 min-h-screen flex items-center px-8 pt-24"
+      className="bg-background/55 min-h-screen flex items-center px-8 pt-12"
     >
       <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
