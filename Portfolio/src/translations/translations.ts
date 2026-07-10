@@ -42,6 +42,8 @@ export const translations = {
       projects: "Proyectos",
       experience: "Experiencia",
       contact: "Contacto",
+      blog: "Blog",
+      work: "Trabajo",
     },
     hero: {
       greeting: "Hola, soy",
@@ -50,7 +52,7 @@ export const translations = {
       titleLine2: "-Analista de",
       titleLine2Highlight: "Sistemas",
       descPart1:
-        "Analizo y creo los requerimientos para convertirlos en soluciones. Como Analista en Sistemas y Desarrollador Full-Stack, diseño y construyo soluciones web modernas, escalables y eficientes.",
+        "Analizo y creo los requerimientos para convertirlos en soluciones.",
       descBilingual: "Bilingüe — ",
       descBilingualHighlight: "Español / Inglés B2",
       viewProjects: "Ver proyectos",
@@ -172,6 +174,10 @@ export const translations = {
     footer: {
       rights: "Todos los derechos reservados",
     },
+    blog: {
+      title: "Blog",
+      comingSoon: "Próximamente voy a compartir artículos y novedades acá. ¡Volvé pronto!",
+    },
   },
   en: {
     nav: {
@@ -181,6 +187,8 @@ export const translations = {
       projects: "Projects",
       experience: "Experience",
       contact: "Contact",
+      blog: "Blog",
+      work: "Work",
     },
     hero: {
       greeting: "Hello, I'm",
@@ -189,7 +197,7 @@ export const translations = {
       titleLine2: "-Systems",
       titleLine2Highlight: "Analyst",
       descPart1:
-        "I analyze and create requirements to turn them into solutions. As a Systems Analyst and Full-Stack Developer, I design and build modern, scalable and efficient web solutions.",
+        "I analyze and create requirements to turn them into solutions.",
       descBilingual: "Bilingual — ",
       descBilingualHighlight: "Spanish / English B2",
       viewProjects: "View projects",
@@ -310,6 +318,10 @@ export const translations = {
     },
     footer: {
       rights: "All rights reserved",
+    },
+    blog: {
+      title: "Blog",
+      comingSoon: "I'll be sharing articles and updates here soon. Check back later!",
     },
   },
 }

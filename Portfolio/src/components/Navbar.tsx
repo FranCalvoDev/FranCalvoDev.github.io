@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState, type ReactElement } from "react"
+import { useEffect, useRef, useState, useMemo, type ReactElement } from "react"
+import { Link, useLocation } from "react-router-dom"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 
@@ -17,37 +18,7 @@ const HomeIcon = () => (
   </svg>
 )
 
-const AboutIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-4 h-4"
-  >
-    <circle cx="12" cy="8" r="4" />
-    <path d="M4 21c0-4 3.58-7 8-7s8 3 8 7" />
-  </svg>
-)
-
-const SkillsIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-4 h-4"
-  >
-    <path d="m8 8-4 4 4 4" />
-    <path d="m16 8 4 4-4 4" />
-  </svg>
-)
-
-const ProjectsIcon = () => (
+const WorkIcon = () => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
@@ -58,22 +29,6 @@ const ProjectsIcon = () => (
     className="w-4 h-4"
   >
     <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
-  </svg>
-)
-
-const ExperienceIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-4 h-4"
-  >
-    <rect x="3" y="7" width="18" height="13" rx="2" />
-    <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-    <path d="M3 13h18" />
   </svg>
 )
 
@@ -92,32 +47,38 @@ const ContactIcon = () => (
   </svg>
 )
 
-const navIcons: Record<string, () => ReactElement> = {
-  "#home": HomeIcon,
-  "#about": AboutIcon,
-  "#skills": SkillsIcon,
-  "#projects": ProjectsIcon,
-  "#experience": ExperienceIcon,
-  "#contact": ContactIcon,
-}
+const BlogIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="w-4 h-4"
+  >
+    <path d="M4 4h12l4 4v12H4Z" />
+    <path d="M8 10h8M8 14h8M8 18h4" />
+  </svg>
+)
+
+type NavLink = { path: string; label: string; Icon: () => ReactElement }
 
 const Navbar = () => {
   const { language, toggleLanguage } = useLanguage()
   const t = translations[language].nav
+  const location = useLocation()
 
-  const links = useMemo(
+  const links = useMemo<NavLink[]>(
     () => [
-      { label: t.home, href: "#home" },
-      { label: t.about, href: "#about" },
-      { label: t.skills, href: "#skills" },
-      { label: t.projects, href: "#projects" },
-      { label: t.experience, href: "#experience" },
-      { label: t.contact, href: "#contact" },
+      { path: "/", label: t.home, Icon: HomeIcon },
+      { path: "/work", label: t.work, Icon: WorkIcon },
+      { path: "/blog", label: t.blog, Icon: BlogIcon },
+      { path: "/contact", label: t.contact, Icon: ContactIcon },
     ],
     [t]
   )
 
-  const [activeSection, setActiveSection] = useState("")
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [visible, setVisible] = useState(true)
@@ -144,27 +105,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  useEffect(() => {
-    const sectionIds = links.map((l) => l.href.replace("#", ""))
-    const observers: IntersectionObserver[] = []
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id)
-      if (!el) return
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id)
-        },
-        { threshold: 0.4 }
-      )
-      observer.observe(el)
-      observers.push(observer)
-    })
-
-    return () => observers.forEach((o) => o.disconnect())
-  }, [links])
-
-  const handleLinkClick = () => {
+  const markNavigating = () => {
     setMenuOpen(false)
     setVisible(true)
     isNavigating.current = true
@@ -173,6 +114,28 @@ const Navbar = () => {
       isNavigating.current = false
     }, 1000)
   }
+
+  const isActive = (link: NavLink) => location.pathname === link.path
+
+  const renderLink = (link: NavLink, className: string) => {
+    const { Icon, label } = link
+    const active = isActive(link)
+    const activeClass = active ? "text-primary" : "text-foreground hover:text-primary"
+
+    return (
+      <Link
+        to={link.path}
+        onClick={markNavigating}
+        aria-label={label}
+        title={label}
+        className={`${className} ${activeClass}`}
+      >
+        <Icon />
+      </Link>
+    )
+  }
+
+  const linkKey = (link: NavLink) => link.path
 
   return (
     <nav
@@ -198,31 +161,17 @@ const Navbar = () => {
 
         {/* Links desktop */}
         <ul className="hidden md:flex gap-6 items-center">
-          {links.map((link) => {
-            const Icon = navIcons[link.href]
-            return (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={handleLinkClick}
-                  aria-label={link.label}
-                  title={link.label}
-                  className={`text-sm font-medium transition-all duration-200 relative pb-1 flex items-center
-                    ${
-                      activeSection === link.href.replace("#", "")
-                        ? "text-primary"
-                        : "text-foreground hover:text-primary"
-                    }
-                  `}
-                >
-                  <Icon />
-                  {activeSection === link.href.replace("#", "") && (
-                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-primary" />
-                  )}
-                </a>
-              </li>
-            )
-          })}
+          {links.map((link) => (
+            <li key={linkKey(link)}>
+              {renderLink(
+                link,
+                "text-sm font-medium transition-all duration-200 relative pb-1 flex items-center"
+              )}
+              {isActive(link) && (
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-primary" />
+              )}
+            </li>
+          ))}
         </ul>
 
         {/* Botón de traducción — desktop */}
@@ -268,26 +217,16 @@ const Navbar = () => {
         }`}
       >
         <ul className="flex items-center justify-center gap-6 px-6 py-4">
-          {links.map((link) => {
-            const Icon = navIcons[link.href]
-            return (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={handleLinkClick}
-                  aria-label={link.label}
-                  title={link.label}
-                  className={`flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200 ${
-                    activeSection === link.href.replace("#", "")
-                      ? "bg-primary text-primary-foreground"
-                      : "text-foreground hover:text-primary"
-                  }`}
-                >
-                  <Icon />
-                </a>
-              </li>
-            )
-          })}
+          {links.map((link) => (
+            <li key={linkKey(link)}>
+              {renderLink(
+                link,
+                `flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200 ${
+                  isActive(link) ? "bg-primary text-primary-foreground" : ""
+                }`
+              )}
+            </li>
+          ))}
         </ul>
 
         {/* Botón de traducción — mobile */}

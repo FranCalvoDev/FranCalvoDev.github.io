@@ -1,13 +1,12 @@
 import { useEffect, useRef } from 'react'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero.tsx'
-import About from './components/About'
-import Skills from './components/Skills'
-import Projects from './components/Projects'
-import Experience from './components/Experience'
-import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Home from './pages/Home'
+import WorkPage from './pages/WorkPage'
+import BlogPage from './pages/BlogPage'
+import ContactPage from './pages/ContactPage'
 import backgroundVideo from './assets/background-viddd4mb.mp4'
 
 function App() {
@@ -49,16 +48,18 @@ function App() {
         />
         <div className="fixed inset-0 -z-10 bg-background/45" />
 
-        <main className="relative z-10 text-white font-main">
-          <Navbar />
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Experience />
-          <Contact />
-          <Footer />
-        </main>
+        <HashRouter>
+          <main className="relative z-10 text-white font-main">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/work" element={<WorkPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
+            <Footer />
+          </main>
+        </HashRouter>
       </div>
     </LanguageProvider>
   )
