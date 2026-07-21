@@ -44,17 +44,24 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="bg-background/55 min-h-screen flex items-center px-8 pt-12"
+      className="bg-background/55 min-h-screen flex items-center px-6 md:px-8 py-32"
     >
-      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-16 items-center">
 
         {/* Texto — entra desde la izquierda */}
         <motion.div
-          className="flex flex-col gap-6"
-          variants={staggerContainer}
-          initial="hidden"
-          animate="show"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
+          <motion.div
+            className="flex flex-col gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+          >
           {/* Saludo + Nombre */}
           <motion.div variants={fadeLeft} className="flex flex-col gap-1">
             <span className="text-primary text-sm font-medium tracking-widest uppercase">
@@ -93,26 +100,28 @@ const Hero = () => {
           <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
             <a
               href="#projects"
-              className="bg-primary text-primary-foreground font-semibold text-base px-6 py-3 rounded-lg hover:opacity-90 transition"
+              className="bg-primary text-primary-foreground font-semibold text-base px-7 py-3.5 rounded-full hover:opacity-90 transition-all duration-300 ease-out active:scale-95"
             >
               {t.viewProjects}
             </a>
             <a
               href="#contact"
-              className="border border-primary text-primary font-semibold text-base px-6 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground transition"
+              className="border border-primary text-primary font-semibold text-base px-7 py-3.5 rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300 ease-out active:scale-95"
             >
               {t.contactMe}
             </a>
           </motion.div>
 
+          </motion.div>
         </motion.div>
 
         {/* Foto + Botones — entra desde la derecha */}
         <motion.div
           className="flex flex-col items-center gap-6"
-          variants={fadeRight}
-          initial="hidden"
-          animate="show"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
         >
           <motion.div variants={scaleIn}>
             <PhotoCarousel />
@@ -124,7 +133,7 @@ const Hero = () => {
             <a
               href={cvFile}
               download
-              className="bg-primary text-primary-foreground font-semibold text-sm px-5 py-2.5 rounded-full hover:opacity-90 transition"
+              className="bg-primary text-primary-foreground font-semibold text-sm px-6 py-3 rounded-full hover:opacity-90 transition-all duration-300 ease-out active:scale-95"
             >
               {t.downloadCV}
             </a>
@@ -134,7 +143,7 @@ const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-border text-foreground hover:border-primary hover:text-primary transition"
+              className="flex items-center justify-center w-11 h-11 rounded-full border border-border/60 text-foreground hover:border-primary hover:text-primary transition-all duration-300 ease-out active:scale-95"
             >
               <GitHubIcon />
             </a>
@@ -143,7 +152,7 @@ const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-border text-foreground hover:border-primary hover:text-primary transition"
+              className="flex items-center justify-center w-11 h-11 rounded-full border border-border/60 text-foreground hover:border-primary hover:text-primary transition-all duration-300 ease-out active:scale-95"
             >
               <LinkedInIcon />
             </a>

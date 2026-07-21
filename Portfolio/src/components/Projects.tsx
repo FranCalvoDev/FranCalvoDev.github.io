@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 
@@ -15,7 +16,7 @@ const ProjectCarousel = ({ images, title }: { images: string[]; title: string })
   }, [images.length])
 
   return (
-    <div className="relative w-full h-44 rounded-lg overflow-hidden border border-border mb-4 bg-muted">
+    <div className="relative w-full h-44 rounded-2xl overflow-hidden border border-border/40 mb-5 bg-muted">
       {images.map((src, index) => (
         <img
           key={index}
@@ -63,18 +64,28 @@ const Projects = () => {
   const t = translations[language].projects
 
   return (
-    <section id="projects" className="bg-background/55 py-24 px-8">
-      <div className="max-w-5xl mx-auto">
+    <section id="projects" className="bg-background/55 py-32 px-6 md:px-8">
+      <motion.div
+        className="max-w-6xl mx-auto"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
 
-        <h2 className="text-3xl font-bold text-primary mb-12 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-16 text-center tracking-tight">
           {t.title}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {t.items.map((project) => (
-            <div
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {t.items.map((project, index) => (
+            <motion.div
               key={project.title}
-              className="bg-secondary border border-border rounded-xl p-6 flex flex-col justify-between"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
+              className="bg-secondary/90 border border-border/40 rounded-3xl p-7 shadow-[0_2px_20px_rgba(0,0,0,0.22)] flex flex-col justify-between transition-transform duration-300 ease-out hover:-translate-y-1"
             >
               {/* Carrusel de imágenes */}
               <ProjectCarousel images={project.images} title={project.title} />
@@ -113,7 +124,7 @@ const Projects = () => {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-primary border border-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-primary-foreground transition"
+                    className="text-sm text-primary border border-primary px-5 py-2.5 rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300 ease-out active:scale-95"
                   >
                     GitHub
                   </a>
@@ -123,7 +134,7 @@ const Projects = () => {
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-primary border border-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-primary-foreground transition"
+                    className="text-sm text-primary border border-primary px-5 py-2.5 rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300 ease-out active:scale-95"
                   >
                     Demo
                   </a>
@@ -135,11 +146,11 @@ const Projects = () => {
                 )}
               </div>
 
-            </div>
+            </motion.div>
           ))}
         </div>
 
-      </div>
+      </motion.div>
     </section>
   )
 }
