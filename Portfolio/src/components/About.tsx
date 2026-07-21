@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 
@@ -6,17 +7,23 @@ const About = () => {
   const t = translations[language].about
 
   return (
-    <section id="about" className="bg-background/55 py-24 px-8">
-      <div className="max-w-5xl mx-auto">
+    <section id="about" className="bg-background/55 py-32 px-6 md:px-8">
+      <motion.div
+        className="max-w-6xl mx-auto"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
 
-        <h2 className="text-3xl font-bold text-primary mb-12 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-16 text-center tracking-tight">
           {t.title}
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-16 items-center">
 
           {/* Texto */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-8">
             <p className="text-foreground text-base leading-relaxed">
               {t.p1a}<span className="text-primary font-medium">Tecnicatura en Análisis de Sistemas</span>{t.p1b}
             </p>
@@ -32,11 +39,15 @@ const About = () => {
           </div>
 
           {/* Cards de datos */}
-          <div className="grid grid-cols-1 gap-4">
-            {t.stats.map((stat) => (
-              <div
+          <div className="grid grid-cols-1 gap-6">
+            {t.stats.map((stat, index) => (
+              <motion.div
                 key={stat.label}
-                className="bg-secondary border border-border rounded-xl px-6 py-4 flex items-center gap-4"
+                initial={{ opacity: 0, y: 26 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
+                className="bg-secondary/90 border border-border/40 rounded-3xl px-7 py-6 flex items-center gap-4 shadow-[0_2px_20px_rgba(0,0,0,0.22)] transition-transform duration-300 ease-out hover:-translate-y-1"
               >
                 <span className="text-2xl">{stat.icon}</span>
                 <div>
@@ -47,12 +58,12 @@ const About = () => {
                     {stat.value}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

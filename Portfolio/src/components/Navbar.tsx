@@ -128,7 +128,7 @@ const Navbar = () => {
         onClick={markNavigating}
         aria-label={label}
         title={label}
-        className={`${className} ${activeClass}`}
+        className={`${className} ${activeClass} transition-all duration-300 ease-out active:scale-95`}
       >
         <Icon />
       </Link>
@@ -177,7 +177,7 @@ const Navbar = () => {
         {/* Botón de traducción — desktop */}
         <button
           onClick={toggleLanguage}
-          className="hidden md:flex items-center gap-1.5 text-sm font-medium px-3 py-1 rounded-full border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-200"
+          className="hidden md:flex items-center gap-1.5 text-sm font-medium px-4 py-1.5 rounded-full border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-300 ease-out active:scale-95"
           aria-label="Cambiar idioma"
         >
           🌐 {language === "es" ? "EN" : "ES"}
@@ -233,7 +233,7 @@ const Navbar = () => {
         <div className="flex justify-center pb-4">
           <button
             onClick={toggleLanguage}
-            className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full border border-primary text-primary hover:opacity-80 transition"
+            className="flex items-center gap-1.5 text-sm font-medium px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-300 ease-out active:scale-95"
             aria-label="Cambiar idioma"
           >
             🌐 {language === "es" ? "Switch to English" : "Cambiar a Español"}

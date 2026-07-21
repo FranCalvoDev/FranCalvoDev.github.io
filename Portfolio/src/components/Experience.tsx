@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 
@@ -6,18 +7,28 @@ const Experience = () => {
   const t = translations[language].experience
 
   return (
-    <section id="experience" className="bg-background/55 py-24 px-8">
-      <div className="max-w-4xl mx-auto">
+    <section id="experience" className="bg-background/55 py-32 px-6 md:px-8">
+      <motion.div
+        className="max-w-5xl mx-auto"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
 
-        <h2 className="text-3xl font-bold text-primary mb-12 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-16 text-center tracking-tight">
           {t.title}
         </h2>
 
-        <div className="flex flex-col gap-8">
-          {t.items.map((exp) => (
-            <div
+        <div className="flex flex-col gap-10">
+          {t.items.map((exp, index) => (
+            <motion.div
               key={exp.role}
-              className="bg-secondary border border-border rounded-xl p-6"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.55, delay: index * 0.1, ease: "easeOut" }}
+              className="bg-secondary/90 border border-border/40 rounded-3xl p-7 md:p-8 shadow-[0_2px_20px_rgba(0,0,0,0.22)] transition-transform duration-300 ease-out hover:-translate-y-1"
             >
               {/* Header */}
               <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
@@ -43,11 +54,11 @@ const Experience = () => {
                 ))}
               </ul>
 
-            </div>
+            </motion.div>
           ))}
         </div>
 
-      </div>
+      </motion.div>
     </section>
   )
 }
