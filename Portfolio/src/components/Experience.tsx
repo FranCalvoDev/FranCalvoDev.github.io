@@ -7,7 +7,7 @@ const Experience = () => {
   const t = translations[language].experience
 
   return (
-    <section id="experience" className="bg-background/55 py-32 px-6 md:px-8">
+    <section id="experience" className="bg-background/55 py-16 md:py-20 px-6 md:px-8">
       <motion.div
         className="max-w-5xl mx-auto"
         initial={{ opacity: 0, y: 40 }}
