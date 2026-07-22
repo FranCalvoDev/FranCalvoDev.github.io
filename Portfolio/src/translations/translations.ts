@@ -22,10 +22,16 @@ export type ExperienceItem = {
   description: string[]
 }
 
+export type StatLine = {
+  icon: string
+  text: string
+}
+
 export type StatItem = {
   icon: string
   label: string
-  value: string
+  value: string | StatLine[]
+  highlight?: boolean
 }
 
 export type SkillCategory = {
@@ -76,7 +82,15 @@ export const translations = {
         { icon: "🎓", label: "Educación", value: "Tecnicatura en Análisis de Sistemas (+90%)" },
         { icon: "🌍", label: "Idiomas", value: "Español nativo — Inglés B2 (Cambridge)" },
         { icon: "📍", label: "Ubicación", value: "Buenos Aires, Argentina" },
-        { icon: "🏀", label: "Extracurricular", value: "Árbitro Federado de Básquet" },
+        {
+          icon: "🏀",
+          label: "Extra",
+          value: [
+            { icon: "🏀", text: "Árbitro Federado de Básquet" },
+            { icon: "📷", text: "Fotógrafo Profesional Privado" },
+          ],
+          highlight: true,
+        },
       ] as StatItem[],
     },
     skills: {
@@ -221,7 +235,15 @@ export const translations = {
         { icon: "🎓", label: "Education", value: "Systems Analysis Degree (+90%)" },
         { icon: "🌍", label: "Languages", value: "Native Spanish — English B2 (Cambridge)" },
         { icon: "📍", label: "Location", value: "Buenos Aires, Argentina" },
-        { icon: "🏀", label: "Extracurricular", value: "Certified Basketball Referee" },
+        {
+          icon: "🏀",
+          label: "Extra",
+          value: [
+            { icon: "🏀", text: "Certified Basketball Referee" },
+            { icon: "📷", text: "Private Professional Photographer" },
+          ],
+          highlight: true,
+        },
       ] as StatItem[],
     },
     skills: {

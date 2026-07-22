@@ -34,9 +34,9 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="bg-background/55 min-h-screen flex items-center px-6 md:px-8 py-32"
+      className="bg-background/55 min-h-screen flex items-center px-6 md:px-8 py-16 md:py-20"
     >
-      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-16 items-center">
+      <div className="max-w-3xl mx-auto w-full flex justify-center text-center">
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -76,7 +76,7 @@ const Hero = () => {
             {/* Descripción */}
             <motion.p
               variants={fadeUp}
-              className="text-foreground text-base leading-relaxed max-w-md"
+              className="text-foreground text-base leading-relaxed max-w-md text-justify"
             >
               {t.descPart1}
               <span className="mt-2 block">
