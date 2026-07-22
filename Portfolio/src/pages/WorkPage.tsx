@@ -3,8 +3,8 @@ import Experience from "../components/Experience"
 
 const WorkPage = () => {
   return (
-    <div className="pt-16">
-      <Projects />
+    <div>
+      <Projects compactTop />
       <Experience />
     </div>
   )

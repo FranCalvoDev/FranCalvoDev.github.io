@@ -3,6 +3,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ScrollDownCue from './components/ScrollDownCue'
 import Home from './pages/Home'
 import WorkPage from './pages/WorkPage'
 import BlogPage from './pages/BlogPage'
@@ -57,6 +58,7 @@ function App() {
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/contact" element={<ContactPage />} />
             </Routes>
+            <ScrollDownCue />
             <Footer />
           </main>
         </HashRouter>

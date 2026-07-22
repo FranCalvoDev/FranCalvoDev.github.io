@@ -59,12 +59,19 @@ const ProjectCarousel = ({ images, title }: { images: string[]; title: string })
   )
 }
 
-const Projects = () => {
+type ProjectsProps = {
+  compactTop?: boolean
+}
+
+const Projects = ({ compactTop = false }: ProjectsProps) => {
   const { language } = useLanguage()
   const t = translations[language].projects
 
   return (
-    <section id="projects" className="bg-background/55 py-32 px-6 md:px-8">
+    <section
+      id="projects"
+      className={`bg-background/55 px-6 md:px-8 ${compactTop ? "pt-20 pb-32" : "py-32"}`}
+    >
       <motion.div
         className="max-w-6xl mx-auto"
         initial={{ opacity: 0, y: 40 }}

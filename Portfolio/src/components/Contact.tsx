@@ -2,12 +2,19 @@ import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 
-const Contact = () => {
+type ContactProps = {
+  compactTop?: boolean
+}
+
+const Contact = ({ compactTop = false }: ContactProps) => {
   const { language } = useLanguage()
   const t = translations[language].contact
 
   return (
-    <section id="contact" className="bg-background/55 py-32 px-6 md:px-8">
+    <section
+      id="contact"
+      className={`bg-background/55 px-6 md:px-8 ${compactTop ? "pt-20 pb-32" : "py-32"}`}
+    >
       <motion.div
         className="max-w-5xl mx-auto"
         initial={{ opacity: 0, y: 40 }}
