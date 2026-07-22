@@ -64,7 +64,7 @@ const Projects = () => {
   const t = translations[language].projects
 
   return (
-    <section id="projects" className="bg-background/55 py-32 px-6 md:px-8">
+    <section id="projects" className="bg-background/55 pt-24 md:pt-28 pb-32 px-6 md:px-8">
       <motion.div
         className="max-w-6xl mx-auto"
         initial={{ opacity: 0, y: 40 }}

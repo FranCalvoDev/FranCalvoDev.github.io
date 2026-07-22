@@ -3,7 +3,7 @@ import Experience from "../components/Experience"
 
 const WorkPage = () => {
   return (
-    <div className="pt-16">
+    <div>
       <Projects />
       <Experience />
     </div>
