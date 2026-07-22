@@ -2,6 +2,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import ScrollIndicator from './components/ScrollIndicator'
 import Home from './pages/Home'
 import WorkPage from './pages/WorkPage'
 import BlogPage from './pages/BlogPage'
@@ -32,6 +33,7 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
             </Routes>
             <Footer />
+            <ScrollIndicator />
           </main>
         </HashRouter>
       </div>

@@ -36,13 +36,7 @@ const Hero = () => {
       id="home"
       className="bg-background/55 min-h-screen flex items-center px-6 md:px-8 py-32"
     >
-      {/*
-        Hero reestructurado estilo Apple: layout centrado a una sola columna
-        (sin foto por ahora) mientras se prepara el nuevo diseño visual.
-        Tipografía grande + mucho espacio negativo, apoyado en los glows
-        de fondo definidos en index.css.
-      */}
-      <div className="max-w-4xl mx-auto w-full flex flex-col items-center text-center gap-10">
+      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-16 items-center">
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
