@@ -1,12 +1,14 @@
 import { motion } from "framer-motion"
-import { fadeUp, fadeLeft, fadeRight, scaleIn, staggerContainer } from "../utils/animations"
+import { fadeUp, fadeLeft, fadeRight, staggerContainer } from "../utils/animations"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
-import foto1 from "../assets/hero/Foto1.jpg"
-import foto2 from "../assets/hero/Foto2.jpg"
-import foto3 from "../assets/hero/Foto3.jpg"
 
-const photos = [foto1, foto2, foto3]
+// NOTA: foto/carrusel del hero deshabilitados temporalmente a la espera
+// de la reestructuración visual (ver comentarios más abajo).
+// import foto1 from "../assets/hero/Foto1.jpg"
+// import foto2 from "../assets/hero/Foto2.jpg"
+// import foto3 from "../assets/hero/Foto3.jpg"
+// const photos = [foto1, foto2, foto3]
 
 const GitHubIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -19,18 +21,6 @@ const LinkedInIcon = () => (
     <path d="M6.94 8.5H3.56V20.5H6.94V8.5ZM5.25 3.5A1.97 1.97 0 1 0 5.25 7.44 1.97 1.97 0 0 0 5.25 3.5ZM20.44 20.5H17.06V14.75c0-1.37-.03-3.13-1.91-3.13-1.92 0-2.21 1.5-2.21 3.04V20.5H9.56V8.5h3.24v1.64h.05c.45-.85 1.56-1.75 3.21-1.75 3.43 0 4.06 2.26 4.06 5.19V20.5Z" />
   </svg>
 )
-
-const PhotoCarousel = () => {
-  return (
-    <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-primary overflow-hidden">
-      <img
-        src={photos[0]}
-        alt="Francisco Calvo 1"
-        className="w-full h-full object-cover"
-      />
-    </div>
-  )
-}
 
 const Hero = () => {
   const { language } = useLanguage()
@@ -48,7 +38,6 @@ const Hero = () => {
     >
       <div className="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-16 items-center">
 
-        {/* Texto — entra desde la izquierda */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,109 +45,93 @@ const Hero = () => {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <motion.div
-            className="flex flex-col gap-8"
+            className="flex flex-col items-center gap-8"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.25 }}
           >
-          {/* Saludo + Nombre */}
-          <motion.div variants={fadeLeft} className="flex flex-col gap-1">
-            <span className="text-primary text-sm font-medium tracking-widest uppercase">
-              {t.greeting}
-            </span>
-            <h1 className="text-5xl md:text-6xl lg:text-[80px] font-semibold text-foreground leading-tight lg:leading-[84px] lg:tracking-[-1.2px]">
-              Francisco <br />
-              <span className="text-primary">Calvo</span>
-            </h1>
+            {/* Saludo + Nombre */}
+            <motion.div variants={fadeLeft} className="flex flex-col items-center gap-1">
+              <span className="text-primary text-sm font-medium tracking-widest uppercase">
+                {t.greeting}
+              </span>
+              <h1 className="text-5xl md:text-6xl lg:text-[80px] font-semibold text-foreground leading-tight lg:leading-[84px] lg:tracking-[-1.2px]">
+                Francisco <br />
+                <span className="text-primary">Calvo</span>
+              </h1>
+            </motion.div>
+
+            {/* Título */}
+            <motion.h2
+              variants={fadeRight}
+              className="gap-1 text-xl md:text-2xl text-muted-foreground font-medium"
+            >
+              {t.titleLine1}{" "}
+              <span className="text-primary">{t.titleLine1Highlight} </span> <br />
+              {t.titleLine2}{" "}
+              <span className="text-primary">{t.titleLine2Highlight}</span>
+            </motion.h2>
+
+            {/* Descripción */}
+            <motion.p
+              variants={fadeUp}
+              className="text-foreground text-base leading-relaxed max-w-md"
+            >
+              {t.descPart1}
+              <span className="mt-2 block">
+                {t.descBilingual}
+                <span className="text-primary">{t.descBilingualHighlight}</span>.
+              </span>
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
+              <a
+                href="#projects"
+                className="bg-primary text-primary-foreground font-semibold text-base px-7 py-3.5 rounded-full hover:opacity-90 transition-all duration-300 ease-out active:scale-95"
+              >
+                {t.viewProjects}
+              </a>
+              <a
+                href="#contact"
+                className="border border-primary text-primary font-semibold text-base px-7 py-3.5 rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300 ease-out active:scale-95"
+              >
+                {t.contactMe}
+              </a>
+            </motion.div>
+
+            {/* Acciones minimalistas */}
+            <motion.div variants={fadeUp} className="flex items-center gap-3">
+              <a
+                href={cvFile}
+                download
+                className="bg-primary text-primary-foreground font-semibold text-sm px-6 py-3 rounded-full hover:opacity-90 transition-all duration-300 ease-out active:scale-95"
+              >
+                {t.downloadCV}
+              </a>
+
+              <a
+                href="https://github.com/FranCalvoDev"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="flex items-center justify-center w-11 h-11 rounded-full border border-border/60 text-foreground hover:border-primary hover:text-primary transition-all duration-300 ease-out active:scale-95"
+              >
+                <GitHubIcon />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/francisco-calvo-5445582ba/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="flex items-center justify-center w-11 h-11 rounded-full border border-border/60 text-foreground hover:border-primary hover:text-primary transition-all duration-300 ease-out active:scale-95"
+              >
+                <LinkedInIcon />
+              </a>
+            </motion.div>
+
           </motion.div>
-
-          {/* Título */}
-          <motion.h2
-            variants={fadeRight}
-            className="gap-1 text-xl md:text-2xl text-muted-foreground font-medium"
-          >
-            {t.titleLine1}{" "}
-            <span className="text-primary">{t.titleLine1Highlight} </span> <br />
-            {t.titleLine2}{" "}
-            <span className="text-primary">{t.titleLine2Highlight}</span>
-          </motion.h2>
-
-          {/* Descripción */}
-          <motion.p
-            variants={fadeUp}
-            className="text-foreground text-base leading-relaxed max-w-md"
-          >
-            {t.descPart1}
-            <span className="mt-2 block">
-              {t.descBilingual}
-              <span className="text-primary">{t.descBilingualHighlight}</span>.
-            </span>
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-            <a
-              href="#projects"
-              className="bg-primary text-primary-foreground font-semibold text-base px-7 py-3.5 rounded-full hover:opacity-90 transition-all duration-300 ease-out active:scale-95"
-            >
-              {t.viewProjects}
-            </a>
-            <a
-              href="#contact"
-              className="border border-primary text-primary font-semibold text-base px-7 py-3.5 rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300 ease-out active:scale-95"
-            >
-              {t.contactMe}
-            </a>
-          </motion.div>
-
-          </motion.div>
-        </motion.div>
-
-        {/* Foto + Botones — entra desde la derecha */}
-        <motion.div
-          className="flex flex-col items-center gap-6"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-        >
-          <motion.div variants={scaleIn}>
-            <PhotoCarousel />
-          </motion.div>
-
-          {/* Acciones minimalistas */}
-          <div className="flex items-center gap-3">
-
-            <a
-              href={cvFile}
-              download
-              className="bg-primary text-primary-foreground font-semibold text-sm px-6 py-3 rounded-full hover:opacity-90 transition-all duration-300 ease-out active:scale-95"
-            >
-              {t.downloadCV}
-            </a>
-
-            <a
-              href="https://github.com/FranCalvoDev"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="flex items-center justify-center w-11 h-11 rounded-full border border-border/60 text-foreground hover:border-primary hover:text-primary transition-all duration-300 ease-out active:scale-95"
-            >
-              <GitHubIcon />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/francisco-calvo-5445582ba/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="flex items-center justify-center w-11 h-11 rounded-full border border-border/60 text-foreground hover:border-primary hover:text-primary transition-all duration-300 ease-out active:scale-95"
-            >
-              <LinkedInIcon />
-            </a>
-
-          </div>
-
         </motion.div>
 
       </div>
