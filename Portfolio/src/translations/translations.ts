@@ -3,6 +3,13 @@ import sneakerhub2 from "../assets/projects/sneakerhub-2.png"
 import sneakerhub3 from "../assets/projects/sneakerhub-3.png"
 import sneakerhub4 from "../assets/projects/sneakerhub-4.png"
 import sneakerhub5 from "../assets/projects/sneakerhub-5.png"
+import distribuidoraVarela1 from "../assets/projects/Prototipo_DistribuidoraVarela-1.png"
+import distribuidoraVarela2 from "../assets/projects/Prototipo_DistribuidoraVarela-2.png"
+import distribuidoraVarela3 from "../assets/projects/Prototipo_DistribuidoraVarela-3.png"
+import distribuidoraVarela4 from "../assets/projects/Prototipo_DistribuidoraVarela-4.png"
+import distribuidoraVarela5 from "../assets/projects/Prototipo_DistribuidoraVarela-5.png"
+import distribuidoraVarela6 from "../assets/projects/Prototipo_DistribuidoraVarela-6.png"
+import distribuidoraVarela7 from "../assets/projects/Prototipo_DistribuidoraVarela-7.png"
 
 export type ProjectItem = {
   title: string
@@ -137,7 +144,15 @@ export const translations = {
           github: null,
           demo: null,
           status: "inprogress",
-          images: ["/projects/php-1.jpg", "/projects/php-2.jpg", "/projects/php-3.jpg"],
+          images: [
+            distribuidoraVarela1,
+            distribuidoraVarela2,
+            distribuidoraVarela3,
+            distribuidoraVarela4,
+            distribuidoraVarela5,
+            distribuidoraVarela6,
+            distribuidoraVarela7,
+          ],
         },
       ] as ProjectItem[],
     },
@@ -290,7 +305,15 @@ export const translations = {
           github: null,
           demo: null,
           status: "inprogress",
-          images: ["/projects/php-1.jpg", "/projects/php-2.jpg", "/projects/php-3.jpg"],
+          images: [
+            distribuidoraVarela1,
+            distribuidoraVarela2,
+            distribuidoraVarela3,
+            distribuidoraVarela4,
+            distribuidoraVarela5,
+            distribuidoraVarela6,
+            distribuidoraVarela7,
+          ],
         },
       ] as ProjectItem[],
     },
