@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 import { fadeUp, fadeLeft, fadeRight, staggerContainer } from "../utils/animations"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
@@ -87,18 +88,18 @@ const Hero = () => {
 
             {/* CTAs */}
             <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
-              <a
-                href="#projects"
+              <Link
+                to="/work"
                 className="bg-primary text-primary-foreground font-semibold text-base px-7 py-3.5 rounded-full hover:opacity-90 transition-all duration-300 ease-out active:scale-95"
               >
                 {t.viewProjects}
-              </a>
-              <a
-                href="#contact"
+              </Link>
+              <Link
+                to="/contact"
                 className="border border-primary text-primary font-semibold text-base px-7 py-3.5 rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300 ease-out active:scale-95"
               >
                 {t.contactMe}
-              </a>
+              </Link>
             </motion.div>
 
             {/* Acciones minimalistas */}
