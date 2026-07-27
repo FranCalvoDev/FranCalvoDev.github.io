@@ -57,6 +57,7 @@ export const translations = {
       contact: "Contacto",
       blog: "Blog",
       work: "Trabajo",
+      more: "Más",
     },
     hero: {
       greeting: "Hola, soy",
@@ -207,6 +208,21 @@ export const translations = {
       title: "Blog",
       comingSoon: "Próximamente voy a compartir artículos y novedades acá. ¡Volvé pronto!",
     },
+    more: {
+      title: "Extra",
+      subtitle: "Un espacio para cosas que voy a ir sumando con el tiempo.",
+      back: "Volver a Extra",
+      gallery: {
+        title: "Galería",
+        description: "Fotos y capturas de proyectos, eventos y más.",
+      },
+      specs: {
+        title: "Especificaciones",
+        description: "El setup y las herramientas con las que trabajo.",
+      },
+      comingSoon: "Próximamente",
+      comingSoonDesc: "Estoy preparando más secciones para acá. ¡Volvé pronto!",
+    },
   },
   en: {
     nav: {
@@ -218,6 +234,7 @@ export const translations = {
       contact: "Contact",
       blog: "Blog",
       work: "Work",
+      more: "More",
     },
     hero: {
       greeting: "Hello, I'm",
@@ -367,6 +384,21 @@ export const translations = {
     blog: {
       title: "Blog",
       comingSoon: "I'll be sharing articles and updates here soon. Check back later!",
+    },
+    more: {
+      title: "Extra",
+      subtitle: "A space for things I'll keep adding over time.",
+      back: "Back to Extra",
+      gallery: {
+        title: "Gallery",
+        description: "Photos and screenshots from projects, events and more.",
+      },
+      specs: {
+        title: "Specs",
+        description: "The setup and tools I work with.",
+      },
+      comingSoon: "Coming soon",
+      comingSoonDesc: "I'm preparing more sections for here. Check back soon!",
     },
   },
 }

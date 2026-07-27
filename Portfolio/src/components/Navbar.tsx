@@ -62,6 +62,20 @@ const BlogIcon = () => (
   </svg>
 )
 
+const MoreIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="w-4 h-4 transition-transform duration-300 ease-out group-hover:rotate-90"
+  >
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+)
+
 type NavLink = { path: string; label: string; Icon: () => ReactElement }
 
 const Navbar = () => {
@@ -75,11 +89,11 @@ const Navbar = () => {
       { path: "/work", label: t.work, Icon: WorkIcon },
       { path: "/blog", label: t.blog, Icon: BlogIcon },
       { path: "/contact", label: t.contact, Icon: ContactIcon },
+      { path: "/more", label: t.more, Icon: MoreIcon },
     ],
     [t]
   )
 
-  const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [visible, setVisible] = useState(true)
   const [interacting, setInteracting] = useState(false)
@@ -106,7 +120,6 @@ const Navbar = () => {
   }, [])
 
   const markNavigating = () => {
-    setMenuOpen(false)
     setVisible(true)
     isNavigating.current = true
     if (navigatingTimeout.current) window.clearTimeout(navigatingTimeout.current)
@@ -128,7 +141,7 @@ const Navbar = () => {
         onClick={markNavigating}
         aria-label={label}
         title={label}
-        className={`${className} ${activeClass} transition-all duration-300 ease-out active:scale-95`}
+        className={`group ${className} ${activeClass} transition-all duration-300 ease-out active:scale-95`}
       >
         <Icon />
       </Link>
@@ -143,24 +156,24 @@ const Navbar = () => {
       onMouseLeave={() => setInteracting(false)}
       onFocus={() => setInteracting(true)}
       onBlur={() => setInteracting(false)}
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center transition-all duration-300 ${
-        visible || menuOpen || interacting
+      className={`fixed top-5 md:top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center transition-all duration-300 ${
+        visible || interacting
           ? "opacity-100 translate-y-0"
           : "opacity-0 -translate-y-3 pointer-events-none"
       }`}
     >
 
-      {/* Cápsula que envuelve únicamente los enlaces */}
+      {/* Cápsula fija que envuelve los enlaces — igual en mobile y desktop */}
       <div
-        className={`flex items-center gap-5 md:gap-6 px-4 py-2 rounded-full transition-all duration-300 ${
+        className={`flex items-center gap-3 sm:gap-5 md:gap-7 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all duration-300 ${
           scrolled
             ? "bg-secondary/80 backdrop-blur-md shadow-lg shadow-black/30 border border-border"
             : "bg-secondary/40 backdrop-blur-sm border border-border/50"
         }`}
       >
 
-        {/* Links desktop */}
-        <ul className="hidden md:flex gap-6 items-center">
+        {/* Links */}
+        <ul className="flex gap-3 sm:gap-5 md:gap-6 items-center">
           {links.map((link) => (
             <li key={linkKey(link)}>
               {renderLink(
@@ -174,71 +187,15 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Botón de traducción — desktop */}
+        {/* Botón de traducción */}
         <button
           onClick={toggleLanguage}
-          className="hidden md:flex items-center gap-1.5 text-sm font-medium px-4 py-1.5 rounded-full border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-300 ease-out active:scale-95"
+          className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm font-medium px-3 sm:px-4 py-1.5 rounded-full border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-300 ease-out active:scale-95"
           aria-label="Cambiar idioma"
         >
           🌐 {language === "es" ? "EN" : "ES"}
         </button>
 
-        {/* Botón hamburguesa — solo mobile */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-1 focus:outline-none"
-          aria-label="Abrir menú"
-        >
-          <span
-            className={`block w-6 h-0.5 bg-primary transition-all duration-300 ${
-              menuOpen ? "rotate-45 translate-y-2" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-primary transition-all duration-300 ${
-              menuOpen ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-primary transition-all duration-300 ${
-              menuOpen ? "-rotate-45 -translate-y-2" : ""
-            }`}
-          />
-        </button>
-
-      </div>
-
-      {/* Menú mobile desplegable */}
-      <div
-        className={`md:hidden w-auto overflow-hidden transition-all duration-300 rounded-3xl mt-2 ${
-          menuOpen
-            ? "max-h-96 bg-secondary/90 backdrop-blur-md border border-border"
-            : "max-h-0"
-        }`}
-      >
-        <ul className="flex items-center justify-center gap-6 px-6 py-4">
-          {links.map((link) => (
-            <li key={linkKey(link)}>
-              {renderLink(
-                link,
-                `flex items-center justify-center w-9 h-9 rounded-full transition-all duration-200 ${
-                  isActive(link) ? "bg-primary text-primary-foreground" : ""
-                }`
-              )}
-            </li>
-          ))}
-        </ul>
-
-        {/* Botón de traducción — mobile */}
-        <div className="flex justify-center pb-4">
-          <button
-            onClick={toggleLanguage}
-            className="flex items-center gap-1.5 text-sm font-medium px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-300 ease-out active:scale-95"
-            aria-label="Cambiar idioma"
-          >
-            🌐 {language === "es" ? "Switch to English" : "Cambiar a Español"}
-          </button>
-        </div>
       </div>
 
     </nav>

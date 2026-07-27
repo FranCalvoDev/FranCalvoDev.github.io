@@ -94,3 +94,17 @@ body {
     animation: none;
   }
 }
+
+/* Cursor parpadeante del efecto de "máquina de escribir" del Hero */
+@keyframes typewriter-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.typewriter-caret {
+  animation: typewriter-blink 0.85s step-end infinite;
+}

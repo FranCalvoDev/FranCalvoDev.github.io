@@ -7,7 +7,7 @@ const Contact = () => {
   const t = translations[language].contact
 
   return (
-    <section id="contact" className="bg-background/55 pt-16 md:pt-20 pb-16 md:pb-20 px-6 md:px-8">
+    <section id="contact" className="bg-background/55 pt-28 md:pt-32 pb-16 md:pb-20 px-6 md:px-8">
       <motion.div
         className="max-w-5xl mx-auto"
         initial={{ opacity: 0, y: 40 }}

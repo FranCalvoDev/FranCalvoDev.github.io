@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { fadeUp, fadeLeft, fadeRight, staggerContainer } from "../utils/animations"
 import { useLanguage } from "../context/LanguageContext"
@@ -23,9 +24,29 @@ const LinkedInIcon = () => (
   </svg>
 )
 
+// Efecto "máquina de escribir": tipea el texto letra a letra y deja
+// un cursor parpadeante al final, de forma sutil.
+const useTypewriter = (text: string, speed = 28) => {
+  const [displayed, setDisplayed] = useState("")
+
+  useEffect(() => {
+    setDisplayed("")
+    let i = 0
+    const interval = window.setInterval(() => {
+      i += 1
+      setDisplayed(text.slice(0, i))
+      if (i >= text.length) window.clearInterval(interval)
+    }, speed)
+    return () => window.clearInterval(interval)
+  }, [text, speed])
+
+  return displayed
+}
+
 const Hero = () => {
   const { language } = useLanguage()
   const t = translations[language].hero
+  const typedDescPart1 = useTypewriter(t.descPart1)
 
   const cvFile =
     language === "es"
@@ -35,7 +56,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="bg-background/55 min-h-screen flex items-center px-6 md:px-8 py-16 md:py-20"
+      className="bg-background/55 min-h-screen flex items-center px-6 md:px-8 pt-28 pb-16 md:pt-24 md:pb-20"
     >
       <div className="max-w-3xl mx-auto w-full flex justify-center text-center">
 
@@ -79,7 +100,10 @@ const Hero = () => {
               variants={fadeUp}
               className="text-foreground text-base leading-relaxed max-w-md text-justify"
             >
-              {t.descPart1}
+              <span>
+                {typedDescPart1}
+                <span className="typewriter-caret inline-block w-0.5 h-4 -mb-0.5 ml-0.5 bg-primary align-middle" />
+              </span>
               <span className="mt-2 block">
                 {t.descBilingual}
                 <span className="text-primary">{t.descBilingualHighlight}</span>.
