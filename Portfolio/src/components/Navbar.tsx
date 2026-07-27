@@ -193,7 +193,7 @@ const Navbar = () => {
           className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm font-medium px-3 sm:px-4 py-1.5 rounded-full border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-300 ease-out active:scale-95"
           aria-label="Cambiar idioma"
         >
-          🌐 {language === "es" ? "EN" : "ES"}
+           {language === "es" ? "EN" : "ES"}
         </button>
 
       </div>
