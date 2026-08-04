@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState, type FocusEvent, type ReactElement } from "react"
 import { useLocation } from "react-router-dom"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
@@ -7,143 +7,128 @@ import MegaMenuCard from "./MegaMenuCard"
 type MegaMenuItem = {
   title: string
   description: string
-  path: string
-  image: string
+  path?: string
+  image?: string
+  Icon: () => ReactElement
+  comingSoon?: boolean
 }
+
+const GalleryIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.75"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-5 w-5"
+  >
+    <rect x="3" y="3" width="18" height="18" rx="2" />
+    <circle cx="9" cy="9" r="1.5" />
+    <path d="m21 15-5-5L5 21" />
+  </svg>
+)
+
+const SpecsIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.75"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-5 w-5"
+  >
+    <path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4Z" />
+  </svg>
+)
+
+const SoonIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.75"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="h-5 w-5"
+  >
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3.5 2" />
+  </svg>
+)
 
 const MegaMenu = () => {
   const { language } = useLanguage()
   const location = useLocation()
   const t = translations[language].more
   const [open, setOpen] = useState(false)
-  const hoverTimeoutRef = useRef<number | undefined>(undefined)
-  const menuRef = useRef<HTMLDivElement | null>(null)
+  const rootRef = useRef<HTMLDivElement | null>(null)
   const triggerRef = useRef<HTMLButtonElement | null>(null)
 
+  const close = useCallback(() => setOpen(false), [])
+  const toggle = useCallback(() => setOpen((prev) => !prev), [])
+
+  // Cierra el panel al navegar (cambio de ruta).
+  useEffect(() => {
+    close()
+  }, [location.pathname, close])
+
+  // Cierra al hacer click/tap fuera del trigger o del panel.
   useEffect(() => {
     if (!open) return
 
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node) &&
-        triggerRef.current &&
-        !triggerRef.current.contains(event.target as Node)
-      ) {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) {
         setOpen(false)
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    document.addEventListener("pointerdown", handlePointerDown)
+    return () => document.removeEventListener("pointerdown", handlePointerDown)
   }, [open])
 
-  useEffect(() => {
-    setOpen(false)
-  }, [location.pathname])
-
+  // Cierra con Escape y devuelve el foco al trigger.
   useEffect(() => {
     if (!open) return
 
-    const handleEscape = (event: globalThis.KeyboardEvent) => {
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false)
         triggerRef.current?.focus()
       }
     }
 
-    document.addEventListener("keydown", handleEscape)
-    return () => document.removeEventListener("keydown", handleEscape)
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
   }, [open])
 
-  useEffect(() => {
-    return () => {
-      if (hoverTimeoutRef.current) {
-        window.clearTimeout(hoverTimeoutRef.current)
-      }
-    }
-  }, [])
-
-  const clearHoverTimer = () => {
-    if (hoverTimeoutRef.current) {
-      window.clearTimeout(hoverTimeoutRef.current)
-    }
-  }
-
-  const handleDesktopEnter = () => {
-    clearHoverTimer()
-    setOpen(true)
-  }
-
-  const handleDesktopLeave = () => {
-    clearHoverTimer()
-    hoverTimeoutRef.current = window.setTimeout(() => {
+  // Cierra cuando el foco (tab) sale por completo del trigger + panel.
+  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+    if (!rootRef.current?.contains(event.relatedTarget as Node | null)) {
       setOpen(false)
-    }, 150)
-  }
-
-  const handleMenuEnter = () => {
-    clearHoverTimer()
-  }
-
-  const handleMenuLeave = () => {
-    clearHoverTimer()
-    hoverTimeoutRef.current = window.setTimeout(() => {
-      setOpen(false)
-    }, 150)
+    }
   }
 
   const items = useMemo<MegaMenuItem[]>(
+    // "image" es opcional por item (URL/import): sin ella se ve un degradé de respaldo.
     () => [
-      {
-        title: t.gallery.title,
-        description: t.gallery.description,
-        path: "/gallery",
-        image: "",
-      },
-      {
-        title: t.specs.title,
-        description: t.specs.description,
-        path: "/specs",
-        image: "",
-      },
-      {
-        title: t.comingSoon,
-        description: t.comingSoonDesc,
-        path: "/",
-        image: "",
-      },
-      {
-        title: t.comingSoon,
-        description: t.comingSoonDesc,
-        path: "/work",
-        image: "",
-      },
+      { title: t.gallery.title, description: t.gallery.description, path: "/gallery", Icon: GalleryIcon },
+      { title: t.specs.title, description: t.specs.description, path: "/specs", Icon: SpecsIcon },
+      { title: t.comingSoon, description: t.comingSoonDesc, Icon: SoonIcon, comingSoon: true },
+      { title: t.comingSoon, description: t.comingSoonDesc, Icon: SoonIcon, comingSoon: true },
     ],
-    [t.comingSoon, t.comingSoonDesc, t.gallery.description, t.gallery.title, t.specs.description, t.specs.title]
+    [t]
   )
 
-  const toggleOpen = () => setOpen((prev) => !prev)
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault()
-      toggleOpen()
-    }
-  }
-
   return (
-    <div className="relative">
+    <div ref={rootRef} onBlur={handleBlur} className="relative">
       <button
         ref={triggerRef}
         type="button"
-        onClick={toggleOpen}
-        onKeyDown={handleKeyDown}
-        onMouseEnter={handleDesktopEnter}
-        onMouseLeave={handleDesktopLeave}
+        onClick={toggle}
         className="group flex w-full items-center justify-center rounded-full px-1.5 py-1.5 text-primary transition-all duration-200 hover:bg-primary/5 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary sm:px-2"
         aria-label={t.title}
-        aria-haspopup="menu"
         aria-expanded={open}
         aria-controls="mega-menu-panel"
       >
@@ -154,8 +139,8 @@ const MegaMenu = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={`w-4 h-4 transition-transform duration-300 ease-out ${
-            open ? "rotate-90" : "group-hover:rotate-90"
+          className={`h-4 w-4 transition-transform duration-300 ease-out ${
+            open ? "rotate-45" : "group-hover:rotate-90"
           }`}
         >
           <path d="M12 5v14M5 12h14" />
@@ -165,25 +150,24 @@ const MegaMenu = () => {
       {open && (
         <div
           id="mega-menu-panel"
-          ref={menuRef}
-          role="menu"
           aria-label={t.title}
-          onMouseEnter={handleMenuEnter}
-          onMouseLeave={handleMenuLeave}
-          className="absolute left-1/2 top-[calc(100%+0.9rem)] w-[min(92vw,30rem)] -translate-x-1/2 rounded-[1.75rem] border border-white/10 bg-[rgba(2,38,1,0.86)] p-3 shadow-[0_24px_80px_rgba(0,0,0,0.38)] backdrop-blur-2xl sm:w-[min(92vw,34rem)] md:w-[min(92vw,38rem)]"
+          className="fixed left-1/2 top-20 z-50 w-[calc(100vw-2rem)] max-w-104 -translate-x-1/2 rounded-3xl border border-white/10 bg-secondary/95 p-2.5 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:max-w-xl md:top-24 md:max-w-2xl"
         >
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {items.map((item) => (
-              <MegaMenuCard
-                key={item.path}
-                title={item.title}
-                description={item.description}
-                path={item.path}
-                image={item.image}
-                onClick={() => setOpen(false)}
-              />
+          <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2">
+            {items.map((item, index) => (
+              <li key={item.path ?? `soon-${index}`}>
+                <MegaMenuCard
+                  title={item.title}
+                  description={item.description}
+                  path={item.path}
+                  image={item.image}
+                  Icon={item.Icon}
+                  comingSoonLabel={item.comingSoon ? t.comingSoon : undefined}
+                  onNavigate={close}
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       )}
     </div>
