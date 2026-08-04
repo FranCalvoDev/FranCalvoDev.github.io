@@ -54,8 +54,8 @@ const BlogReddit = () => {
     if (loading) return t.loading
     if (error) return error
     if (!posts.length) return t.empty
-    return t.subtitle
-  }, [error, loading, posts.length, t.empty, t.loading, t.subtitle])
+    
+  }, [error, loading, posts.length, t.empty, t.loading, ])
 
   return (
     <div className="max-w-6xl mx-auto">
