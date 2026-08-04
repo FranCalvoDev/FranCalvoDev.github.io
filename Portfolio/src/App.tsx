@@ -7,7 +7,6 @@ import Home from './pages/Home'
 import WorkPage from './pages/WorkPage'
 import BlogPage from './pages/BlogPage'
 import ContactPage from './pages/ContactPage'
-import MorePage from './pages/MorePage'
 import GalleryPage from './pages/GalleryPage'
 import SpecsPage from './pages/SpecsPage'
 
@@ -34,9 +33,8 @@ function App() {
               <Route path="/work" element={<WorkPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/contact" element={<ContactPage />} />
-              <Route path="/more" element={<MorePage />} />
-              <Route path="/more/gallery" element={<GalleryPage />} />
-              <Route path="/more/specs" element={<SpecsPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/specs" element={<SpecsPage />} />
             </Routes>
             <Footer />
             <ScrollIndicator />
