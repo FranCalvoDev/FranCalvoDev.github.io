@@ -16,7 +16,7 @@ const SpecsPage = () => {
           {t.comingSoonDesc}
         </p>
         <Link
-          to="/more"
+          to="/"
           className="text-sm font-medium text-primary hover:underline transition-all duration-300 ease-out"
         >
           ← {t.back}

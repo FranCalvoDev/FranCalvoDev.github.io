@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useMemo, type ReactElement } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
+import MegaMenu from "./MegaMenu"
 
 const HomeIcon = () => (
   <svg
@@ -62,20 +63,6 @@ const BlogIcon = () => (
   </svg>
 )
 
-const MoreIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-4 h-4 transition-transform duration-300 ease-out group-hover:rotate-90"
-  >
-    <path d="M12 5v14M5 12h14" />
-  </svg>
-)
-
 type NavLink = { path: string; label: string; Icon: () => ReactElement }
 
 const Navbar = () => {
@@ -89,7 +76,6 @@ const Navbar = () => {
       { path: "/work", label: t.work, Icon: WorkIcon },
       { path: "/blog", label: t.blog, Icon: BlogIcon },
       { path: "/contact", label: t.contact, Icon: ContactIcon },
-      { path: "/more", label: t.more, Icon: MoreIcon },
     ],
     [t]
   )
@@ -102,20 +88,34 @@ const Navbar = () => {
   const navigatingTimeout = useRef<number | undefined>(undefined)
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false
+
+    const updateFromScroll = () => {
       const { scrollY } = window
+      const scrollingDown = scrollY > lastScrollY.current
       setScrolled(scrollY > 20)
 
-      if (isNavigating.current) {
+      if (isNavigating.current || scrollY <= 20) {
         setVisible(true)
+        setInteracting(false)
+      } else if (scrollingDown) {
+        setVisible(false)
+        setInteracting(false)
       } else {
-        const scrollingDown = scrollY > lastScrollY.current
-        setVisible(scrollY <= 20 ? true : !scrollingDown)
+        setVisible(true)
       }
 
       lastScrollY.current = scrollY
+      ticking = false
     }
-    window.addEventListener("scroll", handleScroll)
+
+    const handleScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(updateFromScroll)
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -130,10 +130,15 @@ const Navbar = () => {
 
   const isActive = (link: NavLink) => location.pathname === link.path
 
+  const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+
   const renderLink = (link: NavLink, className: string) => {
     const { Icon, label } = link
     const active = isActive(link)
-    const activeClass = active ? "text-primary" : "text-foreground hover:text-primary"
+    const activeClass = active
+      ? "text-primary bg-primary/10 shadow-[0_0_0_1px_rgba(121,191,15,0.18)]"
+      : "text-foreground hover:text-primary hover:bg-primary/5"
 
     return (
       <Link
@@ -141,63 +146,66 @@ const Navbar = () => {
         onClick={markNavigating}
         aria-label={label}
         title={label}
-        className={`group ${className} ${activeClass} transition-all duration-300 ease-out active:scale-95`}
+        className={`group ${className} ${activeClass} ${focusRing} transition-all duration-300 ease-out active:scale-95`}
       >
         <Icon />
       </Link>
     )
   }
 
-  const linkKey = (link: NavLink) => link.path
-
   return (
     <nav
-      onMouseEnter={() => setInteracting(true)}
-      onMouseLeave={() => setInteracting(false)}
-      onFocus={() => setInteracting(true)}
-      onBlur={() => setInteracting(false)}
-      className={`fixed top-5 md:top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center transition-all duration-300 ${
-        visible || interacting
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 -translate-y-3 pointer-events-none"
-      }`}
+      aria-label="Navegación principal"
+      className="fixed top-5 md:top-6 left-1/2 z-50 -translate-x-1/2 transition-all duration-300"
     >
-
-      {/* Cápsula fija que envuelve los enlaces — igual en mobile y desktop */}
       <div
-        className={`flex items-center gap-3 sm:gap-5 md:gap-7 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all duration-300 ${
-          scrolled
-            ? "bg-secondary/80 backdrop-blur-md shadow-lg shadow-black/30 border border-border"
-            : "bg-secondary/40 backdrop-blur-sm border border-border/50"
+        onMouseEnter={() => setInteracting(true)}
+        onMouseLeave={() => setInteracting(false)}
+        onFocus={() => setInteracting(true)}
+        onBlur={() => setInteracting(false)}
+        className={`flex flex-col items-center transition-all duration-300 ${
+          visible || interacting
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-3 pointer-events-none"
         }`}
       >
-
-        {/* Links */}
-        <ul className="flex gap-3 sm:gap-5 md:gap-6 items-center">
-          {links.map((link) => (
-            <li key={linkKey(link)}>
-              {renderLink(
-                link,
-                "text-sm font-medium transition-all duration-200 relative pb-1 flex items-center"
-              )}
-              {isActive(link) && (
-                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-primary" />
-              )}
-            </li>
-          ))}
-        </ul>
-
-        {/* Botón de traducción */}
-        <button
-          onClick={toggleLanguage}
-          className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm font-medium px-3 sm:px-4 py-1.5 rounded-full border border-primary text-primary hover:bg-primary hover:text-secondary transition-all duration-300 ease-out active:scale-95"
-          aria-label="Cambiar idioma"
+        {/* Cápsula única de cristal: enlaces, mega menu y selector de idioma
+            comparten el mismo fondo/blur/borde, así ningún control se siente "agregado". */}
+        <div
+          className={`nav-capsule-width flex items-center gap-2 px-2.5 py-2 sm:gap-3 sm:px-4 md:gap-4 md:px-5 sm:py-2.5 rounded-full transition-all duration-300 ${
+            scrolled
+              ? "bg-secondary/80 backdrop-blur-md shadow-lg shadow-black/30 border border-border"
+              : "bg-secondary/40 backdrop-blur-sm border border-border/50"
+          }`}
         >
-           {language === "es" ? "EN" : "ES"}
-        </button>
+          {/* Todos los links (incluido el mega menu) comparten un único <ul> flex
+              para que el reparto de ancho sea idéntico entre ellos. */}
+          <ul className="flex flex-1 items-center gap-1 sm:gap-2 md:gap-2">
+            {links.map((link) => (
+              <li key={link.path} className="flex-1">
+                {renderLink(
+                  link,
+                  "text-sm font-medium transition-all duration-200 flex items-center justify-center rounded-full px-1.5 py-1.5 sm:px-2"
+                )}
+              </li>
+            ))}
+            <li className="flex-1">
+              <MegaMenu />
+            </li>
+          </ul>
 
+          <span aria-hidden="true" className="h-5 w-px shrink-0 bg-border/60 sm:h-6" />
+
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-label="Cambiar idioma"
+            className={`shrink-0 rounded-full px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary transition-all duration-200 ease-out hover:bg-primary/5 active:scale-95 sm:px-3 ${focusRing}`}
+          >
+            {language === "es" ? "EN" : "ES"}
+          </button>
+        </div>
       </div>
-
     </nav>
   )
 }
