@@ -10,6 +10,9 @@ import distribuidoraVarela4 from "../assets/projects/Prototipo_DistribuidoraVare
 import distribuidoraVarela5 from "../assets/projects/Prototipo_DistribuidoraVarela-5.png"
 import distribuidoraVarela6 from "../assets/projects/Prototipo_DistribuidoraVarela-6.png"
 import distribuidoraVarela7 from "../assets/projects/Prototipo_DistribuidoraVarela-7.png"
+import protoRominetta1 from "../assets/projects/Proto-Rominetta1.png"
+import protoRominetta2 from "../assets/projects/Proto-Rominetta2.png"
+import protoRominetta3 from "../assets/projects/Proto-Rominetta3.png"
 
 export type ProjectItem = {
   title: string
@@ -155,15 +158,43 @@ export const translations = {
             distribuidoraVarela7,
           ],
         },
+        {
+          title: "Prototipo del sistema de gestión de Rominetta",
+          description:
+            "Sistema de control de inventario por matriz de tallas, punto de venta  y registro de ventas para una tienda de calzado.",
+          techs: ["React", "TypeScript", "Node.js", "SQLite"],
+          github: null,
+          demo: null,
+          status: "Finalizado",
+          images: [
+            protoRominetta1,
+            protoRominetta2,
+            protoRominetta3,
+          ],
+        },
       ] as ProjectItem[],
     },
     experience: {
       title: "Experiencia",
       items: [
+             {
+          role: "Sistema Integral de Gestión para Zapatería",
+          company: "Rominetta",
+          period: "2025",
+          location: "Bahía Blanca, Buenos Aires",
+          description: [
+            "Relevamiento y análisis de requerimientos para la digitalización de procesos internos de una zapatería.",
+            "Diseño y desarrollo de un sistema integral para la gestión de stock, ventas, compras, proveedores, clientes, caja y reportes.",
+            "Diseño y administración de la base de datos, incluyendo productos, variantes, movimientos de stock y operaciones comerciales.",
+            "Implementación de roles y permisos de usuario, control de inventario y trazabilidad de operacio-nes.",
+            "Integración de procesos de facturación electrónica y requerimientos fiscales de Argentina mediante ARCA (ex AFIP).",
+            "Implementación y soporte de una solución local, incluyendo capacitación de usuarios, resolución de incidencias y documentación técnica.",
+          ],
+        },
         {
           role: "Analista de Sistemas / Desarrollador",
           company: "Estudio Contable Privado",
-          period: "Abril 2024 – Diciembre 2024",
+          period: "Abril 2025 – Diciembre 2025",
           location: "Bahía Blanca, Buenos Aires",
           description: [
             "Relevamiento, análisis y organización de información en entornos digitales utilizando Python para automatización de tareas y procesamiento de datos.",
@@ -188,6 +219,7 @@ export const translations = {
             "Contenerización de proyectos con Docker para gestión de entornos de desarrollo.",
           ],
         },
+   
       ] as ExperienceItem[],
     },
     contact: {
@@ -338,15 +370,43 @@ export const translations = {
             distribuidoraVarela7,
           ],
         },
+        {
+          title: "Rominetta Management System Prototype",
+          description:
+            "Inventory control system by size matrix, point of sale and sales tracking for a footwear store.",
+          techs: ["React", "TypeScript", "Node.js", "SQLite"],
+          github: null,
+          demo: null,
+          status: "Finished",
+          images: [
+            protoRominetta1,
+            protoRominetta2,
+            protoRominetta3,
+          ],
+        },
       ] as ProjectItem[],
     },
     experience: {
       title: "Experience",
       items: [
         {
+          role: "Comprehensive Management System for a Footwear Store",
+          company: "Rominetta",
+          period: "2025",
+          location: "Bahía Blanca, Buenos Aires",
+          description: [
+            "Requirements gathering and analysis for the digitalization of internal processes at a footwear store.",
+            "Design and development of a comprehensive system for managing stock, sales, purchases, suppliers, customers, cash register and reports.",
+            "Design and administration of the database, including products, variants, stock movements and business operations.",
+            "Implementation of user roles and permissions, inventory control and operation traceability.",
+            "Integration of electronic invoicing processes and Argentine tax requirements through ARCA (formerly AFIP).",
+            "Implementation and support of a local solution, including user training, issue resolution and technical documentation.",
+          ],
+        },
+        {
           role: "Systems Analyst / Developer",
           company: "Private Accounting Firm",
-          period: "April 2024 – December 2024",
+          period: "April 2025 – December 2025",
           location: "Bahía Blanca, Buenos Aires",
           description: [
             "Information gathering, analysis and organization in digital environments using Python for task automation and data processing.",
