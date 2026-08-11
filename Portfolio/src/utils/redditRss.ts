@@ -10,6 +10,7 @@ export type RedditPost = {
 const REDDIT_USERNAME = "FC-Dev"
 const REDDIT_RSS_URL = `https://old.reddit.com/user/${REDDIT_USERNAME}/submitted/.rss`
 const RSS2JSON_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(REDDIT_RSS_URL)}`
+const LOCAL_REDDIT_POSTS_URL = "/reddit-posts.json"
 
 const getText = (node: ParentNode, selector: string) =>
   node.querySelector(selector)?.textContent?.trim() ?? ""
@@ -23,6 +24,33 @@ const htmlToText = (html: string) => {
 const getSubredditFromUrl = (url: string) => {
   const match = url.match(/\/r\/([^/]+)\//i)
   return match?.[1] ?? "reddit"
+}
+
+const normalizePosts = (posts: RedditPost[], limit: number) => posts.slice(0, limit)
+
+const fetchLocalPosts = async (limit: number): Promise<RedditPost[]> => {
+  const response = await fetch(LOCAL_REDDIT_POSTS_URL)
+  if (!response.ok) {
+    return []
+  }
+
+  const payload = (await response.json()) as {
+    posts?: RedditPost[]
+  }
+
+  if (!Array.isArray(payload.posts) || !payload.posts.length) {
+    return []
+  }
+
+  return normalizePosts(
+    payload.posts
+      .filter((post) => post.id && post.title && post.url)
+      .map((post) => ({
+        ...post,
+        subreddit: post.subreddit || getSubredditFromUrl(post.url),
+      })),
+    limit,
+  )
 }
 
 const fetchViaRss2Json = async (limit: number): Promise<RedditPost[]> => {
@@ -96,6 +124,11 @@ const fetchRssXml = async (url: string) => {
 }
 
 export const fetchRedditPostsRss = async (limit = 10): Promise<RedditPost[]> => {
+  const localPosts = await fetchLocalPosts(limit)
+  if (localPosts.length) {
+    return localPosts
+  }
+
   const rss2jsonPosts = await fetchViaRss2Json(limit)
   if (rss2jsonPosts.length) {
     return rss2jsonPosts
