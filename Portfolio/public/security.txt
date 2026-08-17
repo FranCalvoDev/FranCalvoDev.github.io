@@ -1,0 +1,5 @@
+Contact: mailto:franciscocalvo.dev@gmail.com
+Encryption: https://francalvodev.github.io
+Policy: https://francalvodev.github.io
+Preferred-Languages: en, es
+Canonical: https://francalvodev.github.io/security.txt

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://francalvodev.github.io/sitemap.xml
