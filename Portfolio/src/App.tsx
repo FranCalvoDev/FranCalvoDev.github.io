@@ -9,6 +9,7 @@ import BlogPage from './pages/BlogPage'
 import ContactPage from './pages/ContactPage'
 import GalleryPage from './pages/GalleryPage'
 import SpecsPage from './pages/SpecsPage'
+import SpecItemPage from './pages/SpecItemPage'
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/specs" element={<SpecsPage />} />
+              <Route path="/specs/:itemId" element={<SpecItemPage />} />
             </Routes>
             <Footer />
             <ScrollIndicator />

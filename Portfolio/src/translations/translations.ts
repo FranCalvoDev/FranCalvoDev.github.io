@@ -64,7 +64,7 @@ export const translations = {
     },
     hero: {
       greeting: "Hola, soy",
-      titleLine1: "-Desarrollador Web",
+      titleLine1: "-Desarrollador ",
       titleLine1Highlight: "Full-Stack",
       titleLine2: "-Analista de",
       titleLine2Highlight: "Sistemas",
@@ -257,6 +257,8 @@ export const translations = {
       specs: {
         title: "Especificaciones",
         description: "El setup y las herramientas con las que trabajo.",
+        viewSpecs: "Ver especificaciones",
+        notFound: "Elemento no encontrado",
       },
       comingSoon: "Próximamente",
       comingSoonDesc: "Estoy preparando más secciones para acá. ¡Volvé pronto!",
@@ -276,7 +278,7 @@ export const translations = {
     },
     hero: {
       greeting: "Hello, I'm",
-      titleLine1: "-Full-Stack Web",
+      titleLine1: "-Full-Stack ",
       titleLine1Highlight: "Developer",
       titleLine2: "-Systems",
       titleLine2Highlight: "Analyst",
@@ -468,6 +470,8 @@ export const translations = {
       specs: {
         title: "Specs",
         description: "The setup and tools I work with.",
+        viewSpecs: "View specs",
+        notFound: "Item not found",
       },
       comingSoon: "Coming soon",
       comingSoonDesc: "I'm preparing more sections for here. Check back soon!",

@@ -37,8 +37,8 @@ const MorePage = () => {
   const t = translations[language].more
 
   const cards = [
-    { path: "/more/gallery", title: t.gallery.title, description: t.gallery.description, Icon: GalleryIcon },
-    { path: "/more/specs", title: t.specs.title, description: t.specs.description, Icon: SpecsIcon },
+    { path: "/gallery", title: t.gallery.title, description: t.gallery.description, Icon: GalleryIcon },
+    { path: "/specs", title: t.specs.title, description: t.specs.description, Icon: SpecsIcon },
   ]
 
   return (
