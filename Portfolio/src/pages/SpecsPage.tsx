@@ -62,9 +62,9 @@ const SpecsPage = () => {
               width: `${item.width}%`,
               height: `${item.height}%`,
             }}
-            aria-label={item.name}
+            aria-label={t.specs.items[item.id].name}
           >
-            <span className="sr-only">{item.name}</span>
+            <span className="sr-only">{t.specs.items[item.id].name}</span>
           </button>
         ))}
 
@@ -77,7 +77,7 @@ const SpecsPage = () => {
               transform: "translate(-50%, calc(-100% - 8px))",
             }}
           >
-            <p className="text-sm font-semibold text-foreground">{hoveredItem.name}</p>
+            <p className="text-sm font-semibold text-foreground">{t.specs.items[hoveredItem.id].name}</p>
             <p className="text-xs text-muted-foreground">{t.specs.viewSpecs}</p>
           </div>
         )}
@@ -99,7 +99,7 @@ const SpecsPage = () => {
               onClick={() => navigate(`/specs/${item.id}`)}
               className="px-3 py-1.5 rounded-full border border-border bg-secondary/40 text-sm text-foreground hover:border-primary hover:text-primary transition-colors duration-200 ease-out outline-none focus-visible:border-primary"
             >
-              {item.name}
+              {t.specs.items[item.id].name}
             </button>
           ))}
         </div>

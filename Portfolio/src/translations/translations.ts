@@ -49,6 +49,126 @@ export type SkillCategory = {
   items: string[]
 }
 
+export type SpecItemTranslation = {
+  name: string
+  labels: Record<string, string>
+  values?: Record<string, string>
+}
+
+const esSpecItems: Record<string, SpecItemTranslation> = {
+  pc: {
+    name: "PC",
+    labels: { cpu: "CPU", gpu: "GPU", ram: "RAM", storage: "Almacenamiento", os: "SO" },
+  },
+  monitor: {
+    name: "Monitor",
+    labels: { model: "Modelo", size: "Tamaño", resolution: "Resolución", refreshRate: "Tasa de refresco", panel: "Panel" },
+    values: { monitorSize: "24 pulgadas" },
+  },
+  laptop: {
+    name: "Laptop",
+    labels: { model: "Modelo", cpu: "CPU", gpu: "GPU", ram: "RAM", storage: "Almacenamiento" },
+  },
+  keyboard: {
+    name: "Teclado",
+    labels: { layout: "Diseño" },
+    values: { keyboardLayout: "A definir" },
+  },
+  mouse: {
+    name: "Mouse",
+    labels: { model: "Modelo", dpi: "DPI" },
+  },
+  camera: {
+    name: "Cámara",
+    labels: { model: "Modelo", videoResolution: "Resolución de video" },
+    values: { cameraVideoResolution: "Hasta 4K a 30 fps, 2.7K a 60 fps y 1080p a 120 fps" },
+  },
+  "portable-speaker": {
+    name: "Parlante portátil",
+    labels: { model: "Modelo" },
+  },
+  whiteboard: {
+    name: "Pizarra",
+    labels: { taskManager: "Gestor de tareas", emptiedForPhotos: "Vacío para fotos" },
+    values: { whiteboardTaskManager: "Todo lo que necesitás" },
+  },
+  tripod: {
+    name: "Trípode",
+    labels: { brand: "Marca" },
+  },
+  chair: {
+    name: "Silla",
+    labels: { brand: "Marca", comfort: "Comodidad" },
+    values: { chairBrand: "Desconocida" },
+  },
+  headphones: {
+    name: "Auriculares",
+    labels: { model: "Modelo" },
+  },
+  "carry-bag": {
+    name: "Bolso",
+    labels: { brand: "Marca", extras: "Extras" },
+    values: { carryBagExtras: "Bolsillo para botella de agua" },
+  },
+}
+
+const enSpecItems: Record<string, SpecItemTranslation> = {
+  pc: {
+    name: "PC",
+    labels: { cpu: "CPU", gpu: "GPU", ram: "RAM", storage: "Storage", os: "OS" },
+  },
+  monitor: {
+    name: "Monitor",
+    labels: { model: "Model", size: "Size", resolution: "Resolution", refreshRate: "Refresh rate", panel: "Panel" },
+    values: { monitorSize: "24 inches" },
+  },
+  laptop: {
+    name: "Laptop",
+    labels: { model: "Model", cpu: "CPU", gpu: "GPU", ram: "RAM", storage: "Storage" },
+  },
+  keyboard: {
+    name: "Keyboard",
+    labels: { layout: "Layout" },
+    values: { keyboardLayout: "TBD" },
+  },
+  mouse: {
+    name: "Mouse",
+    labels: { model: "Model", dpi: "DPI" },
+  },
+  camera: {
+    name: "Camera",
+    labels: { model: "Model", videoResolution: "Video Resolution" },
+    values: { cameraVideoResolution: "Up to 4K at 30 fps, 2.7K at 60 fps, and 1080p at 120 fps" },
+  },
+  "portable-speaker": {
+    name: "Portable Speaker",
+    labels: { model: "Model" },
+  },
+  whiteboard: {
+    name: "Whiteboard",
+    labels: { taskManager: "TaskManager", emptiedForPhotos: "Emptied for photos" },
+    values: { whiteboardTaskManager: "All you need" },
+  },
+  tripod: {
+    name: "Tripod",
+    labels: { brand: "Brand" },
+  },
+  chair: {
+    name: "Chair",
+    labels: { brand: "Brand", comfort: "Comfort" },
+    values: { chairBrand: "Unknown" },
+  },
+  headphones: {
+    name: "Headphones",
+    labels: { model: "Model" },
+  },
+  "carry-bag": {
+    name: "Carry Bag",
+    labels: { brand: "Brand", extras: "Extras" },
+    values: { carryBagExtras: "Pocket for water bottle" },
+  },
+}
+
 export const translations = {
   es: {
     nav: {
@@ -260,6 +380,7 @@ export const translations = {
         viewSpecs: "Ver especificaciones",
         notFound: "Elemento no encontrado",
         allItems: "Todos los elementos",
+        items: esSpecItems,
       },
       comingSoon: "Próximamente",
       comingSoonDesc: "Estoy preparando más secciones para acá. ¡Volvé pronto!",
@@ -474,6 +595,7 @@ export const translations = {
         viewSpecs: "View specs",
         notFound: "Item not found",
         allItems: "All items",
+        items: enSpecItems,
       },
       comingSoon: "Coming soon",
       comingSoonDesc: "I'm preparing more sections for here. Check back soon!",

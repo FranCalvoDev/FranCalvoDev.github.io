@@ -13,13 +13,16 @@ import carrybag from "../assets/specs-ph/carry-bag.jpg"
 
 
 export type SpecEntry = {
-  label: string
+  // Key used to look up the translated label (and, when present, value) in
+  // translations.ts under more.specs.items[id]. Raw values (model numbers,
+  // brand names) are kept in `value` since they're the same in every language.
+  labelKey: string
   value: string
+  valueKey?: string
 }
 
 export type SpecItem = {
   id: string
-  name: string
   // Position and size as a percentage of the background image, so hotspots
   // stay aligned regardless of the rendered size.
   x: number
@@ -35,164 +38,155 @@ export type SpecItem = {
 export const specsItems: SpecItem[] = [
   {
     id: "pc",
-    name: "PC",
     x: 46.7,
     y: 56,
     width: 14.3,
     height: 22,
     photo: PC,
     specs: [
-      { label: "CPU", value: "Ryzen 5 5600G" },
-      { label: "GPU", value: "NVIDIA GTX 1060 6 GB" },
-      { label: "RAM", value: "16 GB DDR4" },
-      { label: "Storage", value: "SSD 150GB + HDD 1 TB" },
-      { label: "OS", value: "Windows 10 LTSC" },
+      { labelKey: "cpu", value: "Ryzen 5 5600G" },
+      { labelKey: "gpu", value: "NVIDIA GTX 1060 6 GB" },
+      { labelKey: "ram", value: "16 GB DDR4" },
+      { labelKey: "storage", value: "SSD 150GB + HDD 1 TB" },
+      { labelKey: "os", value: "Windows 10 LTSC" },
     ],
   },
   {
     id: "monitor",
-    name: "Monitor",
     x: 34.68,
     y: 31,
     width: 17,
     height: 21,
     photo: monitor,
     specs: [
-      { label: "Model", value: "ASUS TUF VG249QL3A" },
-      { label: "Size", value: "24 inches" },
-      { label: "Resolution", value: "Full-HD" },
-      { label: "Refresh rate", value: "180hz" },
-      { label: "Panel", value: "IPS" },
+      { labelKey: "model", value: "ASUS TUF VG249QL3A" },
+      { labelKey: "size", value: "24 inches", valueKey: "monitorSize" },
+      { labelKey: "resolution", value: "Full-HD" },
+      { labelKey: "refreshRate", value: "180hz" },
+      { labelKey: "panel", value: "IPS" },
     ],
   },
   {
     id: "laptop",
-    name: "Laptop",
     x: 23.3,
     y: 38,
     width: 16,
     height: 17,
     photo: laptop,
     specs: [
-      { label: "Model", value: "ASUS Rog Strix" },
-      { label: "CPU", value: "AMD Ryzen 7 6800HS with Radeon Graphics (3.20 GHz)" },
-      { label: "GPU", value: "NVIDIA GeForce RTX 3050 Laptop GPU (4 GB) AMD Radeon(TM) Graphics (486 MB)" },
-      { label: "RAM", value: "16GB DDR5" },
-      { label: "Storage", value: "500GB" },
+      { labelKey: "model", value: "ASUS Rog Strix" },
+      { labelKey: "cpu", value: "AMD Ryzen 7 6800HS with Radeon Graphics (3.20 GHz)" },
+      { labelKey: "gpu", value: "NVIDIA GeForce RTX 3050 Laptop GPU (4 GB) AMD Radeon(TM) Graphics (486 MB)" },
+      { labelKey: "ram", value: "16GB DDR5" },
+      { labelKey: "storage", value: "500GB" },
     ],
   },
   {
     id: "keyboard",
-    name: "Keyboard",
     x: 21.5,
     y: 54,
     width: 19,
     height: 7,
     photo: keyboard,
     specs: [
-      { label: "Layout", value: "TBD" },
+      { labelKey: "layout", value: "TBD", valueKey: "keyboardLayout" },
     ],
   },
   {
     id: "mouse",
-    name: "Mouse",
     x: 42,
     y: 50,
     width: 5,
     height: 5,
     photo: mouse,
     specs: [
-      { label: "Model", value: "Logitech G305" },
-      { label: "DPI", value: "16000" },
+      { labelKey: "model", value: "Logitech G305" },
+      { labelKey: "dpi", value: "16000" },
     ],
   },
   {
     id: "camera",
-    name: "Camera",
     x: 6.3,
     y: 57,
     width: 6,
     height: 6,
     photo: camera,
     specs: [
-      { label: "Model", value: "GoPro Hero 5 Black" },
-      { label: "Video Resolution", value: " Up to 4K at 30 fps, 2.7K at 60 fps, and 1080p at 120 fps" },
-
+      { labelKey: "model", value: "GoPro Hero 5 Black" },
+      {
+        labelKey: "videoResolution",
+        value: "Up to 4K at 30 fps, 2.7K at 60 fps, and 1080p at 120 fps",
+        valueKey: "cameraVideoResolution",
+      },
     ],
   },
   {
     id: "portable-speaker",
-    name: "Portable Speaker",
     x: 57.5,
     y: 41,
     width: 4,
     height: 9,
     photo: portableSpeaker,
     specs: [
-      { label: "Model", value: "UE BOOM 2" },
+      { labelKey: "model", value: "UE BOOM 2" },
     ],
   },
   {
     id: "whiteboard",
-    name: "Whiteboard",
     x: 67,
     y: 8.5,
     width: 30,
     height: 34.5,
     photo: whiteboard,
     specs: [
-      { label: "TaskManager", value: "All you need" },
-      { label: "Emptied for photos", value: "." },
+      { labelKey: "taskManager", value: "All you need", valueKey: "whiteboardTaskManager" },
+      { labelKey: "emptiedForPhotos", value: "." },
     ],
   },
   {
     id: "tripod",
-    name: "Tripod",
     x: 2.5,
     y: 62,
     width: 17,
     height: 34,
     photo: tripod,
     specs: [
-      { label: "Brand", value: "Gadnic" },
+      { labelKey: "brand", value: "Gadnic" },
     ],
   },
   {
     id: "chair",
-    name: "Chair",
     x: 32,
     y: 70,
     width: 16,
     height: 30,
     photo: chair,
     specs: [
-      { label: "Brand", value: "Unknown" },
-      { label: "Comfort", value: "10/10" },
+      { labelKey: "brand", value: "Unknown", valueKey: "chairBrand" },
+      { labelKey: "comfort", value: "10/10" },
     ],
   },
   {
     id: "headphones",
-    name: "Headphones",
     x: 49.3,
     y: 48,
     width: 7,
     height: 6,
     photo: headphones,
     specs: [
-      { label: "Model", value: "Sony WH-1000XM3" },
+      { labelKey: "model", value: "Sony WH-1000XM3" },
     ],
   },
     {
     id: "carry-bag",
-    name: "Carry Bag",
     x: 67,
     y: 80,
     width: 9,
     height: 19,
     photo: carrybag,
     specs: [
-      { label: "Brand", value: "Cane Corso" },
-      { label: "Extras", value: "Pocket for water bottle" },
+      { labelKey: "brand", value: "Cane Corso" },
+      { labelKey: "extras", value: "Pocket for water bottle", valueKey: "carryBagExtras" },
     ],
   },
 ]
