@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { specsItems } from "../data/specsItems"
+import deskPhoto  from "../assets/specs-ph/desk.jpg"
 
 const SpecsPage = () => {
   const { language } = useLanguage()
@@ -16,7 +17,7 @@ const SpecsPage = () => {
     setHoveredId((current) => (current === id ? null : current))
 
   return (
-    <section className="bg-background/55 min-h-screen pt-28 md:pt-32 pb-16 md:pb-20 px-8">
+    <section className="bg-background/55 min-h-screen pt-28 md:pt-32 pb-16 md:pb-20 px-4 md:px-8">
       <div className="max-w-3xl mx-auto text-center flex flex-col gap-4 items-center mb-10">
         <h1 className="text-3xl md:text-4xl font-bold text-primary tracking-tight">
           {t.specs.title}
@@ -26,9 +27,22 @@ const SpecsPage = () => {
         </p>
       </div>
 
-      <div className="relative max-w-5xl mx-auto aspect-video rounded-2xl overflow-hidden border border-border bg-secondary/40">
-        {/* Placeholder background: swap for the real room/desk photo */}
+      <div className="relative w-full max-w-450 mx-auto rounded-2xl overflow-hidden border border-border bg-secondary/40">
+        <img src={deskPhoto} alt="Desk" className="w-full h-auto block" />
         <div className="absolute inset-0 bg-gradient-to-br from-secondary/60 to-background" aria-hidden="true" />
+
+        <img
+          src={deskPhoto}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-[clip-path,opacity] duration-200 ease-out rounded-lg ring-2 ring-primary/70"
+          style={{
+            opacity: hoveredItem ? 1 : 0,
+            clipPath: hoveredItem
+              ? `inset(${hoveredItem.y}% ${100 - hoveredItem.x - hoveredItem.width}% ${100 - hoveredItem.y - hoveredItem.height}% ${hoveredItem.x}% round 8px)`
+              : "inset(0% 100% 100% 0%)",
+          }}
+        />
 
         {specsItems.map((item) => (
           <button
@@ -38,6 +52,8 @@ const SpecsPage = () => {
             onMouseLeave={() => clearHover(item.id)}
             onFocus={() => setHoveredId(item.id)}
             onBlur={() => clearHover(item.id)}
+            onTouchStart={() => setHoveredId(item.id)}
+            onTouchEnd={() => clearHover(item.id)}
             onClick={() => navigate(`/specs/${item.id}`)}
             className="absolute rounded-lg border-2 border-transparent hover:border-primary focus-visible:border-primary transition-colors duration-200 ease-out outline-none"
             style={{
@@ -56,15 +72,37 @@ const SpecsPage = () => {
           <div
             className="absolute z-10 pointer-events-none rounded-xl border border-border bg-background/90 backdrop-blur-sm px-3 py-2 shadow-lg text-left"
             style={{
-              left: `${hoveredItem.x}%`,
+              left: `${hoveredItem.x + hoveredItem.width / 2}%`,
               top: `${hoveredItem.y}%`,
-              transform: "translate(-50%, -100%)",
+              transform: "translate(-50%, calc(-100% - 8px))",
             }}
           >
             <p className="text-sm font-semibold text-foreground">{hoveredItem.name}</p>
             <p className="text-xs text-muted-foreground">{t.specs.viewSpecs}</p>
           </div>
         )}
+      </div>
+
+      <div className="max-w-450 mx-auto mt-6">
+        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground text-center mb-3">
+          {t.specs.allItems}
+        </p>
+        <div className="flex flex-wrap justify-center gap-2">
+          {specsItems.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              onMouseEnter={() => setHoveredId(item.id)}
+              onMouseLeave={() => clearHover(item.id)}
+              onFocus={() => setHoveredId(item.id)}
+              onBlur={() => clearHover(item.id)}
+              onClick={() => navigate(`/specs/${item.id}`)}
+              className="px-3 py-1.5 rounded-full border border-border bg-secondary/40 text-sm text-foreground hover:border-primary hover:text-primary transition-colors duration-200 ease-out outline-none focus-visible:border-primary"
+            >
+              {item.name}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="max-w-3xl mx-auto text-center mt-8">

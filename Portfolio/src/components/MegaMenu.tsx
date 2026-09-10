@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import MegaMenuCard from "./MegaMenuCard"
+import deskPhoto from "../assets/specs-ph/desk.jpg"
 
 type MegaMenuItem = {
   title: string
@@ -114,7 +115,7 @@ const MegaMenu = () => {
     // "image" es opcional por item (URL/import): sin ella se ve un degradé de respaldo.
     () => [
       { title: t.gallery.title, description: t.gallery.description, path: "/gallery", Icon: GalleryIcon },
-      { title: t.specs.title, description: t.specs.description, path: "/specs", Icon: SpecsIcon },
+      { title: t.specs.title, description: t.specs.description, path: "/specs", image: deskPhoto, Icon: SpecsIcon },
       { title: t.comingSoon, description: t.comingSoonDesc, Icon: SoonIcon, comingSoon: true },
       { title: t.comingSoon, description: t.comingSoonDesc, Icon: SoonIcon, comingSoon: true },
     ],

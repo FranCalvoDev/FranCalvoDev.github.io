@@ -1,3 +1,17 @@
+import PC from "../assets/specs-ph/PC.jpg"
+import monitor from "../assets/specs-ph/monitor.jpg"
+import laptop from "../assets/specs-ph/laptop.jpg"
+import keyboard from "../assets/specs-ph/keyboard.jpg"
+import mouse from "../assets/specs-ph/mouse.jpg"
+import camera from "../assets/specs-ph/cam&tri.jpg"
+import portableSpeaker from "../assets/specs-ph/little-speaker.jpg"
+import whiteboard from "../assets/specs-ph/whiteboard.jpg"
+import tripod from "../assets/specs-ph/tripod.jpg"
+import chair from "../assets/specs-ph/chair.jpg"
+import headphones from "../assets/specs-ph/headphones.jpg"
+import carrybag from "../assets/specs-ph/carry-bag.jpg"
+
+
 export type SpecEntry = {
   label: string
   value: string
@@ -13,138 +27,172 @@ export type SpecItem = {
   width: number
   height: number
   specs: SpecEntry[]
+  // Dedicated close-up photo shown on the item's detail page. Import it from
+  // src/assets/specs-ph and assign it here; left undefined until then.
+  photo: string
 }
 
 export const specsItems: SpecItem[] = [
   {
     id: "pc",
     name: "PC",
-    x: 46,
-    y: 40,
-    width: 14,
-    height: 30,
+    x: 46.7,
+    y: 56,
+    width: 14.3,
+    height: 22,
+    photo: PC,
     specs: [
-      { label: "CPU", value: "TBD" },
-      { label: "GPU", value: "TBD" },
-      { label: "RAM", value: "TBD" },
-      { label: "Storage", value: "TBD" },
+      { label: "CPU", value: "Ryzen 5 5600G" },
+      { label: "GPU", value: "NVIDIA GTX 1060 6 GB" },
+      { label: "RAM", value: "16 GB DDR4" },
+      { label: "Storage", value: "SSD 150GB + HDD 1 TB" },
+      { label: "OS", value: "Windows 10 LTSC" },
     ],
   },
   {
     id: "monitor",
     name: "Monitor",
-    x: 30,
-    y: 15,
-    width: 20,
-    height: 20,
+    x: 34.68,
+    y: 31,
+    width: 17,
+    height: 21,
+    photo: monitor,
     specs: [
-      { label: "Size", value: "TBD" },
-      { label: "Resolution", value: "TBD" },
-      { label: "Refresh rate", value: "TBD" },
-      { label: "Panel", value: "TBD" },
+      { label: "Model", value: "ASUS TUF VG249QL3A" },
+      { label: "Size", value: "24 inches" },
+      { label: "Resolution", value: "Full-HD" },
+      { label: "Refresh rate", value: "180hz" },
+      { label: "Panel", value: "IPS" },
     ],
   },
   {
     id: "laptop",
     name: "Laptop",
-    x: 62,
-    y: 42,
+    x: 23.3,
+    y: 38,
     width: 16,
-    height: 14,
+    height: 17,
+    photo: laptop,
     specs: [
-      { label: "Model", value: "TBD" },
-      { label: "CPU", value: "TBD" },
-      { label: "RAM", value: "TBD" },
-      { label: "Storage", value: "TBD" },
+      { label: "Model", value: "ASUS Rog Strix" },
+      { label: "CPU", value: "AMD Ryzen 7 6800HS with Radeon Graphics (3.20 GHz)" },
+      { label: "GPU", value: "NVIDIA GeForce RTX 3050 Laptop GPU (4 GB) AMD Radeon(TM) Graphics (486 MB)" },
+      { label: "RAM", value: "16GB DDR5" },
+      { label: "Storage", value: "500GB" },
     ],
   },
   {
     id: "keyboard",
     name: "Keyboard",
-    x: 32,
-    y: 58,
-    width: 16,
-    height: 8,
+    x: 21.5,
+    y: 54,
+    width: 19,
+    height: 7,
+    photo: keyboard,
     specs: [
       { label: "Layout", value: "TBD" },
-      { label: "Switches", value: "TBD" },
-      { label: "Connection", value: "TBD" },
     ],
   },
   {
     id: "mouse",
     name: "Mouse",
-    x: 50,
-    y: 60,
-    width: 6,
-    height: 8,
+    x: 42,
+    y: 50,
+    width: 5,
+    height: 5,
+    photo: mouse,
     specs: [
-      { label: "DPI", value: "TBD" },
-      { label: "Connection", value: "TBD" },
-      { label: "Weight", value: "TBD" },
+      { label: "Model", value: "Logitech G305" },
+      { label: "DPI", value: "16000" },
     ],
   },
   {
     id: "camera",
     name: "Camera",
-    x: 40,
-    y: 8,
+    x: 6.3,
+    y: 57,
     width: 6,
     height: 6,
+    photo: camera,
     specs: [
-      { label: "Resolution", value: "TBD" },
-      { label: "FPS", value: "TBD" },
-      { label: "Connection", value: "TBD" },
+      { label: "Model", value: "GoPro Hero 5 Black" },
+      { label: "Video Resolution", value: " Up to 4K at 30 fps, 2.7K at 60 fps, and 1080p at 120 fps" },
+
     ],
   },
   {
-    id: "speakers",
-    name: "Speakers",
-    x: 20,
-    y: 20,
-    width: 8,
-    height: 12,
+    id: "portable-speaker",
+    name: "Portable Speaker",
+    x: 57.5,
+    y: 41,
+    width: 4,
+    height: 9,
+    photo: portableSpeaker,
     specs: [
-      { label: "Type", value: "TBD" },
-      { label: "Power", value: "TBD" },
-      { label: "Connection", value: "TBD" },
+      { label: "Model", value: "UE BOOM 2" },
     ],
   },
   {
     id: "whiteboard",
     name: "Whiteboard",
-    x: 5,
-    y: 5,
-    width: 20,
-    height: 25,
+    x: 67,
+    y: 8.5,
+    width: 30,
+    height: 34.5,
+    photo: whiteboard,
     specs: [
-      { label: "Size", value: "TBD" },
-      { label: "Type", value: "TBD" },
+      { label: "TaskManager", value: "All you need" },
+      { label: "Emptied for photos", value: "." },
     ],
   },
   {
-    id: "desk",
-    name: "Desk",
-    x: 10,
-    y: 70,
-    width: 70,
-    height: 20,
+    id: "tripod",
+    name: "Tripod",
+    x: 2.5,
+    y: 62,
+    width: 17,
+    height: 34,
+    photo: tripod,
     specs: [
-      { label: "Material", value: "TBD" },
-      { label: "Size", value: "TBD" },
-      { label: "Height", value: "TBD" },
+      { label: "Brand", value: "Gadnic" },
     ],
   },
   {
     id: "chair",
     name: "Chair",
-    x: 78,
-    y: 60,
+    x: 32,
+    y: 70,
     width: 16,
     height: 30,
+    photo: chair,
     specs: [
-      { label: "Model", value: "TBD" },
-      { label: "Type", value: "TBD" },
+      { label: "Brand", value: "Unknown" },
+      { label: "Comfort", value: "10/10" },
+    ],
+  },
+  {
+    id: "headphones",
+    name: "Headphones",
+    x: 49.3,
+    y: 48,
+    width: 7,
+    height: 6,
+    photo: headphones,
+    specs: [
+      { label: "Model", value: "Sony WH-1000XM3" },
+    ],
+  },
+    {
+    id: "carry-bag",
+    name: "Carry Bag",
+    x: 67,
+    y: 80,
+    width: 9,
+    height: 19,
+    photo: carrybag,
+    specs: [
+      { label: "Brand", value: "Cane Corso" },
+      { label: "Extras", value: "Pocket for water bottle" },
     ],
   },
 ]
