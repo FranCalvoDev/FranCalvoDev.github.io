@@ -1,4 +1,4 @@
-import type { ReactElement } from "react"
+import { useState, type ReactElement } from "react"
 import { Link } from "react-router-dom"
 
 type MegaMenuCardProps = {
@@ -27,6 +27,7 @@ const ArrowIcon = () => (
 
 const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, onNavigate }: MegaMenuCardProps) => {
   const isDisabled = !path
+  const [pressed, setPressed] = useState(false)
 
   const iconWrapper = (
     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-200 group-hover:bg-primary/20">
@@ -54,13 +55,44 @@ const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, 
     </>
   )
 
+  const background = (
+    <span aria-hidden="true" className="absolute inset-0">
+      {image ? (
+        <img
+          src={image}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover transition-[transform,filter] duration-500 ease-out group-hover:scale-105"
+          style={{ filter: pressed ? "blur(0px)" : "blur(6px)" }}
+        />
+      ) : (
+        <span
+          className="block h-full w-full bg-linear-to-br from-primary/20 via-secondary to-accent/40 transition-[filter] duration-500 ease-out"
+          style={{ filter: pressed ? "blur(0px)" : "blur(6px)" }}
+        />
+      )}
+      <span className="absolute inset-0 bg-secondary/85 transition-colors duration-300 ease-out group-hover:bg-secondary/55 group-focus-visible:bg-secondary/55 group-active:bg-secondary/50" />
+    </span>
+  )
+
+  const pressHandlers = {
+    onMouseEnter: () => setPressed(true),
+    onMouseLeave: () => setPressed(false),
+    onTouchStart: () => setPressed(true),
+    onTouchEnd: () => setPressed(false),
+    onTouchCancel: () => setPressed(false),
+  }
+
   if (isDisabled) {
     return (
       <div
         aria-disabled="true"
-        className="group flex cursor-default items-start gap-3.5 rounded-2xl p-3.5 opacity-50 sm:p-4"
+        {...pressHandlers}
+        className="group relative flex cursor-default overflow-hidden items-start gap-3.5 rounded-2xl p-3.5 opacity-50 sm:p-4"
       >
-        {content}
+        {background}
+        <span className="relative flex w-full items-start gap-3.5">{content}</span>
       </div>
     )
   }
@@ -69,23 +101,10 @@ const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, 
     <Link
       to={path}
       onClick={onNavigate}
+      {...pressHandlers}
       className="group relative flex overflow-hidden rounded-2xl transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
     >
-      {/* Fondo: imagen (o degradé de respaldo mientras no haya asset definitivo) + velo que se aclara en hover/foco/tap */}
-      <span aria-hidden="true" className="absolute inset-0">
-        {image ? (
-          <img
-            src={image}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-          />
-        ) : (
-          <span className="block h-full w-full bg-linear-to-br from-primary/20 via-secondary to-accent/40" />
-        )}
-        <span className="absolute inset-0 bg-secondary/85 transition-colors duration-300 ease-out group-hover:bg-secondary/55 group-focus-visible:bg-secondary/55 group-active:bg-secondary/50" />
-      </span>
+      {background}
       <span className="relative flex w-full items-start gap-3.5 p-3.5 sm:p-4">{content}</span>
     </Link>
   )
