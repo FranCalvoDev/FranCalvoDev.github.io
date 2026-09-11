@@ -85,7 +85,11 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
-              className="bg-secondary/90 border border-border/40 rounded-3xl p-7 shadow-[0_2px_20px_rgba(0,0,0,0.22)] flex flex-col justify-between transition-transform duration-300 ease-out hover:-translate-y-1"
+              className={`bg-secondary/90 rounded-3xl p-7 flex flex-col justify-between transition-transform duration-300 ease-out hover:-translate-y-1 ${
+                project.status === "inprogress"
+                  ? "border-2 border-primary shadow-[0_0_20px_rgba(121,191,15,0.45)]"
+                  : "border border-border/40 shadow-[0_2px_20px_rgba(0,0,0,0.22)]"
+              }`}
             >
               {/* Carrusel de imágenes */}
               <ProjectCarousel images={project.images} title={project.title} />
