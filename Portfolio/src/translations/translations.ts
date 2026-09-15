@@ -1,3 +1,4 @@
+import fc from "../assets/projects/FC_new.png"
 import sneakerhub1 from "../assets/projects/sneakerhub-1.png"
 import sneakerhub2 from "../assets/projects/sneakerhub-2.png"
 import sneakerhub3 from "../assets/projects/sneakerhub-3.png"
@@ -250,6 +251,16 @@ export const translations = {
       privateProject: "Proyecto privado",
       galleryHint: "Clickea y navega",
       items: [
+             {
+          title: "Portfolio Personal",
+          description:
+            "Portfolio profesional desarrollado con React y TypeScript. Muestra de proyectos, habilidades y experiencia laboral.",
+          techs: ["React.js", "TypeScript", "Tailwind CSS"],
+          github: "https://github.com/FranCalvoDev/Portfolio",
+          demo: null,
+          status: "finished",
+          images: [fc],
+        },
         {
           title: "SneakerHub",
           description:
@@ -260,16 +271,7 @@ export const translations = {
           status: "finished",
           images: [sneakerhub1, sneakerhub2, sneakerhub3, sneakerhub4, sneakerhub5],
         },
-        {
-          title: "Portfolio Personal",
-          description:
-            "Portfolio profesional desarrollado con React y TypeScript. Muestra de proyectos, habilidades y experiencia laboral.",
-          techs: ["React.js", "TypeScript", "Tailwind CSS"],
-          github: "https://github.com/FranCalvoDev/Portfolio",
-          demo: null,
-          status: "finished",
-          images: ["/projects/portfolio-1.jpg", "/projects/portfolio-2.jpg", "/projects/portfolio-3.jpg"],
-        },
+  
         {
           title: "Migración de Software PHP",
           description:
@@ -486,6 +488,16 @@ export const translations = {
       privateProject: "Private project",
       galleryHint: "Click and browse",
       items: [
+         {
+          title: "Personal Portfolio",
+          description:
+            "Professional portfolio built with React and TypeScript. Showcase of projects, skills and work experience.",
+          techs: ["React.js", "TypeScript", "Tailwind CSS"],
+          github: "https://github.com/FranCalvoDev/Portfolio",
+          demo: null,
+          status: "finished",
+          images: [fc],
+        },
         {
           title: "SneakerHub",
           description:
@@ -495,16 +507,6 @@ export const translations = {
           demo: null,
           status: "finished",
           images: [sneakerhub1, sneakerhub2, sneakerhub3, sneakerhub4, sneakerhub5],
-        },
-        {
-          title: "Personal Portfolio",
-          description:
-            "Professional portfolio built with React and TypeScript. Showcase of projects, skills and work experience.",
-          techs: ["React.js", "TypeScript", "Tailwind CSS"],
-          github: "https://github.com/FranCalvoDev/Portfolio",
-          demo: null,
-          status: "finished",
-          images: ["/projects/portfolio-1.jpg", "/projects/portfolio-2.jpg", "/projects/portfolio-3.jpg"],
         },
         {
           title: "PHP Software Migration",
