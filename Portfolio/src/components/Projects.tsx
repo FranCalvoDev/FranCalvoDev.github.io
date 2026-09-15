@@ -3,12 +3,23 @@ import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 
-const ProjectCarousel = ({ images, title }: { images: string[]; title: string }) => {
+const ProjectCarousel = ({
+  images,
+  title,
+  onOpen,
+}: {
+  images: string[]
+  title: string
+  onOpen: () => void
+}) => {
   const [current, setCurrent] = useState(0)
   const { language } = useLanguage()
   const imageSoon = translations[language].projects.imageSoon
+  const galleryHint = translations[language].projects.galleryHint
 
   useEffect(() => {
+    if (images.length <= 1) return
+
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length)
     }, 3000)
@@ -16,12 +27,27 @@ const ProjectCarousel = ({ images, title }: { images: string[]; title: string })
   }, [images.length])
 
   return (
-    <div className="relative w-full h-44 rounded-2xl overflow-hidden border border-border/40 mb-5 bg-muted">
+    <button
+      type="button"
+      onClick={onOpen}
+      aria-label={`Open ${title} image gallery`}
+      className="group relative block w-full aspect-[16/10] rounded-2xl overflow-hidden border border-border/40 mb-5 bg-[#071007] cursor-zoom-in"
+    >
+      {images.length > 0 && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 scale-110 bg-cover bg-center opacity-30 blur-2xl"
+          style={{ backgroundImage: `url("${images[current]}")` }}
+        />
+      )}
+
       {images.map((src, index) => (
         <img
           key={index}
           src={src}
           alt={`${title} screenshot ${index + 1}`}
+          loading={index === 0 ? "eager" : "lazy"}
+          decoding="async"
           onError={(e) => {
             const target = e.currentTarget
             target.style.display = "none"
@@ -31,7 +57,7 @@ const ProjectCarousel = ({ images, title }: { images: string[]; title: string })
               if (placeholder) (placeholder as HTMLElement).style.display = "flex"
             }
           }}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+          className={`absolute inset-0 z-10 w-full h-full object-cover object-center transition-opacity duration-700 ${
             index === current ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -43,17 +69,109 @@ const ProjectCarousel = ({ images, title }: { images: string[]; title: string })
         <span>{imageSoon}</span>
       </div>
 
+      <span className="absolute right-3 top-3 z-20 rounded-full bg-background/75 px-3 py-1 text-xs text-foreground opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+        {galleryHint}
+      </span>
+
       {/* Dots */}
       <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
         {images.map((_, index) => (
-          <button
+          <span
             key={index}
-            onClick={() => setCurrent(index)}
             className={`w-1.5 h-1.5 rounded-full transition-all ${
               index === current ? "bg-primary w-3" : "bg-muted-foreground opacity-50"
             }`}
           />
         ))}
+      </div>
+    </button>
+  )
+}
+
+const ProjectLightbox = ({
+  title,
+  images,
+  current,
+  onClose,
+  onChange,
+}: {
+  title: string
+  images: string[]
+  current: number
+  onClose: () => void
+  onChange: (index: number) => void
+}) => {
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose()
+      if (event.key === "ArrowRight") onChange((current + 1) % images.length)
+      if (event.key === "ArrowLeft") onChange((current - 1 + images.length) % images.length)
+    }
+
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      document.body.style.overflow = ""
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [current, images.length, onChange, onClose])
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${title} image gallery`}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-8"
+      onClick={onClose}
+    >
+      <div
+        className="relative flex h-full w-full max-w-7xl flex-col items-center justify-center gap-4"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="flex w-full items-center justify-between gap-4 text-foreground">
+          <h3 className="truncate text-lg font-semibold text-primary md:text-xl">{title}</h3>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close image gallery"
+            className="rounded-full border border-border/70 bg-secondary/80 px-4 py-2 text-xl leading-none text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            ×
+          </button>
+        </div>
+
+        <div className="relative flex min-h-0 w-full flex-1 items-center justify-center">
+          <img
+            src={images[current]}
+            alt={`${title} screenshot ${current + 1}`}
+            className="max-h-full max-w-full rounded-xl object-contain shadow-2xl"
+          />
+
+          {images.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={() => onChange((current - 1 + images.length) % images.length)}
+                aria-label="Previous image"
+                className="absolute left-2 rounded-full bg-background/80 px-4 py-3 text-2xl text-primary transition-colors hover:bg-primary hover:text-primary-foreground md:left-6"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                onClick={() => onChange((current + 1) % images.length)}
+                aria-label="Next image"
+                className="absolute right-2 rounded-full bg-background/80 px-4 py-3 text-2xl text-primary transition-colors hover:bg-primary hover:text-primary-foreground md:right-6"
+              >
+                ›
+              </button>
+            </>
+          )}
+        </div>
+
+        <p className="text-sm text-muted-foreground">
+          {current + 1} / {images.length}
+        </p>
       </div>
     </div>
   )
@@ -62,6 +180,16 @@ const ProjectCarousel = ({ images, title }: { images: string[]; title: string })
 const Projects = () => {
   const { language } = useLanguage()
   const t = translations[language].projects
+  const [selectedProject, setSelectedProject] = useState<{
+    title: string
+    images: string[]
+  } | null>(null)
+  const [selectedImage, setSelectedImage] = useState(0)
+
+  const openProjectGallery = (title: string, images: string[]) => {
+    setSelectedProject({ title, images })
+    setSelectedImage(0)
+  }
 
   return (
     <section id="projects" className="bg-background/55 pt-28 md:pt-32 pb-16 md:pb-20 px-6 md:px-8">
@@ -92,7 +220,11 @@ const Projects = () => {
               }`}
             >
               {/* Carrusel de imágenes */}
-              <ProjectCarousel images={project.images} title={project.title} />
+              <ProjectCarousel
+                images={project.images}
+                title={project.title}
+                onOpen={() => openProjectGallery(project.title, project.images)}
+              />
 
               {/* Header */}
               <div>
@@ -143,9 +275,9 @@ const Projects = () => {
                     Demo
                   </a>
                 )}
-                {!project.github && !project.demo && (
+                {!project.github && (
                   <span className="text-xs text-muted-foreground italic">
-                    {t.linksSoon}
+                    {t.privateProject}
                   </span>
                 )}
               </div>
@@ -155,6 +287,16 @@ const Projects = () => {
         </div>
 
       </motion.div>
+
+      {selectedProject && (
+        <ProjectLightbox
+          title={selectedProject.title}
+          images={selectedProject.images}
+          current={selectedImage}
+          onClose={() => setSelectedProject(null)}
+          onChange={setSelectedImage}
+        />
+      )}
     </section>
   )
 }

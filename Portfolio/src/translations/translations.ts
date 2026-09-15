@@ -10,9 +10,16 @@ import distribuidoraVarela4 from "../assets/projects/Prototipo_DistribuidoraVare
 import distribuidoraVarela5 from "../assets/projects/Prototipo_DistribuidoraVarela-5.png"
 import distribuidoraVarela6 from "../assets/projects/Prototipo_DistribuidoraVarela-6.png"
 import distribuidoraVarela7 from "../assets/projects/Prototipo_DistribuidoraVarela-7.png"
+import protoRominetta from "../assets/projects/Proto-Rominetta.png"
 import protoRominetta1 from "../assets/projects/Proto-Rominetta1.png"
 import protoRominetta2 from "../assets/projects/Proto-Rominetta2.png"
 import protoRominetta3 from "../assets/projects/Proto-Rominetta3.png"
+import hsghogar1 from "../assets/projects/HSG-hogar.png"
+import hsghogar2 from "../assets/projects/HSG-hogar2.png"
+import hsghogar3 from "../assets/projects/HSG-hogar3.png"
+import hsghogar4 from "../assets/projects/HSG-hogar4.png"
+import hsghogar5 from "../assets/projects/HSG-hogar5.png"
+
 
 export type ProjectItem = {
   title: string
@@ -209,6 +216,7 @@ export const translations = {
       p3c:
         " me formó en liderazgo, comunicación y toma de decisiones bajo presión — habilidades que aplico día a día en mi trabajo como desarrollador.",
       p4: "Busco integrarme a un equipo donde pueda aportar mis conocimientos técnicos, seguir creciendo profesionalmente y contribuir a proyectos de impacto real.",
+      viewExperience: "Ver experiencia",
       stats: [
         { icon: "🎓", label: "Educación", value: "Tecnicatura en Análisis de Sistemas (+90%)" },
         { icon: "🌍", label: "Idiomas", value: "Español nativo — Inglés B2 (Cambridge)" },
@@ -239,13 +247,15 @@ export const translations = {
       inProgress: "En proceso",
       imageSoon: "Imagen próximamente",
       linksSoon: "Links disponibles próximamente",
+      privateProject: "Proyecto privado",
+      galleryHint: "Clickea y navega",
       items: [
         {
           title: "SneakerHub",
           description:
             "Aplicación web de e-commerce orientada a la venta de zapatillas. Desarrollo Full-Stack con interfaz dinámica y gestión de productos.",
           techs: ["JavaScript", "React.js", "MySQL", "CSS"],
-          github: "https://github.com/FranCalvoDev/SneakerHub-Final",
+          github: null,
           demo: null,
           status: "finished",
           images: [sneakerhub1, sneakerhub2, sneakerhub3, sneakerhub4, sneakerhub5],
@@ -279,7 +289,7 @@ export const translations = {
           ],
         },
         {
-          title: "Prototipo del sistema de gestión de Rominetta",
+          title: "Sistema de gestión de Rominetta",
           description:
             "Sistema de control de inventario por matriz de tallas, punto de venta  y registro de ventas para una tienda de calzado.",
           techs: ["React", "TypeScript", "Node.js", "SQLite"],
@@ -287,9 +297,26 @@ export const translations = {
           demo: null,
           status: "Finalizado",
           images: [
+            protoRominetta,
             protoRominetta1,
             protoRominetta2,
             protoRominetta3,
+          ],
+        },
+        {
+          title: "HSG Hogar",
+          description:
+            "Aplicación web tipo catálogo para la venta de productos para el hogar. Desarrollo Full-Stack con interfaz dinámica, gestión de productos y contacto directo por WhatsApp. No procesa pagos online por pedido del cliente.",
+          techs: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
+          github: null,
+          demo: null,
+          status: "inprogress",
+          images: [
+            hsghogar1,
+            hsghogar2,
+            hsghogar3,
+            hsghogar4,
+            hsghogar5,
           ],
         },
       ] as ProjectItem[],
@@ -297,18 +324,18 @@ export const translations = {
     experience: {
       title: "Experiencia",
       items: [
-             {
-          role: "Sistema Integral de Gestión para Zapatería",
-          company: "Rominetta",
-          period: "2025",
+        {
+          role: "Desarrollador Full-Stack / Analista de Sistemas — Freelance",
+          company: "Proyectos independientes",
+          period: "2025 – Actualidad",
           location: "Bahía Blanca, Buenos Aires",
           description: [
-            "Relevamiento y análisis de requerimientos para la digitalización de procesos internos de una zapatería.",
-            "Diseño y desarrollo de un sistema integral para la gestión de stock, ventas, compras, proveedores, clientes, caja y reportes.",
-            "Diseño y administración de la base de datos, incluyendo productos, variantes, movimientos de stock y operaciones comerciales.",
-            "Implementación de roles y permisos de usuario, control de inventario y trazabilidad de operacio-nes.",
-            "Integración de procesos de facturación electrónica y requerimientos fiscales de Argentina mediante ARCA (ex AFIP).",
-            "Implementación y soporte de una solución local, incluyendo capacitación de usuarios, resolución de incidencias y documentación técnica.",
+            "Desarrollo de soluciones de software orientadas a necesidades reales de negocio, participando en el análisis de requerimientos, diseño, desarrollo, integración de datos, despliegue y documentación.",
+            "Participación en el ciclo completo de desarrollo, desde el relevamiento de necesidades y definición de alcance hasta la implementación, pruebas, despliegue y entrega de las soluciones.",
+            "Diseño y desarrollo de aplicaciones web Full-Stack, interfaces dinámicas y sistemas de gestión adaptados a los procesos de cada proyecto.",
+            "Diseño, modelado y administración de bases de datos, junto con la integración de servicios, APIs y procesos de negocio.",
+            "Implementación de automatizaciones, control de acceso, gestión de información y funcionalidades orientadas a mejorar la eficiencia operativa.",
+            "Soporte, resolución de incidencias, capacitación de usuarios y elaboración de documentación técnica para facilitar la continuidad y el mantenimiento de las soluciones.",
           ],
         },
         {
@@ -425,6 +452,7 @@ export const translations = {
       p3c:
         " shaped me in leadership, communication and decision-making under pressure — skills I apply every day in my work as a developer.",
       p4: "I'm looking to join a team where I can contribute my technical knowledge, continue growing professionally and contribute to real-impact projects.",
+      viewExperience: "View experience",
       stats: [
         { icon: "🎓", label: "Education", value: "Systems Analysis Degree (+90%)" },
         { icon: "🌍", label: "Languages", value: "Native Spanish — English B2 (Cambridge)" },
@@ -455,13 +483,15 @@ export const translations = {
       inProgress: "In progress",
       imageSoon: "Image coming soon",
       linksSoon: "Links coming soon",
+      privateProject: "Private project",
+      galleryHint: "Click and browse",
       items: [
         {
           title: "SneakerHub",
           description:
             "E-commerce web application focused on sneaker sales. Full-Stack development with dynamic interface and product management.",
           techs: ["JavaScript", "React.js", "MySQL", "CSS"],
-          github: "https://github.com/FranCalvoDev/SneakerHub-Final",
+          github: null,
           demo: null,
           status: "finished",
           images: [sneakerhub1, sneakerhub2, sneakerhub3, sneakerhub4, sneakerhub5],
@@ -508,23 +538,39 @@ export const translations = {
             protoRominetta3,
           ],
         },
+        {
+          title: "HSG Hogar",
+          description:
+            "Catalog-style web application for selling home products. Full-Stack development with a dynamic interface, product management and direct contact through WhatsApp. Online payments are not processed by client request.",
+          techs: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
+          github: null,
+          demo: null,
+          status: "inprogress",
+          images: [
+            hsghogar1,
+            hsghogar2,
+            hsghogar3,
+            hsghogar4,
+            hsghogar5,
+          ],
+        },
       ] as ProjectItem[],
     },
     experience: {
       title: "Experience",
       items: [
         {
-          role: "Comprehensive Management System for a Footwear Store",
-          company: "Rominetta",
-          period: "2025",
+          role: "Full-Stack Developer / Systems Analyst — Freelance",
+          company: "Independent Projects",
+          period: "2025 – Present",
           location: "Bahía Blanca, Buenos Aires",
           description: [
-            "Requirements gathering and analysis for the digitalization of internal processes at a footwear store.",
-            "Design and development of a comprehensive system for managing stock, sales, purchases, suppliers, customers, cash register and reports.",
-            "Design and administration of the database, including products, variants, stock movements and business operations.",
-            "Implementation of user roles and permissions, inventory control and operation traceability.",
-            "Integration of electronic invoicing processes and Argentine tax requirements through ARCA (formerly AFIP).",
-            "Implementation and support of a local solution, including user training, issue resolution and technical documentation.",
+            "Development of software solutions focused on real business needs, participating in requirements analysis, design, development, data integration, deployment and documentation.",
+            "Participation in the complete development lifecycle, from gathering needs and defining scope to implementation, testing, deployment and delivery of solutions.",
+            "Design and development of Full-Stack web applications, dynamic interfaces and management systems adapted to each project's processes.",
+            "Database design, modeling and administration, together with the integration of services, APIs and business processes.",
+            "Implementation of automations, access control, information management and features aimed at improving operational efficiency.",
+            "Support, issue resolution, user training and technical documentation to facilitate the continuity and maintenance of solutions.",
           ],
         },
         {

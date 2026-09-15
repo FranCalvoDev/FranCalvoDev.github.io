@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 
@@ -36,6 +37,12 @@ const About = () => {
             <p className="text-foreground text-base leading-relaxed text-justify">
               {t.p4}
             </p>
+            <Link
+              to="/work#experience"
+              className="w-fit rounded-full border border-primary px-5 py-2.5 text-sm text-primary transition-all duration-300 ease-out hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              {t.viewExperience}
+            </Link>
           </div>
 
           {/* Cards de datos */}
