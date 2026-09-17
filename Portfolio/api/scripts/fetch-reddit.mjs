@@ -12,6 +12,8 @@ const stripHtml = (value) =>
     .trim();
 
 const getSubredditFromUrl = (url) => url.match(/\/r\/([^/]+)\//i)?.[1] ?? 'reddit';
+const normalizeRedditPostUrl = (url) =>
+  url.replace(/^https?:\/\/old\.reddit\.com(?=\/|$)/i, 'https://www.reddit.com');
 
 async function main() {
   const res = await fetch(RSS2JSON_URL);
@@ -31,7 +33,7 @@ async function main() {
   const posts = items.slice(0, 10).map((item) => {
     const title = (item.title ?? '').trim();
     const content = (item.content ?? item.description ?? '').trim();
-    const link = (item.link ?? '').trim();
+    const link = normalizeRedditPostUrl((item.link ?? '').trim());
     const guid = (item.guid ?? link).trim();
     const category = Array.isArray(item.categories)
       ? item.categories.find(Boolean)?.replace('u/', '')

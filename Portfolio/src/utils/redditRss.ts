@@ -26,6 +26,9 @@ const getSubredditFromUrl = (url: string) => {
   return match?.[1] ?? "reddit"
 }
 
+const normalizeRedditPostUrl = (url: string) =>
+  url.replace(/^https?:\/\/old\.reddit\.com(?=\/|$)/i, "https://www.reddit.com")
+
 const normalizePosts = (posts: RedditPost[], limit: number) => posts.slice(0, limit)
 
 const fetchLocalPosts = async (limit: number): Promise<RedditPost[]> => {
@@ -47,6 +50,7 @@ const fetchLocalPosts = async (limit: number): Promise<RedditPost[]> => {
       .filter((post) => post.id && post.title && post.url)
       .map((post) => ({
         ...post,
+        url: normalizeRedditPostUrl(post.url),
         subreddit: post.subreddit || getSubredditFromUrl(post.url),
       })),
     limit,
@@ -77,7 +81,7 @@ const fetchViaRss2Json = async (limit: number): Promise<RedditPost[]> => {
   }
 
   return payload.items.slice(0, limit).map((item) => {
-    const url = item.link?.trim() ?? ""
+    const url = normalizeRedditPostUrl(item.link?.trim() ?? "")
     const text = htmlToText(item.content?.trim() || item.description?.trim() || "")
     const category = item.categories?.find(Boolean)?.replace("u/", "")
 
@@ -161,7 +165,7 @@ export const fetchRedditPostsRss = async (limit = 10): Promise<RedditPost[]> => 
       ?.getAttribute("href")
       ?.trim()
     const rssLink = getText(node, "link")
-    const url = atomLink || rssLink
+    const url = normalizeRedditPostUrl(atomLink || rssLink)
 
     const text = htmlToText(contentEncoded || description)
     const categoryNodes = Array.from(node.querySelectorAll("category"))
