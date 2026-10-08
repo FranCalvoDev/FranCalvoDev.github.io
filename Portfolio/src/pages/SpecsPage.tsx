@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { motion } from "framer-motion"
+import PageHeader from "../components/PageHeader"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { specsItems } from "../data/specsItems"
@@ -17,17 +19,17 @@ const SpecsPage = () => {
     setHoveredId((current) => (current === id ? null : current))
 
   return (
-    <section className="bg-background/55 min-h-screen pt-28 md:pt-32 pb-16 md:pb-20 px-4 md:px-8">
-      <div className="max-w-3xl mx-auto text-center flex flex-col gap-4 items-center mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-primary tracking-tight">
-          {t.specs.title}
-        </h1>
-        <p className="text-muted-foreground text-lg max-w-xl text-justify">
-          {t.specs.description}
-        </p>
+    <section className="bg-background/55 min-h-screen pt-28 md:pt-32 pb-16 md:pb-20 px-6 md:px-8">
+      <div className="max-w-3xl mx-auto">
+        <PageHeader title={t.specs.title} subtitle={t.specs.description} />
       </div>
 
-      <div className="relative w-full max-w-450 mx-auto rounded-2xl overflow-hidden border border-border bg-secondary/40">
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative w-full max-w-450 mx-auto rounded-2xl overflow-hidden border border-border bg-secondary/40"
+      >
         <img src={deskPhoto} alt="Desk" className="w-full h-auto block" />
         <div className="absolute inset-0 bg-gradient-to-br from-secondary/60 to-background" aria-hidden="true" />
 
@@ -81,9 +83,15 @@ const SpecsPage = () => {
             <p className="text-xs text-muted-foreground">{t.specs.viewSpecs}</p>
           </div>
         )}
-      </div>
+      </motion.div>
 
-      <div className="max-w-450 mx-auto mt-6">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.55, ease: "easeOut" }}
+        className="max-w-450 mx-auto mt-6"
+      >
         <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground text-center mb-3">
           {t.specs.allItems}
         </p>
@@ -103,16 +111,15 @@ const SpecsPage = () => {
             </button>
           ))}
         </div>
-      </div>
-
-      <div className="max-w-3xl mx-auto text-center mt-8">
-        <Link
-          to="/"
-          className="text-sm font-medium text-primary hover:underline transition-all duration-300 ease-out"
-        >
-          ← {t.back}
-        </Link>
-      </div>
+        <div className="text-center mt-8">
+          <Link
+            to="/"
+            className="text-sm font-medium text-primary hover:underline transition-all duration-300 ease-out"
+          >
+            ← {t.back}
+          </Link>
+        </div>
+      </motion.div>
     </section>
   )
 }

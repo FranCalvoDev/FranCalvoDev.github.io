@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom"
+import { motion } from "framer-motion"
+import PageHeader from "../components/PageHeader"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 
@@ -42,38 +44,44 @@ const MorePage = () => {
   ]
 
   return (
-    <section className="bg-background/55 min-h-screen pt-28 md:pt-32 pb-16 md:pb-20 px-8">
-      <div className="max-w-4xl mx-auto flex flex-col gap-10 items-center">
-        <div className="text-center flex flex-col gap-4 items-center">
-          <h1 className="text-4xl md:text-5xl font-semibold text-foreground">
-            {t.title}
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-xl text-justify">
-            {t.subtitle}
-          </p>
-        </div>
+    <section className="bg-background/55 min-h-screen pt-28 md:pt-32 pb-16 md:pb-20 px-6 md:px-8">
+      <div className="max-w-4xl mx-auto flex flex-col items-center">
+        <PageHeader title={t.title} subtitle={t.subtitle} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
           {cards.map((card) => (
-            <Link
+            <motion.div
               key={card.path}
-              to={card.path}
-              className="group flex flex-col gap-3 p-6 rounded-2xl border border-border bg-secondary/40 backdrop-blur-sm hover:bg-secondary/70 hover:border-primary transition-all duration-300 ease-out active:scale-95"
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <span className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/10 text-primary transition-transform duration-300 ease-out group-hover:scale-110">
-                <card.Icon />
-              </span>
-              <h2 className="text-xl font-semibold text-foreground">{card.title}</h2>
-              <p className="text-muted-foreground text-sm">{card.description}</p>
-            </Link>
+              <Link
+                to={card.path}
+                className="group flex h-full flex-col gap-3 p-6 rounded-2xl border border-border bg-secondary/40 backdrop-blur-sm hover:bg-secondary/70 hover:border-primary transition-all duration-300 ease-out active:scale-95"
+              >
+                <span className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/10 text-primary transition-transform duration-300 ease-out group-hover:scale-110">
+                  <card.Icon />
+                </span>
+                <h2 className="text-xl font-semibold text-foreground">{card.title}</h2>
+                <p className="text-muted-foreground text-sm">{card.description}</p>
+              </Link>
+            </motion.div>
           ))}
 
-          <div className="flex flex-col gap-3 p-6 rounded-2xl border border-dashed border-border/70 text-center sm:col-span-2 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col gap-3 p-6 rounded-2xl border border-dashed border-border/70 text-center sm:col-span-2 items-center"
+          >
             <span className="text-sm font-medium uppercase tracking-wide text-primary">
               {t.comingSoon}
             </span>
             <p className="text-muted-foreground text-sm max-w-md">{t.comingSoonDesc}</p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

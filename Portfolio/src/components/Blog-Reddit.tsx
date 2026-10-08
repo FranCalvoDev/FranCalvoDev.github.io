@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { fetchRedditPostsRss, type RedditPost } from "../utils/redditRss"
+import { UsernameLink } from "./SocialIcons"
 
 const formatDate = (value: string, language: "es" | "en") => {
   return new Intl.DateTimeFormat(language === "es" ? "es-AR" : "en-US", {
@@ -58,24 +59,25 @@ const BlogReddit = () => {
   }, [error, loading, posts.length, t.empty, t.loading, ])
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.65, ease: "easeOut" }}
-        className="text-center mb-8"
+        className="mb-5"
       >
         <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground/70">
-          {t.feedTitle}
+          Reddit
         </h2>
-        <p className="max-w-2xl mx-auto text-muted-foreground text-sm md:text-base mt-1">
+        <UsernameLink platform="reddit" />
+        <p className="text-muted-foreground text-sm mt-1">
           {headerText}
         </p>
       </motion.div>
 
       {loading && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={`skeleton-${index}`}
@@ -91,14 +93,14 @@ const BlogReddit = () => {
       )}
 
       {!loading && !error && posts.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {posts.map((post, index) => (
+        <div className="grid grid-cols-1 gap-6">
+          {posts.map((post) => (
             <motion.article
               key={post.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               className="rounded-3xl border border-border/40 bg-secondary/90 shadow-[0_2px_20px_rgba(0,0,0,0.22)] p-5 md:p-6 flex flex-col gap-4 transition-colors duration-300 hover:border-primary/40"
             >
               <div className="flex items-center justify-between gap-4">
