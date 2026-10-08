@@ -3,7 +3,6 @@ import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import PageHeader from "./PageHeader"
-import { iconFor, TechIcon } from "./TechIcon"
 
 const ProjectCarousel = ({
   images,
@@ -207,7 +206,7 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className={`bg-transparent backdrop-blur-sm rounded-3xl p-7 flex flex-col justify-between transition-transform duration-300 ease-out hover:-translate-y-1 ${
+              className={`bg-secondary/90 rounded-3xl p-7 flex flex-col justify-between transition-transform duration-300 ease-out hover:-translate-y-1 ${
                 project.status === "inprogress"
                   ? "border border-primary/70"
                   : "border border-border/40 hover:border-primary/40"

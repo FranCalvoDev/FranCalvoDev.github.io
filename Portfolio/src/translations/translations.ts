@@ -258,11 +258,10 @@ export const translations = {
       subtitle: "Tecnologías utilizadas · Ordenadas por nivel de experiencia (izquierda → derecha)",
       categories: [
         { category: "Lenguajes", items: ["Python", "JavaScript", "JSON", "SQL", "HTML", "CSS", "TypeScript", "PHP"] },
-        { category: "Frameworks & Librerías", items: ["React.js", "Tailwind CSS", "Node.js", "Next.js", "Vue.js", "Angular", "Laravel"] },
+        { category: "Frameworks & Librerías", items: ["React.js", "Tailwind CSS", "Node.js", "Next.js", "Vue.js", "Angular"] },
         { category: "Bases de Datos", items: ["MySQL", "PostgreSQL", "SQLite", "Supabase", "MongoDB"] },
-        { category: "Herramientas", items: ["VS Code", "Git", "GitHub", "Notion", "Docker", "Postman", "Laragon", "GitLab", "Miro", "Figma"] },
+        { category: "Herramientas", items: ["Git", "GitHub", "Figma", "Docker", "Notion", "GitLab", "Miro"] },
         { category: "Desarrollo Web", items: ["Sitios responsivos", "Manipulación del DOM", "APIs REST", "UX/UI", "Internacionalización (i18n)", "Deploy"] },
-        { category: "Inteligencia Artificial", items: ["Claude", "GitHub Copilot", "OpenCode"] },
       ] as SkillCategory[],
     },
     projects: {
@@ -519,11 +518,10 @@ export const translations = {
       subtitle: "Technologies used · Sorted by experience level (left → right)",
       categories: [
         { category: "Languages", items: ["Python", "JavaScript", "JSON", "SQL", "HTML", "CSS", "TypeScript", "PHP"] },
-        { category: "Frameworks & Libraries", items: ["React.js", "Tailwind CSS", "Node.js", "Next.js", "Vue.js", "Angular", "Laravel"] },
+        { category: "Frameworks & Libraries", items: ["React.js", "Tailwind CSS", "Node.js", "Next.js", "Vue.js", "Angular"] },
         { category: "Databases", items: ["MySQL", "PostgreSQL", "SQLite", "Supabase", "MongoDB"] },
-        { category: "Tools", items: ["VS Code", "Git", "GitHub", "Notion", "Docker", "Postman", "Laragon", "GitLab", "Miro", "Figma"] },
+        { category: "Tools", items: ["Git", "GitHub", "Figma", "Docker", "Notion", "GitLab", "Miro"] },
         { category: "Web Development", items: ["Responsive sites", "DOM Manipulation", "REST APIs", "UX/UI", "Internationalization (i18n)", "Deployment"] },
-        { category: "Artificial Intelligence", items: ["Claude", "GitHub Copilot", "OpenCode"] },
       ] as SkillCategory[],
     },
     projects: {
