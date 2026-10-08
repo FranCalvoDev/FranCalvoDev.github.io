@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
+import PageHeader from "./PageHeader"
 
 const Contact = () => {
   const { language } = useLanguage()
@@ -8,20 +9,16 @@ const Contact = () => {
 
   return (
     <section id="contact" className="bg-background/55 pt-28 md:pt-32 pb-16 md:pb-20 px-6 md:px-8">
-      <motion.div
-        className="max-w-5xl mx-auto"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
+      <div className="max-w-5xl mx-auto">
 
-        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 text-center tracking-tight">
-          {t.title}
-        </h2>
-        <p className="text-foreground text-center mb-16">
-          {t.subtitle}
-        </p>
+        <PageHeader title={t.title} subtitle={t.subtitle} />
+
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
 
         {/* Formulario */}
         <form
@@ -89,8 +86,9 @@ const Contact = () => {
             🐙 GitHub
           </a>
         </div>
+        </motion.div>
 
-      </motion.div>
+      </div>
     </section>
   )
 }

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
+import PageHeader from "./PageHeader"
 
 const Experience = () => {
   const { language } = useLanguage()
@@ -8,26 +9,18 @@ const Experience = () => {
 
   return (
     <section id="experience" className="bg-background/55 py-16 md:py-20 px-6 md:px-8">
-      <motion.div
-        className="max-w-5xl mx-auto"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
+      <div className="max-w-5xl mx-auto">
 
-        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-16 text-center tracking-tight">
-          {t.title}
-        </h2>
+        <PageHeader title={t.title} as="h2" />
 
         <div className="flex flex-col gap-10">
-          {t.items.map((exp, index) => (
+          {t.items.map((exp) => (
             <motion.div
               key={exp.role}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.55, delay: index * 0.1, ease: "easeOut" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               className="bg-secondary/90 border border-border/40 rounded-3xl p-7 md:p-8 shadow-[0_2px_20px_rgba(0,0,0,0.22)] transition-transform duration-300 ease-out hover:-translate-y-1"
             >
               {/* Header */}
@@ -58,7 +51,7 @@ const Experience = () => {
           ))}
         </div>
 
-      </motion.div>
+      </div>
     </section>
   )
 }

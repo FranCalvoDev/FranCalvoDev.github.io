@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
+import PageHeader from "./PageHeader"
 
 const ProjectCarousel = ({
   images,
@@ -193,26 +194,18 @@ const Projects = () => {
 
   return (
     <section id="projects" className="bg-background/55 pt-28 md:pt-32 pb-16 md:pb-20 px-6 md:px-8">
-      <motion.div
-        className="max-w-6xl mx-auto"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
+      <div className="max-w-6xl mx-auto">
 
-        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-16 text-center tracking-tight">
-          {t.title}
-        </h2>
+        <PageHeader title={t.title} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {t.items.map((project, index) => (
+          {t.items.map((project) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               className={`bg-secondary/90 rounded-3xl p-7 flex flex-col justify-between transition-transform duration-300 ease-out hover:-translate-y-1 ${
                 project.status === "inprogress"
                   ? "border-2 border-primary shadow-[0_0_20px_rgba(121,191,15,0.45)]"
@@ -286,7 +279,7 @@ const Projects = () => {
           ))}
         </div>
 
-      </motion.div>
+      </div>
 
       {selectedProject && (
         <ProjectLightbox

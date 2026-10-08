@@ -1,4 +1,4 @@
-import { useState, type ReactElement } from "react"
+import { useEffect, useState, type ReactElement } from "react"
 import { Link } from "react-router-dom"
 
 type MegaMenuCardProps = {
@@ -28,6 +28,13 @@ const ArrowIcon = () => (
 const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, onNavigate }: MegaMenuCardProps) => {
   const isDisabled = !path
   const [pressed, setPressed] = useState(false)
+
+  // En dispositivos táctiles (sin hover) la animación corre sola al abrirse el menú.
+  useEffect(() => {
+    if (!window.matchMedia("(hover: none)").matches) return
+    const id = window.setTimeout(() => setPressed(true), 150)
+    return () => window.clearTimeout(id)
+  }, [])
 
   const iconWrapper = (
     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-200 group-hover:bg-primary/20">
@@ -89,7 +96,7 @@ const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, 
       <div
         aria-disabled="true"
         {...pressHandlers}
-        className="group relative flex cursor-default overflow-hidden items-start gap-3.5 rounded-2xl p-3.5 opacity-50 sm:p-4"
+        className="group relative flex w-full min-h-36 cursor-default overflow-hidden items-start gap-3.5 rounded-2xl p-3.5 opacity-50 sm:min-h-44 md:min-h-52 sm:p-4"
       >
         {background}
         <span className="relative flex w-full items-start gap-3.5">{content}</span>
@@ -102,7 +109,7 @@ const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, 
       to={path}
       onClick={onNavigate}
       {...pressHandlers}
-      className="group relative flex overflow-hidden rounded-2xl transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+      className="group relative flex w-full min-h-36 sm:min-h-44 md:min-h-52 overflow-hidden rounded-2xl border border-white/10 transition-colors duration-300 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
     >
       {background}
       <span className="relative flex w-full items-start gap-3.5 p-3.5 sm:p-4">{content}</span>
