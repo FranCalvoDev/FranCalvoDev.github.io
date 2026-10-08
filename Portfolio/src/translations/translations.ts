@@ -235,12 +235,13 @@ export const translations = {
     },
     skills: {
       title: "Habilidades Técnicas",
+      subtitle: "Tecnologías utilizadas · Ordenadas por nivel de experiencia (izquierda → derecha)",
       categories: [
-        { category: "Lenguajes", items: ["Python", "JavaScript", "SQL", "HTML", "CSS", "JSON"] },
-        { category: "Frameworks & Librerías", items: ["React.js", "Vue.js", "Angular"] },
-        { category: "Bases de Datos", items: ["MySQL", "MongoDB"] },
-        { category: "Herramientas", items: ["Git", "GitHub", "GitLab", "Docker", "Figma", "Notion", "Miro"] },
-        { category: "Desarrollo Web", items: ["Sitios responsivos", "Manipulación del DOM", "APIs REST", "UX/UI"] },
+        { category: "Lenguajes", items: ["Python", "JavaScript", "JSON", "SQL", "HTML", "CSS", "TypeScript", "PHP"] },
+        { category: "Frameworks & Librerías", items: ["React.js", "Tailwind CSS", "Node.js", "Next.js", "Vue.js", "Angular"] },
+        { category: "Bases de Datos", items: ["MySQL", "PostgreSQL", "SQLite", "Supabase", "MongoDB"] },
+        { category: "Herramientas", items: ["Git", "GitHub", "Figma", "Docker", "Notion", "GitLab", "Miro"] },
+        { category: "Desarrollo Web", items: ["Sitios responsivos", "Manipulación del DOM", "APIs REST", "UX/UI", "Internacionalización (i18n)", "Deploy"] },
       ] as SkillCategory[],
     },
     projects: {
@@ -475,12 +476,13 @@ export const translations = {
     },
     skills: {
       title: "Technical Skills",
+      subtitle: "Technologies used · Sorted by experience level (left → right)",
       categories: [
-        { category: "Languages", items: ["Python", "JavaScript", "SQL", "HTML", "CSS", "JSON"] },
-        { category: "Frameworks & Libraries", items: ["React.js", "Vue.js", "Angular"] },
-        { category: "Databases", items: ["MySQL", "MongoDB"] },
-        { category: "Tools", items: ["Git", "GitHub", "GitLab", "Docker", "Figma", "Notion", "Miro"] },
-        { category: "Web Development", items: ["Responsive sites", "DOM Manipulation", "REST APIs", "UX/UI"] },
+        { category: "Languages", items: ["Python", "JavaScript", "JSON", "SQL", "HTML", "CSS", "TypeScript", "PHP"] },
+        { category: "Frameworks & Libraries", items: ["React.js", "Tailwind CSS", "Node.js", "Next.js", "Vue.js", "Angular"] },
+        { category: "Databases", items: ["MySQL", "PostgreSQL", "SQLite", "Supabase", "MongoDB"] },
+        { category: "Tools", items: ["Git", "GitHub", "Figma", "Docker", "Notion", "GitLab", "Miro"] },
+        { category: "Web Development", items: ["Responsive sites", "DOM Manipulation", "REST APIs", "UX/UI", "Internationalization (i18n)", "Deployment"] },
       ] as SkillCategory[],
     },
     projects: {
