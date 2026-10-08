@@ -105,7 +105,7 @@ const SpecsPage = () => {
               onFocus={() => setHoveredId(item.id)}
               onBlur={() => clearHover(item.id)}
               onClick={() => navigate(`/specs/${item.id}`)}
-              className="px-3 py-1.5 rounded-full border border-border bg-secondary/40 text-sm text-foreground hover:border-primary hover:text-primary transition-colors duration-200 ease-out outline-none focus-visible:border-primary"
+              className="px-3 py-1.5 rounded-full border border-border/40 bg-transparent backdrop-blur-sm text-sm text-foreground hover:border-primary hover:text-primary transition-colors duration-200 ease-out outline-none focus-visible:border-primary"
             >
               {t.specs.items[item.id].name}
             </button>

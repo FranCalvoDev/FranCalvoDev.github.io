@@ -2,6 +2,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
+import { iconFor, TechIcon } from "./TechIcon"
 
 import {
   siPython, siJavascript, siMysql, siHtml5, siCss, siJson, siReact, siVuedotjs,

@@ -43,6 +43,7 @@ export type ExperienceItem = {
 export type StatLine = {
   icon: string
   text: string
+  href?: string
 }
 
 export type StatItem = {
@@ -207,27 +208,46 @@ export const translations = {
     about: {
       title: "Sobre mí",
       p1a: "Soy estudiante avanzado de la ",
-      p1b: ", con más de un año de experiencia práctica en desarrollo web Full-Stack. Me apasiona construir soluciones de software que tengan un impacto real.",
+      p1b: ", Desarrollador Full-Stack en formación y estudiante avanzado (+90 %), con experiencia práctica en soluciones web y sistemas orientados a procesos de negocio. Trabajo con JavaScript, Node.js, Python, APIs REST y bases de datos SQL/NoSQL, usando Git/GitHub para control de versiones y colaboración.",
       p2a: "Trabajo con tecnologías como ",
-      p2b: ", y me enfoco en escribir código limpio, escalable y con buenas prácticas.",
+      p2b: ", y participo desde el relevamiento de requerimientos hasta la automatización de procesos y la gestión de datos. Me caracterizan mi capacidad analítica, mi enfoque práctico y la orientación a resolver problemas.",
       p3a: "Soy ",
       p3bilingual: "bilingüe (Español - Inglés B2)",
       p3b: ", lo que me permite colaborar en entornos internacionales. Mi experiencia como ",
       p3referee: "Árbitro Federado de Básquet",
       p3c:
         " me formó en liderazgo, comunicación y toma de decisiones bajo presión — habilidades que aplico día a día en mi trabajo como desarrollador.",
-      p4: "Busco integrarme a un equipo donde pueda aportar mis conocimientos técnicos, seguir creciendo profesionalmente y contribuir a proyectos de impacto real.",
+      p4: "Busco incorporarme a un equipo de desarrollo Full-Stack para seguir creciendo en entornos profesionales.",
       viewExperience: "Ver experiencia",
       stats: [
-        { icon: "🎓", label: "Educación", value: "Tecnicatura en Análisis de Sistemas (+90%)" },
-        { icon: "🌍", label: "Idiomas", value: "Español nativo — Inglés B2 (Cambridge)" },
-        { icon: "📍", label: "Ubicación", value: "Buenos Aires, Argentina" },
+        {
+          icon: "🎓",
+          label: "Educación",
+          value: [
+            { icon: "🎓", text: "Análisis de Sistemas · Juan XXIII · 2023–2026", href: "https://juan23.edu.ar/carreras/tecnicatura-superior-en-analisis-de-sistemas/" },
+            { icon: "💻", text: "BackEnd Developer · UTN · 2026", href: "https://sceu.frba.utn.edu.ar/e-learning/detalle/curso/3801/curso-de-backend-developer-turno-manana" },
+            { icon: "🐍", text: "Python Inicial · Min. Educación CABA · 2024" },
+            { icon: "🎨", text: "Web Designer · Digital House · 2024", href: "https://www.digitalhouse.com/productos/programacion/web-designer" },
+            { icon: "🇬🇧", text: "First Certificate B2 · Cambridge · 2022", href: "https://www.cambridgeenglish.org/es/exams-and-tests/first/" },
+          ],
+        },
+        {
+          icon: "💼",
+          label: "Experiencia reciente",
+          value: [
+            { icon: "🛠️", text: "Analista / Soporte IT", href: "/work#projects" },
+            { icon: "👟", text: "Sistema para zapatería", href: "/work#projects" },
+            { icon: "🐍", text: "Migración PHP", href: "/work#projects" },
+          ],
+        },
+        { icon: "🌍", label: "Idiomas", value: "Español · Inglés" },
+        { icon: "📍", label: "Ubicación", value: "Bahía Blanca y CABA, Argentina" },
         {
           icon: "🏀",
           label: "Extra",
           value: [
-            { icon: "🏀", text: "Árbitro Federado de Básquet" },
-            { icon: "📷", text: "Fotógrafo Profesional Privado" },
+            { icon: "🏀", text: "Árbitro Federado de Básquetbol" },
+            { icon: "📷", text: "Fotógrafo Profesional", href: "/gallery" },
           ],
           highlight: true,
         },
@@ -448,27 +468,46 @@ export const translations = {
     about: {
       title: "About me",
       p1a: "I'm an advanced student of the ",
-      p1b: ", with more than a year of hands-on experience in Full-Stack web development. I'm passionate about building software solutions that have a real impact.",
+      p1b: ", Full-Stack developer in training (+90 % completed), with hands-on experience in web solutions and business-process-oriented systems. I work with JavaScript, Node.js, Python, REST APIs and SQL/NoSQL databases, using Git/GitHub for version control and collaboration.",
       p2a: "I work with technologies like ",
-      p2b: ", and I focus on writing clean, scalable code with good practices.",
+      p2b: ", and I take part from requirements gathering to process automation and data management. I'm analytical, practical and focused on solving problems.",
       p3a: "I'm ",
       p3bilingual: "bilingual (Spanish - English B2)",
       p3b: ", which allows me to collaborate in international environments. My experience as a ",
       p3referee: "Certified Basketball Referee",
       p3c:
         " shaped me in leadership, communication and decision-making under pressure — skills I apply every day in my work as a developer.",
-      p4: "I'm looking to join a team where I can contribute my technical knowledge, continue growing professionally and contribute to real-impact projects.",
+      p4: "I'm looking to join a Full-Stack development team and keep growing in professional environments.",
       viewExperience: "View experience",
       stats: [
-        { icon: "🎓", label: "Education", value: "Systems Analysis Degree (+90%)" },
-        { icon: "🌍", label: "Languages", value: "Native Spanish — English B2 (Cambridge)" },
-        { icon: "📍", label: "Location", value: "Buenos Aires, Argentina" },
+        {
+          icon: "🎓",
+          label: "Education",
+          value: [
+            { icon: "🎓", text: "Systems Analysis · Juan XXIII · 2023–2026", href: "https://juan23.edu.ar/carreras/tecnicatura-superior-en-analisis-de-sistemas/" },
+            { icon: "💻", text: "BackEnd Developer · UTN · 2026", href: "https://sceu.frba.utn.edu.ar/e-learning/detalle/curso/3801/curso-de-backend-developer-turno-manana" },
+            { icon: "🐍", text: "Intro Python · BA Ministry of Education · 2024" },
+            { icon: "🎨", text: "Web Designer · Digital House · 2024", href: "https://www.digitalhouse.com/productos/programacion/web-designer" },
+            { icon: "🇬🇧", text: "First Certificate B2 · Cambridge · 2022", href: "https://www.cambridgeenglish.org/es/exams-and-tests/first/" },
+          ],
+        },
+        {
+          icon: "💼",
+          label: "Recent experience",
+          value: [
+            { icon: "🛠️", text: "Systems Analyst / IT Support", href: "/work#projects" },
+            { icon: "👟", text: "Shoe store system", href: "/work#projects" },
+            { icon: "🐍", text: "PHP migration", href: "/work#projects" },
+          ],
+        },
+        { icon: "🌍", label: "Languages", value: "Spanish · English" },
+        { icon: "📍", label: "Location", value: "Bahía Blanca and CABA, Argentina" },
         {
           icon: "🏀",
           label: "Extra",
           value: [
             { icon: "🏀", text: "Certified Basketball Referee" },
-            { icon: "📷", text: "Private Professional Photographer" },
+            { icon: "📷", text: "Professional Photographer", href: "/gallery" },
           ],
           highlight: true,
         },

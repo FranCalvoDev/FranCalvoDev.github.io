@@ -81,7 +81,7 @@ const BlogReddit = () => {
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={`skeleton-${index}`}
-              className="rounded-3xl border border-border/40 bg-secondary/85 p-5 md:p-6 animate-pulse"
+              className="rounded-3xl border border-border/40 bg-transparent backdrop-blur-sm p-5 md:p-6 animate-pulse"
             >
               <div className="h-4 w-24 rounded-full bg-muted/70 mb-4" />
               <div className="h-4 w-2/3 rounded bg-muted/70 mb-3" />
@@ -136,7 +136,7 @@ const BlogReddit = () => {
       )}
 
       {!loading && error && (
-        <div className="rounded-3xl border border-border/40 bg-secondary/80 p-6 text-center text-muted-foreground">
+        <div className="rounded-3xl border border-border/40 bg-transparent backdrop-blur-sm p-6 text-center text-muted-foreground">
           {error}
         </div>
       )}

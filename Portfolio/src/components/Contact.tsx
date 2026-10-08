@@ -24,7 +24,7 @@ const Contact = () => {
         <form
           action="https://formspree.io/f/mkokgyld"
           method="POST"
-          className="bg-secondary/90 border border-border/40 rounded-3xl p-8 md:p-10 flex flex-col gap-7 mb-14 shadow-[0_2px_20px_rgba(0,0,0,0.22)]"
+          className="bg-transparent backdrop-blur-sm border border-border/40 rounded-3xl p-8 md:p-10 flex flex-col gap-7 mb-14"
         >
           <div className="flex flex-col gap-2">
             <label className="text-foreground text-sm font-medium">{t.nameLbl}</label>
@@ -33,7 +33,7 @@ const Contact = () => {
               name="name"
               required
               placeholder={t.namePlaceholder}
-              className="bg-muted border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition"
+              className="bg-transparent border border-border/50 rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition"
             />
           </div>
 
@@ -44,7 +44,7 @@ const Contact = () => {
               name="email"
               required
               placeholder={t.emailPlaceholder}
-              className="bg-muted border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition"
+              className="bg-transparent border border-border/50 rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition"
             />
           </div>
 
@@ -55,7 +55,7 @@ const Contact = () => {
               required
               rows={5}
               placeholder={t.messagePlaceholder}
-              className="bg-muted border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition resize-none"
+              className="bg-transparent border border-border/50 rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition resize-none"
             />
           </div>
 

@@ -56,34 +56,45 @@ const About = () => {
                 transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
                 className={`rounded-3xl px-7 py-6 flex items-center gap-4 transition-transform duration-300 ease-out hover:-translate-y-1 ${
                   stat.highlight
-                    ? "bg-linear-to-br from-secondary/95 to-primary/15 border-2 border-primary shadow-[0_0_30px_rgba(121,191,15,0.35)] hover:shadow-[0_0_40px_rgba(121,191,15,0.5)]"
-                    : "bg-secondary/90 border border-border/40 shadow-[0_2px_20px_rgba(0,0,0,0.22)]"
+                    ? "bg-transparent backdrop-blur-sm border border-primary/70 hover:border-primary"
+                    : "bg-transparent backdrop-blur-sm border border-border/40"
                 }`}
               >
-                {!Array.isArray(stat.value) && (
-                  <span className="text-2xl">{stat.icon}</span>
-                )}
+                <span className="text-2xl">{stat.icon}</span>
                 <div className="flex-1">
                   <p
-                    className={`text-xs uppercase tracking-widest mb-1 ${
-                      stat.highlight
-                        ? "text-primary font-bold"
-                        : "text-muted-foreground font-normal tracking-wider"
+                    className={`text-xs uppercase tracking-widest mb-1 text-primary ${
+                      stat.highlight ? "font-bold" : "font-semibold"
                     }`}
                   >
                     {stat.label}
                   </p>
                   {Array.isArray(stat.value) ? (
                     <div className="flex flex-col gap-1.5">
-                      {stat.value.map((line) => (
-                        <p
-                          key={line.text}
-                          className="text-foreground text-sm font-medium flex items-center gap-2"
-                        >
-                          <span className="text-base">{line.icon}</span>
-                          <span>{line.text}</span>
-                        </p>
-                      ))}
+                      {stat.value.map((line) => {
+                        const cls =
+                          "text-foreground text-sm font-medium underline underline-offset-4 decoration-primary/40 hover:text-primary hover:decoration-primary transition-colors"
+                        return (
+                          <p key={line.text} className="text-sm font-medium">
+                            {!line.href ? (
+                              <span className="text-foreground">{line.text}</span>
+                            ) : line.href.startsWith("/") ? (
+                              <Link to={line.href} className={cls}>
+                                {line.text}
+                              </Link>
+                            ) : (
+                              <a
+                                href={line.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={cls}
+                              >
+                                {line.text}
+                              </a>
+                            )}
+                          </p>
+                        )
+                      })}
                     </div>
                   ) : (
                     <p className="text-foreground text-sm font-medium">

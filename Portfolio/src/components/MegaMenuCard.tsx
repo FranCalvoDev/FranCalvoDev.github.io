@@ -79,7 +79,7 @@ const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, 
           style={{ filter: pressed ? "blur(0px)" : "blur(6px)" }}
         />
       )}
-      <span className="absolute inset-0 bg-secondary/85 transition-colors duration-300 ease-out group-hover:bg-secondary/55 group-focus-visible:bg-secondary/55 group-active:bg-secondary/50" />
+      <span className="absolute inset-0 bg-background/60 transition-colors duration-300 ease-out group-hover:bg-background/30 group-focus-visible:bg-background/30 group-active:bg-background/25" />
     </span>
   )
 
