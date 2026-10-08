@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
@@ -122,7 +121,7 @@ const Skills = () => {
                       </span>
                     )
                   }
-                  return <SkillIcon key={skill} name={skill} icon={icon} />
+                  return <TechIcon key={skill} name={skill} icon={icon} />
                 })}
               </div>
             </motion.div>
