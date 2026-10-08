@@ -152,9 +152,9 @@ const MegaMenu = () => {
         <div
           id="mega-menu-panel"
           aria-label={t.title}
-          className="fixed left-1/2 top-20 z-50 w-[calc(100vw-2rem)] max-w-104 -translate-x-1/2 rounded-3xl border border-white/10 bg-secondary/95 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:max-w-3xl md:top-24 md:max-w-5xl md:p-4"
+          className="fixed left-1/2 top-20 z-50 w-[calc(100vw-2rem)] max-w-104 -translate-x-1/2 rounded-3xl border border-white/10 bg-background/50 overflow-hidden backdrop-blur-2xl sm:max-w-3xl md:top-24 md:max-w-5xl"
         >
-          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <ul className="relative grid grid-cols-1 sm:grid-cols-2">
             {items.map((item, index) => (
               <li key={item.path ?? `soon-${index}`} className="flex">
                 <MegaMenuCard
@@ -169,6 +169,12 @@ const MegaMenu = () => {
               </li>
             ))}
           </ul>
+          <img
+            src={`${import.meta.env.BASE_URL}favicon-96x96.png`}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-14 w-14 -translate-x-1/2 -translate-y-1/2 md:h-16 md:w-16"
+          />
         </div>
       )}
     </div>

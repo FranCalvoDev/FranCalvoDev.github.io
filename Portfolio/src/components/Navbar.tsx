@@ -174,8 +174,8 @@ const Navbar = () => {
         <div
           className={`nav-capsule-width flex items-center gap-2 px-2.5 py-2 sm:gap-3 sm:px-4 md:gap-4 md:px-5 sm:py-2.5 rounded-full transition-all duration-300 ${
             scrolled
-              ? "bg-secondary/80 backdrop-blur-md shadow-lg shadow-black/30 border border-border"
-              : "bg-secondary/40 backdrop-blur-sm border border-border/50"
+              ? "bg-background/40 backdrop-blur-md border border-border/40"
+              : "bg-transparent backdrop-blur-sm border border-border/30"
           }`}
         >
           {/* Todos los links (incluido el mega menu) comparten un único <ul> flex

@@ -81,7 +81,7 @@ const BlogReddit = () => {
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={`skeleton-${index}`}
-              className="rounded-3xl border border-border/40 bg-secondary/85 p-5 md:p-6 animate-pulse"
+              className="rounded-3xl border border-border/40 bg-transparent backdrop-blur-sm p-5 md:p-6 animate-pulse"
             >
               <div className="h-4 w-24 rounded-full bg-muted/70 mb-4" />
               <div className="h-4 w-2/3 rounded bg-muted/70 mb-3" />
@@ -101,7 +101,7 @@ const BlogReddit = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="rounded-3xl border border-border/40 bg-secondary/90 shadow-[0_2px_20px_rgba(0,0,0,0.22)] p-5 md:p-6 flex flex-col gap-4 transition-colors duration-300 hover:border-primary/40"
+              className="rounded-3xl border border-border/40 bg-transparent backdrop-blur-sm p-5 md:p-6 flex flex-col gap-4 transition-colors duration-300 hover:border-primary/40"
             >
               <div className="flex items-center justify-between gap-4">
                 <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary tracking-wide">
@@ -136,7 +136,7 @@ const BlogReddit = () => {
       )}
 
       {!loading && error && (
-        <div className="rounded-3xl border border-border/40 bg-secondary/80 p-6 text-center text-muted-foreground">
+        <div className="rounded-3xl border border-border/40 bg-transparent backdrop-blur-sm p-6 text-center text-muted-foreground">
           {error}
         </div>
       )}

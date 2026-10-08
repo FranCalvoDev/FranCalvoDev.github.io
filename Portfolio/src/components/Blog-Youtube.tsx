@@ -50,7 +50,7 @@ const BlogYoutube = () => {
       {loading && <div className="aspect-video rounded-3xl bg-muted/60 animate-pulse" />}
 
       {!loading && !featured && (
-        <div className="rounded-3xl border border-border/40 bg-secondary/80 p-6 text-center text-muted-foreground">
+        <div className="rounded-3xl border border-border/40 bg-transparent backdrop-blur-sm p-6 text-center text-muted-foreground">
           {t.youtubeEmpty}
         </div>
       )}
@@ -61,7 +61,7 @@ const BlogYoutube = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="rounded-3xl border border-border/40 bg-secondary/90 shadow-[0_2px_20px_rgba(0,0,0,0.22)] overflow-hidden transition-colors duration-300 hover:border-primary/40"
+          className="rounded-3xl border border-border/40 bg-transparent backdrop-blur-sm overflow-hidden transition-colors duration-300 hover:border-primary/40"
         >
           <div className="aspect-video">
             <iframe
@@ -89,7 +89,7 @@ const BlogYoutube = () => {
               href={video.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-2xl border border-border/40 bg-secondary/90 overflow-hidden transition-colors duration-300 hover:border-primary/40"
+              className="group rounded-2xl border border-border/40 bg-transparent backdrop-blur-sm overflow-hidden transition-colors duration-300 hover:border-primary/40"
             >
               <img
                 src={video.thumbnail}

@@ -59,11 +59,11 @@ const ScrollIndicator = () => {
       }`}
     >
       {isHome && (
-        <span className="text-xs font-medium tracking-wide px-3 py-1 rounded-full border border-primary/60 bg-secondary/50 backdrop-blur-sm shadow-lg shadow-black/20 transition-colors group-hover:border-primary group-hover:bg-secondary/80">
+        <span className="text-xs font-medium tracking-wide px-3 py-1 rounded-full border border-primary/60 bg-transparent backdrop-blur-sm transition-colors group-hover:border-primary group-hover:bg-primary/10">
           + {translations[language].about.title}
         </span>
       )}
-      <span className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/60 bg-secondary/50 backdrop-blur-sm shadow-lg shadow-black/20 transition-colors group-hover:border-primary group-hover:bg-secondary/80">
+      <span className="flex items-center justify-center w-10 h-10 rounded-full border border-primary/60 bg-transparent backdrop-blur-sm transition-colors group-hover:border-primary group-hover:bg-primary/10">
       <svg
         viewBox="0 0 24 24"
         fill="none"

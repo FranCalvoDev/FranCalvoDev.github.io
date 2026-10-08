@@ -79,7 +79,7 @@ const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, 
           style={{ filter: pressed ? "blur(0px)" : "blur(6px)" }}
         />
       )}
-      <span className="absolute inset-0 bg-secondary/85 transition-colors duration-300 ease-out group-hover:bg-secondary/55 group-focus-visible:bg-secondary/55 group-active:bg-secondary/50" />
+      <span className="absolute inset-0 bg-background/60 transition-colors duration-300 ease-out group-hover:bg-background/30 group-focus-visible:bg-background/30 group-active:bg-background/25" />
     </span>
   )
 
@@ -96,7 +96,7 @@ const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, 
       <div
         aria-disabled="true"
         {...pressHandlers}
-        className="group relative flex w-full min-h-36 cursor-default overflow-hidden items-start gap-3.5 rounded-2xl p-3.5 opacity-50 sm:min-h-44 md:min-h-52 sm:p-4"
+        className="group relative flex w-full min-h-36 cursor-default overflow-hidden items-start gap-3.5 p-3.5 opacity-50 sm:min-h-44 md:min-h-52 sm:p-4"
       >
         {background}
         <span className="relative flex w-full items-start gap-3.5">{content}</span>
@@ -109,7 +109,7 @@ const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, 
       to={path}
       onClick={onNavigate}
       {...pressHandlers}
-      className="group relative flex w-full min-h-36 sm:min-h-44 md:min-h-52 overflow-hidden rounded-2xl border border-white/10 transition-colors duration-300 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
+      className="group relative flex w-full min-h-36 sm:min-h-44 md:min-h-52 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/60"
     >
       {background}
       <span className="relative flex w-full items-start gap-3.5 p-3.5 sm:p-4">{content}</span>

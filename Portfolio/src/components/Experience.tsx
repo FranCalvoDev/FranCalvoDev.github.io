@@ -21,7 +21,7 @@ const Experience = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="bg-secondary/90 border border-border/40 rounded-3xl p-7 md:p-8 shadow-[0_2px_20px_rgba(0,0,0,0.22)] transition-transform duration-300 ease-out hover:-translate-y-1"
+              className="bg-transparent backdrop-blur-sm border border-border/40 rounded-3xl p-7 md:p-8 transition-transform duration-300 ease-out hover:-translate-y-1"
             >
               {/* Header */}
               <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">

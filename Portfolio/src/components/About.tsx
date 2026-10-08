@@ -56,8 +56,8 @@ const About = () => {
                 transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
                 className={`rounded-3xl px-7 py-6 flex items-center gap-4 transition-transform duration-300 ease-out hover:-translate-y-1 ${
                   stat.highlight
-                    ? "bg-linear-to-br from-secondary/95 to-primary/15 border-2 border-primary shadow-[0_0_30px_rgba(121,191,15,0.35)] hover:shadow-[0_0_40px_rgba(121,191,15,0.5)]"
-                    : "bg-secondary/90 border border-border/40 shadow-[0_2px_20px_rgba(0,0,0,0.22)]"
+                    ? "bg-transparent backdrop-blur-sm border border-primary/70 hover:border-primary"
+                    : "bg-transparent backdrop-blur-sm border border-border/40"
                 }`}
               >
                 {!Array.isArray(stat.value) && (

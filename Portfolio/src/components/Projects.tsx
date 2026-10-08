@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import PageHeader from "./PageHeader"
+import { iconFor, TechIcon } from "./TechIcon"
 
 const ProjectCarousel = ({
   images,
@@ -135,7 +136,7 @@ const ProjectLightbox = ({
             type="button"
             onClick={onClose}
             aria-label="Close image gallery"
-            className="rounded-full border border-border/70 bg-secondary/80 px-4 py-2 text-xl leading-none text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+            className="rounded-full border border-border/40 bg-transparent backdrop-blur-sm px-4 py-2 text-xl leading-none text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
           >
             ×
           </button>
@@ -206,10 +207,10 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className={`bg-secondary/90 rounded-3xl p-7 flex flex-col justify-between transition-transform duration-300 ease-out hover:-translate-y-1 ${
+              className={`bg-transparent backdrop-blur-sm rounded-3xl p-7 flex flex-col justify-between transition-transform duration-300 ease-out hover:-translate-y-1 ${
                 project.status === "inprogress"
-                  ? "border-2 border-primary shadow-[0_0_20px_rgba(121,191,15,0.45)]"
-                  : "border border-border/40 shadow-[0_2px_20px_rgba(0,0,0,0.22)]"
+                  ? "border border-primary/70"
+                  : "border border-border/40 hover:border-primary/40"
               }`}
             >
               {/* Carrusel de imágenes */}
@@ -226,7 +227,7 @@ const Projects = () => {
                     {project.title}
                   </h3>
                   {project.status === "inprogress" && (
-                    <span className="text-xs bg-muted text-primary border border-primary px-2 py-1 rounded-full">
+                    <span className="text-xs text-primary border border-primary/60 px-2 py-1 rounded-full">
                       {t.inProgress}
                     </span>
                   )}
@@ -235,14 +236,19 @@ const Projects = () => {
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.techs.map((tech) => (
-                    <span
-                      key={tech}
-                      className="bg-muted text-foreground text-xs px-3 py-1 rounded-full border border-border"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  {project.techs.map((tech) => {
+                    const icon = iconFor(tech)
+                    return icon ? (
+                      <TechIcon key={tech} name={tech} icon={icon} small />
+                    ) : (
+                      <span
+                        key={tech}
+                        className="text-foreground text-xs px-3 py-1 rounded-full border border-border/40"
+                      >
+                        {tech}
+                      </span>
+                    )
+                  })}
                 </div>
               </div>
 
