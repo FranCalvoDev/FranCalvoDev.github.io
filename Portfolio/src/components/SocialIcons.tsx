@@ -27,9 +27,6 @@ export const SocialIconsRow = () => (
       const classes =
         "flex items-center justify-center w-10 h-10 rounded-full border border-border/40 bg-secondary/90 text-primary transition-[box-shadow,border-color,background-color,color] duration-300 ease-out hover:border-primary hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_24px_rgba(121,191,15,0.55)]"
       const motionProps = {
-        initial: { opacity: 0, y: 12 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.6, ease: "easeOut" as const },
         whileHover: { y: -4, rotate: -8, scale: 1.12 },
         whileTap: { scale: 0.92 },
       }
@@ -50,7 +47,7 @@ export const SocialIconsRow = () => (
         <motion.span
           key={platform}
           aria-label={platform}
-          className={`${classes} opacity-60`}
+          className={classes}
           {...motionProps}
         >
           <PlatformIcon platform={platform} />
