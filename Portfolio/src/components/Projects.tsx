@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import PageHeader from "./PageHeader"
+import { iconFor, TechIcon } from "./TechIcon"
 
 const ProjectCarousel = ({
   images,
