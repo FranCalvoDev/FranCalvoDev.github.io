@@ -101,7 +101,7 @@ const BlogReddit = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="rounded-3xl border border-border/40 bg-secondary/90 shadow-[0_2px_20px_rgba(0,0,0,0.22)] p-5 md:p-6 flex flex-col gap-4 transition-colors duration-300 hover:border-primary/40"
+              className="rounded-3xl border border-border/40 bg-transparent backdrop-blur-sm shadow-[0_2px_20px_rgba(0,0,0,0.22)] p-5 md:p-6 flex flex-col gap-4 transition-colors duration-300 hover:border-primary/40"
             >
               <div className="flex items-center justify-between gap-4">
                 <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary tracking-wide">

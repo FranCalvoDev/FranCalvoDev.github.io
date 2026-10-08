@@ -59,7 +59,7 @@ const MorePage = () => {
             >
               <Link
                 to={card.path}
-                className="group flex h-full flex-col gap-3 p-6 rounded-2xl border border-border bg-secondary/40 backdrop-blur-sm hover:bg-secondary/70 hover:border-primary transition-all duration-300 ease-out active:scale-95"
+                className="group flex h-full flex-col gap-3 p-6 rounded-3xl border border-border/40 bg-transparent backdrop-blur-sm shadow-[0_2px_20px_rgba(0,0,0,0.22)] hover:border-primary/40 transition-all duration-300 ease-out active:scale-95"
               >
                 <span className="flex items-center justify-center w-11 h-11 rounded-full bg-primary/10 text-primary transition-transform duration-300 ease-out group-hover:scale-110">
                   <card.Icon />
@@ -75,7 +75,7 @@ const MorePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex flex-col gap-3 p-6 rounded-2xl border border-dashed border-border/70 text-center sm:col-span-2 items-center"
+            className="flex flex-col gap-3 p-6 rounded-3xl border border-dashed border-border/40 text-center sm:col-span-2 items-center"
           >
             <span className="text-sm font-medium uppercase tracking-wide text-primary">
               {t.comingSoon}

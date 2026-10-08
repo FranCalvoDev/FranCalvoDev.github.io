@@ -17,6 +17,7 @@ const PageHeader = ({ title, subtitle, as: Heading = "h1", titleAdornment }: Pag
       </Heading>
       {titleAdornment}
     </div>
+    <span aria-hidden="true" className="block h-px w-12 bg-primary/60" />
     {subtitle && (
       <motion.p
         initial={{ opacity: 0, y: 24 }}

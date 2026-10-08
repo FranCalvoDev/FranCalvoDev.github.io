@@ -28,7 +28,7 @@ const SpecsPage = () => {
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative w-full max-w-450 mx-auto rounded-2xl overflow-hidden border border-border bg-secondary/40"
+        className="relative w-full max-w-450 mx-auto rounded-2xl overflow-hidden border border-border/40 bg-transparent shadow-[0_2px_20px_rgba(0,0,0,0.22)]"
       >
         <img src={deskPhoto} alt="Desk" className="w-full h-auto block" />
         <div className="absolute inset-0 bg-gradient-to-br from-secondary/60 to-background" aria-hidden="true" />

@@ -33,7 +33,7 @@ const ProjectCarousel = ({
       type="button"
       onClick={onOpen}
       aria-label={`Open ${title} image gallery`}
-      className="group relative block w-full aspect-[16/10] rounded-2xl overflow-hidden border border-border/40 mb-5 bg-[#071007] cursor-zoom-in"
+      className="group relative block w-full aspect-[16/10] rounded-2xl overflow-hidden mb-5 bg-[#071007] cursor-zoom-in"
     >
       {images.length > 0 && (
         <div
@@ -207,11 +207,7 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className={`bg-secondary/90 rounded-3xl p-7 flex flex-col justify-between transition-transform duration-300 ease-out hover:-translate-y-1 ${
-                project.status === "inprogress"
-                  ? "border border-primary/70"
-                  : "border border-border/40 hover:border-primary/40"
-              }`}
+              className="bg-transparent backdrop-blur-sm rounded-3xl p-7 flex flex-col justify-between shadow-[0_2px_20px_rgba(0,0,0,0.22)] transition-all duration-300 ease-out hover:-translate-y-1"
             >
               {/* Carrusel de imágenes */}
               <ProjectCarousel

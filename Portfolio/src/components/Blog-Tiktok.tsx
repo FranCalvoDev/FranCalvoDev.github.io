@@ -28,7 +28,7 @@ const BlogTiktok = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="rounded-3xl border border-border/40 bg-secondary/90 shadow-[0_2px_20px_rgba(0,0,0,0.22)] p-6 flex flex-col items-center text-center gap-4 transition-colors duration-300 hover:border-primary/40"
+        className="rounded-3xl border border-border/40 bg-transparent backdrop-blur-sm shadow-[0_2px_20px_rgba(0,0,0,0.22)] p-6 flex flex-col items-center text-center gap-4 transition-colors duration-300 hover:border-primary/40"
       >
         <p className="text-muted-foreground text-sm">{t.tiktokSoon}</p>
         {TIKTOK_URL && (
