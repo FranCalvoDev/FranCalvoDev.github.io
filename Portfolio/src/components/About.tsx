@@ -60,30 +60,41 @@ const About = () => {
                     : "bg-transparent backdrop-blur-sm border border-border/40"
                 }`}
               >
-                {!Array.isArray(stat.value) && (
-                  <span className="text-2xl">{stat.icon}</span>
-                )}
+                <span className="text-2xl">{stat.icon}</span>
                 <div className="flex-1">
                   <p
-                    className={`text-xs uppercase tracking-widest mb-1 ${
-                      stat.highlight
-                        ? "text-primary font-bold"
-                        : "text-muted-foreground font-normal tracking-wider"
+                    className={`text-xs uppercase tracking-widest mb-1 text-primary ${
+                      stat.highlight ? "font-bold" : "font-semibold"
                     }`}
                   >
                     {stat.label}
                   </p>
                   {Array.isArray(stat.value) ? (
                     <div className="flex flex-col gap-1.5">
-                      {stat.value.map((line) => (
-                        <p
-                          key={line.text}
-                          className="text-foreground text-sm font-medium flex items-center gap-2"
-                        >
-                          <span className="text-base">{line.icon}</span>
-                          <span>{line.text}</span>
-                        </p>
-                      ))}
+                      {stat.value.map((line) => {
+                        const cls =
+                          "text-foreground text-sm font-medium underline underline-offset-4 decoration-primary/40 hover:text-primary hover:decoration-primary transition-colors"
+                        return (
+                          <p key={line.text} className="text-sm font-medium">
+                            {!line.href ? (
+                              <span className="text-foreground">{line.text}</span>
+                            ) : line.href.startsWith("/") ? (
+                              <Link to={line.href} className={cls}>
+                                {line.text}
+                              </Link>
+                            ) : (
+                              <a
+                                href={line.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={cls}
+                              >
+                                {line.text}
+                              </a>
+                            )}
+                          </p>
+                        )
+                      })}
                     </div>
                   ) : (
                     <p className="text-foreground text-sm font-medium">
