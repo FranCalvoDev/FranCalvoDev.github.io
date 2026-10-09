@@ -70,7 +70,7 @@ const MegaMenuCard = ({ title, description, path, image, Icon, comingSoonLabel, 
           alt=""
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-[transform,filter] duration-500 ease-out group-hover:scale-105"
+          className="absolute inset-0 h-full w-full object-cover transition-[transform,filter] duration-500 ease-out group-hover:scale-105"
           style={{ filter: pressed ? "blur(0px)" : "blur(6px)" }}
         />
       ) : (

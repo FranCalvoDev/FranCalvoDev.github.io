@@ -152,7 +152,7 @@ const MegaMenu = () => {
         <div
           id="mega-menu-panel"
           aria-label={t.title}
-          className="fixed left-1/2 top-20 z-50 w-[calc(100vw-2rem)] max-w-104 -translate-x-1/2           overflow-hidden rounded-3xl border border-white/10 bg-secondary/95 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:max-w-3xl md:top-24 md:max-w-5xl"
+          className="fixed left-1/2 top-20 z-50 w-[calc(100vw-2rem)] max-w-104 -translate-x-1/2 overflow-hidden rounded-3xl bg-secondary/95 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl sm:max-w-3xl md:top-24 md:max-w-5xl"
         >
                     <ul className="grid grid-cols-1 gap-0 sm:grid-cols-2">
             {items.map((item, index) => (
