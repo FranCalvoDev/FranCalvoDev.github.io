@@ -207,17 +207,36 @@ export const translations = {
     },
     about: {
       title: "Sobre mí",
-      p1a: "Soy estudiante avanzado de la ",
-      p1b: ", Desarrollador Full-Stack en formación y estudiante avanzado (+90 %), con experiencia práctica en soluciones web y sistemas orientados a procesos de negocio. Trabajo con JavaScript, Node.js, Python, APIs REST y bases de datos SQL/NoSQL, usando Git/GitHub para control de versiones y colaboración.",
-      p2a: "Trabajo con tecnologías como ",
-      p2b: ", y participo desde el relevamiento de requerimientos hasta la automatización de procesos y la gestión de datos. Me caracterizan mi capacidad analítica, mi enfoque práctico y la orientación a resolver problemas.",
-      p3a: "Soy ",
-      p3bilingual: "bilingüe (Español - Inglés B2)",
-      p3b: ", lo que me permite colaborar en entornos internacionales. Mi experiencia como ",
-      p3referee: "Árbitro Federado de Básquet",
-      p3c:
-        " me formó en liderazgo, comunicación y toma de decisiones bajo presión — habilidades que aplico día a día en mi trabajo como desarrollador.",
-      p4: "Busco incorporarme a un equipo de desarrollo Full-Stack para seguir creciendo en entornos profesionales.",
+      intro:
+        "¡Hola! Soy Francisco, de Bahía Blanca, y también tengo nacionalidad española. Las computadoras me atraparon a los 15 años y desde entonces no las solté: nunca tuve una consola, mi lugar siempre fue frente a la PC, probando cosas y aprendiendo.",
+      basketBeforeClub:
+        "En Bahía Blanca, la capital del básquet, este deporte se vive distinto. Fui jugador y hoy lo sigo disfrutando desde la tribuna como hincha de ",
+      clubName: "Club Atlético Pacífico",
+      basketAfterClub:
+        ": no hay nada como una noche de partido con la hinchada a pleno.",
+      bmxBefore: "Pasé varios años arriba de una bicicleta compitiendo en ",
+      bmxHighlight: "BMX Racing",
+      bmxAfter:
+        ", y llegué a ser el segundo mejor de Argentina en mi categoría. De esa etapa me quedaron la disciplina, las ganas de mejorar en cada carrera y algún que otro golpe que me enseñó a levantarme rápido.",
+      photographyBefore: "La ",
+      photographyHighlight: "fotografía",
+      photographyAfter:
+        " la llevo en la sangre: crecí entre cámaras gracias a mi viejo, que se dedicaba a eso, y desde entonces sacar fotos es mi forma de mirar el mundo.",
+      travelBefore: "Me encanta viajar, y si hay viaje, hay fotos. Tuve la suerte de conocer ",
+      countryFrance: "Francia",
+      countrySpain: "España",
+      countryEngland: "Inglaterra",
+      countryBrazil: "Brasil",
+      travelBetweenFranceSpain: ", ",
+      travelBetweenSpainEngland: ", ",
+      travelBetweenEnglandBrazil: " y ",
+      travelAfter: ", y cada destino me dejó con ganas de conocer el próximo.",
+      cookingBefore: "Y como buen hermano de ",
+      cookingHighlight: "chef",
+      cookingAfter:
+        ", también me gusta cocinar, aunque las comparaciones con él mejor evitarlas.",
+      closing:
+        "Si compartimos alguna de estas pasiones, escribime: siempre hay tema para charlar.",
       viewExperience: "Ver experiencia",
       stats: [
         {
@@ -467,17 +486,37 @@ export const translations = {
     },
     about: {
       title: "About me",
-      p1a: "I'm an advanced student of the ",
-      p1b: ", Full-Stack developer in training (+90 % completed), with hands-on experience in web solutions and business-process-oriented systems. I work with JavaScript, Node.js, Python, REST APIs and SQL/NoSQL databases, using Git/GitHub for version control and collaboration.",
-      p2a: "I work with technologies like ",
-      p2b: ", and I take part from requirements gathering to process automation and data management. I'm analytical, practical and focused on solving problems.",
-      p3a: "I'm ",
-      p3bilingual: "bilingual (Spanish - English B2)",
-      p3b: ", which allows me to collaborate in international environments. My experience as a ",
-      p3referee: "Certified Basketball Referee",
-      p3c:
-        " shaped me in leadership, communication and decision-making under pressure — skills I apply every day in my work as a developer.",
-      p4: "I'm looking to join a Full-Stack development team and keep growing in professional environments.",
+      intro:
+        "Hi! I'm Francisco, from Bahía Blanca, and I also have Spanish citizenship. Computers got me hooked when I was 15, and I haven't let go since: I never had a game console; my place has always been in front of a PC, trying things out and learning.",
+      basketBeforeClub:
+        "In Bahía Blanca, the capital of basketball, the sport is experienced differently. I used to play, and now I enjoy it from the stands as a fan of ",
+      clubName: "Club Atlético Pacífico",
+      basketAfterClub:
+        ": there's nothing like a game night with the stands packed with passionate fans.",
+      bmxBefore: "I spent several years competing in ",
+      bmxHighlight: "BMX Racing",
+      bmxAfter:
+        ", and became the second-best rider in Argentina in my category. That chapter taught me discipline, the drive to improve in every race, and—after a few crashes—how to get back up quickly.",
+      photographyBefore: "",
+      photographyHighlight: "Photography",
+      photographyAfter:
+        " is in my blood: I grew up around cameras thanks to my dad, who worked in photography, and taking pictures has been my way of seeing the world ever since.",
+      travelBefore:
+        "I love traveling, and if there's a trip, there are photos. I've been lucky enough to visit ",
+      countryFrance: "France",
+      countrySpain: "Spain",
+      countryEngland: "England",
+      countryBrazil: "Brazil",
+      travelBetweenFranceSpain: ", ",
+      travelBetweenSpainEngland: ", ",
+      travelBetweenEnglandBrazil: " and ",
+      travelAfter: ", and every destination has left me eager to discover the next one.",
+      cookingBefore: "And as the brother of a ",
+      cookingHighlight: "chef",
+      cookingAfter:
+        ", I also enjoy cooking—though it's probably best not to compare our cooking.",
+      closing:
+        "If we share any of these passions, get in touch: there's always something to talk about.",
       viewExperience: "View experience",
       stats: [
         {
