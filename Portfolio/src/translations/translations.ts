@@ -320,10 +320,10 @@ export const translations = {
         },
   
         {
-          title: "Migración de Software PHP",
+          title: "Distribuidora",
           category: "Modernización de sistema legacy",
           description:
-            "**Migración y modernización de sistema legacy** desarrollado en PHP. Proyecto en proceso de desarrollo activo.",
+            "**Migración y modernización de sistema legacy** desarrollado en PHP para una distribuidora de Coronel Dorrego que abastece a toda la zona. Proyecto en proceso de desarrollo activo.",
           techs: ["PHP", "MySQL", "JavaScript"],
           github: null,
           demo: null,
@@ -339,7 +339,7 @@ export const translations = {
           ],
         },
         {
-          title: "Sistema de gestión de Rominetta",
+          title: "Rominetta",
           category: "Gestión de inventario y punto de venta",
           description:
             "**Sistema de control de inventario** por matriz de tallas, punto de venta  y registro de ventas para una tienda de calzado.",
@@ -615,10 +615,10 @@ export const translations = {
           images: [sneakerhub1, sneakerhub2, sneakerhub3, sneakerhub4, sneakerhub5],
         },
         {
-          title: "PHP Software Migration",
+          title: "Distribuidora",
           category: "Legacy system modernization",
           description:
-            "**Migration and modernization of a legacy system** developed in PHP. Project under active development.",
+            "**Migration and modernization of a legacy system** developed in PHP for a distributor based in Coronel Dorrego that supplies the entire surrounding region. Project under active development.",
           techs: ["PHP", "MySQL", "JavaScript"],
           github: null,
           demo: null,
@@ -634,7 +634,7 @@ export const translations = {
           ],
         },
         {
-          title: "Rominetta Management System Prototype",
+          title: "Rominetta",
           category: "Inventory management & point of sale",
           description:
             "**Inventory control system** by size matrix, point of sale and sales tracking for a footwear store.",
