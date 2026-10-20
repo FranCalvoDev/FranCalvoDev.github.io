@@ -20,10 +20,15 @@ import hsghogar2 from "../assets/projects/HSG-hogar2.png"
 import hsghogar3 from "../assets/projects/HSG-hogar3.png"
 import hsghogar4 from "../assets/projects/HSG-hogar4.png"
 import hsghogar5 from "../assets/projects/HSG-hogar5.png"
+import tbd1 from "../assets/projects/TBD-1.png"
+import tbd2 from "../assets/projects/TBD-2.png"
+import tbdLogo from "../assets/projects/TBD-logo.png"
+import tbd4 from "../assets/projects/TBD-4.png"
 
 
 export type ProjectItem = {
   title: string
+  category: string
   description: string
   techs: string[]
   github: string | null
@@ -293,8 +298,9 @@ export const translations = {
       items: [
              {
           title: "Portfolio Personal",
+          category: "Portfolio profesional y showcase",
           description:
-            "Portfolio profesional desarrollado con React y TypeScript. Muestra de proyectos, habilidades y experiencia laboral.",
+            "**Portfolio profesional** desarrollado con React y TypeScript. Muestra de proyectos, habilidades y experiencia laboral.",
           techs: ["React.js", "TypeScript", "Tailwind CSS"],
           github: "https://github.com/FranCalvoDev/Portfolio",
           demo: null,
@@ -303,8 +309,9 @@ export const translations = {
         },
         {
           title: "SneakerHub",
+          category: "E-commerce de calzado",
           description:
-            "Aplicación web de e-commerce orientada a la venta de zapatillas. Desarrollo Full-Stack con interfaz dinámica y gestión de productos.",
+            "**Aplicación web de e-commerce** orientada a la venta de zapatillas. Desarrollo Full-Stack con interfaz dinámica y gestión de productos.",
           techs: ["JavaScript", "React.js", "MySQL", "CSS"],
           github: null,
           demo: null,
@@ -314,8 +321,9 @@ export const translations = {
   
         {
           title: "Migración de Software PHP",
+          category: "Modernización de sistema legacy",
           description:
-            "Migración y modernización de sistema legacy desarrollado en PHP. Proyecto en proceso de desarrollo activo.",
+            "**Migración y modernización de sistema legacy** desarrollado en PHP. Proyecto en proceso de desarrollo activo.",
           techs: ["PHP", "MySQL", "JavaScript"],
           github: null,
           demo: null,
@@ -332,8 +340,9 @@ export const translations = {
         },
         {
           title: "Sistema de gestión de Rominetta",
+          category: "Gestión de inventario y punto de venta",
           description:
-            "Sistema de control de inventario por matriz de tallas, punto de venta  y registro de ventas para una tienda de calzado.",
+            "**Sistema de control de inventario** por matriz de tallas, punto de venta  y registro de ventas para una tienda de calzado.",
           techs: ["React", "TypeScript", "Node.js", "SQLite"],
           github: null,
           demo: null,
@@ -347,8 +356,9 @@ export const translations = {
         },
         {
           title: "HSG Hogar",
+          category: "Catálogo digital para el hogar",
           description:
-            "Aplicación web tipo catálogo para la venta de productos para el hogar. Desarrollo Full-Stack con interfaz dinámica, gestión de productos y contacto directo por WhatsApp. No procesa pagos online por pedido del cliente.",
+            "**Aplicación web tipo catálogo** para la venta de productos para el hogar. Desarrollo Full-Stack con interfaz dinámica, gestión de productos y contacto directo por WhatsApp. No procesa pagos online por pedido del cliente.",
           techs: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
           github: null,
           demo: null,
@@ -360,6 +370,17 @@ export const translations = {
             hsghogar4,
             hsghogar5,
           ],
+        },
+        {
+          title: "TBD · MiSemana",
+          category: "Planificador semanal y metas",
+          description:
+            "**App de planificación semanal** para web y Android: semana tipo por bloques, tareas que se ubican en los huecos libres, metas semanales y estadísticas. Funciona sin conexión y sincroniza entre dispositivos con un servidor autoalojado.",
+          techs: ["JavaScript", "Vite", "Capacitor", "Android", "PostgreSQL", "Docker", "Vitest"],
+          github: "https://github.com/FranCalvoDev/TBD",
+          demo: null,
+          status: "finished",
+          images: [tbdLogo, tbd1, tbd2, tbd4],
         },
       ] as ProjectItem[],
     },
@@ -573,8 +594,9 @@ export const translations = {
       items: [
          {
           title: "Personal Portfolio",
+          category: "Professional portfolio & showcase",
           description:
-            "Professional portfolio built with React and TypeScript. Showcase of projects, skills and work experience.",
+            "**Professional portfolio** built with React and TypeScript. Showcase of projects, skills and work experience.",
           techs: ["React.js", "TypeScript", "Tailwind CSS"],
           github: "https://github.com/FranCalvoDev/Portfolio",
           demo: null,
@@ -583,8 +605,9 @@ export const translations = {
         },
         {
           title: "SneakerHub",
+          category: "Footwear e-commerce",
           description:
-            "E-commerce web application focused on sneaker sales. Full-Stack development with dynamic interface and product management.",
+            "**E-commerce web application** focused on sneaker sales. Full-Stack development with dynamic interface and product management.",
           techs: ["JavaScript", "React.js", "MySQL", "CSS"],
           github: null,
           demo: null,
@@ -593,8 +616,9 @@ export const translations = {
         },
         {
           title: "PHP Software Migration",
+          category: "Legacy system modernization",
           description:
-            "Migration and modernization of a legacy system developed in PHP. Project under active development.",
+            "**Migration and modernization of a legacy system** developed in PHP. Project under active development.",
           techs: ["PHP", "MySQL", "JavaScript"],
           github: null,
           demo: null,
@@ -611,8 +635,9 @@ export const translations = {
         },
         {
           title: "Rominetta Management System Prototype",
+          category: "Inventory management & point of sale",
           description:
-            "Inventory control system by size matrix, point of sale and sales tracking for a footwear store.",
+            "**Inventory control system** by size matrix, point of sale and sales tracking for a footwear store.",
           techs: ["React", "TypeScript", "Node.js", "SQLite"],
           github: null,
           demo: null,
@@ -625,8 +650,9 @@ export const translations = {
         },
         {
           title: "HSG Hogar",
+          category: "Digital home goods catalog",
           description:
-            "Catalog-style web application for selling home products. Full-Stack development with a dynamic interface, product management and direct contact through WhatsApp. Online payments are not processed by client request.",
+            "**Catalog-style web application** for selling home products. Full-Stack development with a dynamic interface, product management and direct contact through WhatsApp. Online payments are not processed by client request.",
           techs: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
           github: null,
           demo: null,
@@ -638,6 +664,17 @@ export const translations = {
             hsghogar4,
             hsghogar5,
           ],
+        },
+        {
+          title: "TBD · MiSemana",
+          category: "Weekly planner & goals",
+          description:
+            "**Weekly planning app** for web and Android: a template week built from time blocks, tasks that slot into free gaps, weekly goals and statistics. Works offline and syncs across devices through a self-hosted server.",
+          techs: ["JavaScript", "Vite", "Capacitor", "Android", "PostgreSQL", "Docker", "Vitest"],
+          github: "https://github.com/FranCalvoDev/TBD",
+          demo: null,
+          status: "finished",
+          images: [tbdLogo, tbd1, tbd2, tbd4],
         },
       ] as ProjectItem[],
     },
