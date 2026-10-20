@@ -320,10 +320,10 @@ export const translations = {
         },
   
         {
-          title: "Migración de Software PHP",
+          title: "Distribuidora",
           category: "Modernización de sistema legacy",
           description:
-            "**Migración y modernización de sistema legacy** desarrollado en PHP. Proyecto en proceso de desarrollo activo.",
+            "**Migración y modernización de sistema legacy** desarrollado en PHP para una distribuidora de Coronel Dorrego que abastece a toda la zona. Proyecto en proceso de desarrollo activo.",
           techs: ["PHP", "MySQL", "JavaScript"],
           github: null,
           demo: null,
@@ -339,7 +339,7 @@ export const translations = {
           ],
         },
         {
-          title: "Sistema de gestión de Rominetta",
+          title: "Rominetta",
           category: "Gestión de inventario y punto de venta",
           description:
             "**Sistema de control de inventario** por matriz de tallas, punto de venta  y registro de ventas para una tienda de calzado.",
