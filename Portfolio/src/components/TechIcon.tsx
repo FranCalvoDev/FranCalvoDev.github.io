@@ -3,6 +3,7 @@ import {
   siPython, siJavascript, siMysql, siHtml5, siCss, siJson, siReact, siVuedotjs,
   siAngular, siMongodb, siTypescript, siPhp, siNextdotjs, siNodedotjs, siTailwindcss,
   siPostgresql, siSqlite, siSupabase, siGit, siGithub, siGitlab, siDocker, siFigma, siNotion, siMiro, siPostman, siClaude, siGithubcopilot, siOpencode, siLaravel, siLaragon,
+  siVite, siCapacitor, siAndroid, siVitest,
 } from "simple-icons"
 
 type Icon = { path: string; color: string }
@@ -57,6 +58,10 @@ const icons: Record<string, Icon> = {
   opencode: mk(siOpencode, true),
   laravel: mk(siLaravel),
   laragon: mk(siLaragon),
+  vite: mk(siVite),
+  capacitor: mk(siCapacitor),
+  android: mk(siAndroid),
+  vitest: mk(siVitest),
 }
 
 export const iconFor = (name: string) => icons[name.trim().toLowerCase()]
