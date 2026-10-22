@@ -209,6 +209,7 @@ export const translations = {
       viewProjects: "Ver proyectos",
       contactMe: "Contactame",
       downloadCV: "Descargar CV",
+      cvLabel: "Currículum",
     },
     about: {
       title: "Sobre mí",
@@ -504,6 +505,7 @@ export const translations = {
       viewProjects: "View projects",
       contactMe: "Contact me",
       downloadCV: "Download CV",
+      cvLabel: "Resume",
     },
     about: {
       title: "About me",

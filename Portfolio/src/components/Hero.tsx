@@ -24,6 +24,15 @@ const LinkedInIcon = () => (
   </svg>
 )
 
+const DownloadIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z" />
+    <path d="M14 3v5h5" />
+    <path d="M12 11v6" />
+    <path d="m9 14 3 3 3-3" />
+  </svg>
+)
+
 // Efecto "máquina de escribir": tipea el texto letra a letra y deja
 // un cursor parpadeante al final, de forma sutil.
 const useTypewriter = (text: string, speed = 28) => {
@@ -127,33 +136,45 @@ const Hero = () => {
             </motion.div>
 
             {/* Acciones minimalistas */}
-            <motion.div variants={fadeUp} className="flex items-center gap-3">
-              <a
-                href={cvFile}
-                download
-                className="bg-primary text-primary-foreground font-semibold text-sm px-6 py-3 rounded-full hover:opacity-90 transition-all duration-300 ease-out active:scale-95"
-              >
-                {t.downloadCV}
-              </a>
-
-              <a
-                href="https://github.com/FranCalvoDev"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="flex items-center justify-center w-11 h-11 rounded-full border border-border/60 text-foreground hover:border-primary hover:text-primary transition-all duration-300 ease-out active:scale-95"
-              >
-                <GitHubIcon />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/francisco-calvo-5445582ba/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="flex items-center justify-center w-11 h-11 rounded-full border border-border/60 text-foreground hover:border-primary hover:text-primary transition-all duration-300 ease-out active:scale-95"
-              >
-                <LinkedInIcon />
-              </a>
+            <motion.div variants={fadeUp} className="flex items-start justify-center gap-8 sm:gap-12">
+              {[
+                { href: "https://github.com/FranCalvoDev", label: "GitHub", ariaLabel: "GitHub", icon: <GitHubIcon /> },
+                { href: cvFile, label: t.cvLabel, ariaLabel: t.downloadCV, icon: <DownloadIcon />, download: true },
+                { href: "https://www.linkedin.com/in/francisco-calvo-5445582ba/", label: "LinkedIn", ariaLabel: "LinkedIn", icon: <LinkedInIcon /> },
+              ].map(({ href, label, ariaLabel, icon, download }, i) => (
+                <a
+                  key={label}
+                  href={href}
+                  {...(download
+                    ? { download: true }
+                    : { target: "_blank", rel: "noopener noreferrer" })}
+                  aria-label={ariaLabel}
+                  className={`group flex w-20 flex-col items-center gap-1.5 ${download ? "-translate-y-2" : ""}`}
+                >
+                  <span className="neon-hover flex items-center justify-center w-11 h-11 rounded-full border border-border/60 text-foreground transition-all duration-300 ease-out group-active:scale-95">
+                    {icon}
+                  </span>
+                  {/* Flecha neón apuntando al botón (solo en el CV); en los
+                      demás queda invisible para que los textos sigan alineados */}
+                  <span
+                    aria-hidden="true"
+                    className={download ? "neon-arrow" : "invisible"}
+                    style={{ animationDelay: `${i * 1.3}s` }}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                      <path d="M12 19V5" />
+                      <path d="m6 11 6-6 6 6" />
+                    </svg>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="neon-label text-[11px] font-semibold tracking-[0.15em] uppercase whitespace-nowrap"
+                    style={{ animationDelay: `${i * 1.3}s` }}
+                  >
+                    {label}
+                  </span>
+                </a>
+              ))}
             </motion.div>
 
           </motion.div>
