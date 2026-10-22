@@ -118,3 +118,68 @@ body {
 .typewriter-caret {
   animation: typewriter-blink 0.85s step-end infinite;
 }
+
+/* Etiquetas "neón" bajo los íconos sociales del Hero: se prenden y apagan
+   con un parpadeo irregular, como un cartel de neón real. */
+@keyframes neon-flicker {
+  0%, 20%, 24%, 57%, 92%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 2px #fff,
+      0 0 6px var(--primary),
+      0 0 12px var(--primary),
+      0 0 22px var(--primary);
+  }
+  18%, 22%, 55%, 70% {
+    opacity: 0.2;
+    text-shadow: none;
+  }
+}
+
+/* Mismo parpadeo para SVG (text-shadow no aplica a los trazos, se usa drop-shadow) */
+@keyframes neon-flicker-svg {
+  0%, 20%, 24%, 57%, 92%, 100% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 0 1px #fff)
+      drop-shadow(0 0 4px var(--primary))
+      drop-shadow(0 0 10px var(--primary));
+  }
+  18%, 22%, 55%, 70% {
+    opacity: 0.2;
+    filter: none;
+  }
+}
+
+.neon-label {
+  color: #d9ffb0;
+  animation: neon-flicker 4s step-end infinite;
+}
+
+.neon-arrow {
+  color: #d9ffb0;
+  animation: neon-flicker-svg 4s step-end infinite;
+}
+
+/* Hover de los botones circulares: mismo verde neón que los carteles */
+.group:hover .neon-hover {
+  color: #d9ffb0;
+  border-color: #d9ffb0;
+  box-shadow:
+    0 0 6px var(--primary),
+    0 0 14px var(--primary),
+    inset 0 0 6px var(--primary);
+  filter: drop-shadow(0 0 4px var(--primary));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-label {
+    animation: none;
+    text-shadow: 0 0 6px var(--primary), 0 0 12px var(--primary);
+  }
+
+  .neon-arrow {
+    animation: none;
+    filter: drop-shadow(0 0 4px var(--primary));
+  }
+}
