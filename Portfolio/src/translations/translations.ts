@@ -617,10 +617,10 @@ export const translations = {
           images: [sneakerhub1, sneakerhub2, sneakerhub3, sneakerhub4, sneakerhub5],
         },
         {
-          title: "Distribuidora",
+          title: "PHP Software Migration",
           category: "Legacy system modernization",
           description:
-            "**Migration and modernization of a legacy system** developed in PHP for a distributor based in Coronel Dorrego that supplies the entire surrounding region. Project under active development.",
+            "**Migration and modernization of a legacy system** developed in PHP. Project under active development.",
           techs: ["PHP", "MySQL", "JavaScript"],
           github: null,
           demo: null,
@@ -636,7 +636,7 @@ export const translations = {
           ],
         },
         {
-          title: "Rominetta",
+          title: "Rominetta Management System Prototype",
           category: "Inventory management & point of sale",
           description:
             "**Inventory control system** by size matrix, point of sale and sales tracking for a footwear store.",
