@@ -8,7 +8,7 @@ import { TechIcon } from "./TechIcon"
 import { iconFor } from "../utils/techIcons"
 import { CheckCircleIcon, ExpandIcon } from "./ContactIcons"
 
-const labelClass = "text-xs font-semibold uppercase tracking-widest text-primary"
+const labelClass = "text-xs font-semibold uppercase tracking-widest text-muted-foreground"
 
 const CaseStudies = () => {
   const { language } = useLanguage()
@@ -85,7 +85,7 @@ const CaseStudies = () => {
 
                 <div className="flex flex-col gap-5">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-[11px] font-medium tracking-wide text-primary">
+                    <span className="inline-flex items-center rounded-full border border-border/60 bg-white/5 px-3 py-1 text-[11px] font-medium tracking-wide text-foreground">
                       {item.sector}
                     </span>
                     <span
@@ -101,7 +101,7 @@ const CaseStudies = () => {
 
                   <div>
                     <h3 className="text-2xl font-semibold tracking-tight text-white">{item.client}</h3>
-                    <p className="mt-2 text-lg font-medium leading-snug text-primary">{item.headline}</p>
+                    <p className="mt-2 text-lg font-medium leading-snug text-heading">{item.headline}</p>
                   </div>
 
                   <dl className="flex flex-col gap-4">

@@ -51,8 +51,11 @@ export type StatLine = {
   href?: string
 }
 
+// Íconos de las cards de "Sobre mí": se dibujan como SVG de línea en About.tsx
+export type StatIconName = "education" | "experience" | "languages" | "location" | "interests"
+
 export type StatItem = {
-  icon: string
+  icon: StatIconName
   label: string
   value: string | StatLine[]
   highlight?: boolean
@@ -311,7 +314,7 @@ export const translations = {
       viewExperience: "Ver experiencia",
       stats: [
         {
-          icon: "🎓",
+          icon: "education",
           label: "Educación",
           value: [
             { icon: "🎓", text: "Análisis de Sistemas · Juan XXIII · 2023–2026", href: "https://juan23.edu.ar/carreras/tecnicatura-superior-en-analisis-de-sistemas/" },
@@ -322,7 +325,7 @@ export const translations = {
           ],
         },
         {
-          icon: "💼",
+          icon: "experience",
           label: "Experiencia reciente",
           value: [
             { icon: "🛠️", text: "Analista / Soporte IT", href: "/work#projects" },
@@ -330,10 +333,10 @@ export const translations = {
             { icon: "📦", text: "ERP para PyB Pigüé", href: "/work#projects" },
           ],
         },
-        { icon: "🌍", label: "Idiomas", value: "Español · Inglés" },
-        { icon: "📍", label: "Ubicación", value: "Bahía Blanca y CABA, Argentina" },
+        { icon: "languages", label: "Idiomas", value: "Español · Inglés" },
+        { icon: "location", label: "Ubicación", value: "Bahía Blanca y CABA, Argentina" },
         {
-          icon: "🏀",
+          icon: "interests",
           label: "Extra",
           value: [
             { icon: "🏀", text: "Árbitro Federado de Básquetbol" },
@@ -898,7 +901,7 @@ export const translations = {
       viewExperience: "View experience",
       stats: [
         {
-          icon: "🎓",
+          icon: "education",
           label: "Education",
           value: [
             { icon: "🎓", text: "Systems Analysis · Juan XXIII · 2023–2026", href: "https://juan23.edu.ar/carreras/tecnicatura-superior-en-analisis-de-sistemas/" },
@@ -909,7 +912,7 @@ export const translations = {
           ],
         },
         {
-          icon: "💼",
+          icon: "experience",
           label: "Recent experience",
           value: [
             { icon: "🛠️", text: "Systems Analyst / IT Support", href: "/work#projects" },
@@ -917,10 +920,10 @@ export const translations = {
             { icon: "📦", text: "ERP for PyB Pigüé", href: "/work#projects" },
           ],
         },
-        { icon: "🌍", label: "Languages", value: "Spanish · English" },
-        { icon: "📍", label: "Location", value: "Bahía Blanca and CABA, Argentina" },
+        { icon: "languages", label: "Languages", value: "Spanish · English" },
+        { icon: "location", label: "Location", value: "Bahía Blanca and CABA, Argentina" },
         {
-          icon: "🏀",
+          icon: "interests",
           label: "Extra",
           value: [
             { icon: "🏀", text: "Certified Basketball Referee" },

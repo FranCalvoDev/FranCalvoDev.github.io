@@ -26,13 +26,13 @@ const Experience = () => {
               {/* Header */}
               <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
                 <div>
-                  <h3 className="text-primary font-semibold text-lg">
+                  <h3 className="text-heading font-semibold text-lg">
                     {exp.role}
                   </h3>
                   <p className="text-foreground font-medium">{exp.company}</p>
                 </div>
                 <div className="mt-2 md:mt-0 text-right">
-                  <p className="text-primary text-sm">{exp.period}</p>
+                  <p className="text-muted-foreground text-sm">{exp.period}</p>
                   <p className="text-muted-foreground text-sm">{exp.location}</p>
                 </div>
               </div>

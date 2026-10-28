@@ -116,7 +116,7 @@ const BlogReddit = () => {
                 </span>
               </div>
 
-              <h3 className="text-primary text-lg font-semibold leading-snug max-h-14 overflow-hidden">
+              <h3 className="text-heading text-lg font-semibold leading-snug max-h-14 overflow-hidden">
                 {post.title}
               </h3>
 

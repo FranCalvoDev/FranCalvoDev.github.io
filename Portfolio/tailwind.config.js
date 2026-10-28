@@ -7,14 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          "SF Pro Display",
-          "SF Pro Icons",
-          "Helvetica Neue",
-          "Helvetica",
-          "Arial",
-          "sans-serif",
-        ],
+        sans: ["Archivo Variable", "Archivo", "system-ui", "sans-serif"],
       },
       colors: {
         background: "#0D0D0D",

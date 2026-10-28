@@ -71,7 +71,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="bg-background/55 min-h-screen flex items-center px-6 md:px-8 pt-28 pb-16 md:pt-24 md:pb-20"
+      className="bg-background/55 min-h-screen flex items-center px-6 md:px-8 pt-28 pb-10 md:pt-24 md:pb-10"
     >
       <div className="max-w-3xl mx-auto w-full flex justify-center text-center">
 
@@ -82,7 +82,7 @@ const Hero = () => {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <m.div
-            className="flex flex-col items-center gap-8"
+            className="flex flex-col items-center gap-6"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
@@ -90,10 +90,10 @@ const Hero = () => {
           >
             {/* Saludo + Nombre */}
             <m.div variants={fadeLeft} className="flex flex-col items-center gap-1">
-              <span className="text-primary text-sm font-medium tracking-widest uppercase">
+              <span className="text-muted-foreground text-sm font-medium tracking-widest uppercase">
                 {t.greeting}
               </span>
-              <h1 className="text-5xl md:text-6xl lg:text-[80px] font-semibold text-foreground leading-tight lg:leading-[84px] lg:tracking-[-1.2px]">
+              <h1 className="text-5xl md:text-6xl lg:text-[80px] font-extrabold text-foreground leading-tight lg:leading-[84px] lg:tracking-[-1.2px]">
                 Francisco <br />
                 <span className="text-primary">Calvo</span>
               </h1>
@@ -105,20 +105,20 @@ const Hero = () => {
               className="gap-1 text-xl md:text-2xl text-muted-foreground font-medium"
             >
               {t.titleLine1}{" "}
-              <span className="text-primary">{t.titleLine1Highlight} </span> <br />
+              <span className="text-heading">{t.titleLine1Highlight} </span> <br />
               {t.titleLine2}{" "}
-              <span className="text-primary">{t.titleLine2Highlight}</span>
+              <span className="text-heading">{t.titleLine2Highlight}</span>
             </m.h2>
 
             {/* Descripción */}
             <m.p
               variants={fadeUp}
-              className="text-foreground text-base leading-relaxed max-w-md text-justify"
+              className="text-foreground text-base leading-relaxed max-w-md text-center"
             >
               <TypewriterText text={t.descPart1} />
               <span className="mt-2 block">
                 {t.descBilingual}
-                <span className="text-primary">{t.descBilingualHighlight}</span>.
+                <span className="text-heading">{t.descBilingualHighlight}</span>.
               </span>
             </m.p>
 
@@ -171,7 +171,7 @@ const Hero = () => {
                   </span>
                   <span
                     aria-hidden="true"
-                    className="neon-label text-[11px] font-semibold tracking-[0.15em] uppercase whitespace-nowrap"
+                    className={`${download ? "neon-label" : "text-muted-foreground transition-colors group-hover:text-heading"} text-[11px] font-semibold tracking-[0.1em] uppercase whitespace-nowrap`}
                     style={{ animationDelay: `${i * 1.3}s` }}
                   >
                     {label}
@@ -179,6 +179,23 @@ const Hero = () => {
                 </a>
               ))}
             </m.div>
+
+            {/* Invitación a seguir bajando: va dentro del flujo (no fija) para no
+                taparse con los botones de arriba en pantallas bajas. Con HashRouter
+                un href="#about" cambiaría de ruta, por eso se hace scroll a mano. */}
+            <m.button
+              type="button"
+              variants={fadeUp}
+              onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+              className="group flex flex-col items-center gap-1 text-primary active:scale-95"
+            >
+              <span className="text-xs font-medium tracking-wide px-3 py-1 rounded-full border border-primary/60 bg-secondary/50 transition-colors group-hover:border-primary group-hover:bg-secondary/80">
+                + {translations[language].about.title}
+              </span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 motion-safe:animate-bounce" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </m.button>
 
           </m.div>
         </m.div>

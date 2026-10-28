@@ -10,7 +10,7 @@ import { iconFor } from "../utils/techIcons"
 const highlight = (text: string) =>
   text.split(/\*\*(.+?)\*\*/g).map((part, i) =>
     i % 2 ? (
-      <span key={i} className="text-primary font-medium">
+      <span key={i} className="text-heading font-medium">
         {part}
       </span>
     ) : (
@@ -164,7 +164,7 @@ export const ProjectLightbox = ({
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex w-full items-center justify-between gap-4 text-foreground">
-          <h3 className="truncate text-lg font-semibold text-primary md:text-xl">{title}</h3>
+          <h3 className="truncate text-lg font-semibold text-heading md:text-xl">{title}</h3>
           <button
             type="button"
             onClick={onClose}
@@ -252,7 +252,7 @@ const Projects = () => {
               {/* Header */}
               <div>
                 <div className="mb-3 flex flex-wrap items-center gap-2">
-                  <span className="inline-flex w-fit items-center rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-[11px] font-medium tracking-wide text-primary">
+                  <span className="inline-flex w-fit items-center rounded-full border border-border/60 bg-white/5 px-3 py-1 text-[11px] font-medium tracking-wide text-foreground">
                     {project.category}
                   </span>
                   {project.status === "inprogress" && (
@@ -262,7 +262,7 @@ const Projects = () => {
                   )}
                 </div>
                 <div className="mb-3 flex items-start justify-between gap-3">
-                  <h3 className="min-w-0 text-primary font-semibold text-lg">
+                  <h3 className="min-w-0 text-heading font-semibold text-lg">
                     {project.title}
                   </h3>
                 </div>

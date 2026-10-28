@@ -9,11 +9,23 @@ import {
 // exporte componentes (requisito del Fast Refresh de Vite).
 export type Icon = { path: string; color: string }
 
-// Colores muy oscuros se reemplazan por uno claro para que se vean sobre el fondo oscuro
+// Colores muy oscuros se reemplazan por uno claro para que se vean sobre el fondo oscuro.
+// Se calcula el contraste contra el fondo (#0D0D0D) en lugar de marcarlos a mano: así
+// también se corrigen marcas que cambian de color en simple-icons (p. ej. Angular pasó a #0F0F11).
 const light = "#e5e5e5"
-const mk = (i: { path: string; hex: string }, forceLight = false): Icon => ({
+const luminance = (hex: string) => {
+  const [r, g, b] = [0, 2, 4].map((i) => {
+    const c = parseInt(hex.slice(i, i + 2), 16) / 255
+    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+  })
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b
+}
+const BACKGROUND_LUMINANCE = luminance("0D0D0D")
+// 3:1 es el mínimo de WCAG para gráficos que no son texto
+const MIN_CONTRAST = 3
+const mk = (i: { path: string; hex: string }): Icon => ({
   path: i.path,
-  color: forceLight ? light : `#${i.hex}`,
+  color: (luminance(i.hex) + 0.05) / (BACKGROUND_LUMINANCE + 0.05) < MIN_CONTRAST ? light : `#${i.hex}`,
 })
 
 const sqlPath =
@@ -27,7 +39,7 @@ const icons: Record<string, Icon> = {
   sql: { path: sqlPath, color: "#00758F" },
   html: mk(siHtml5),
   css: mk(siCss),
-  json: mk(siJson, true),
+  json: mk(siJson),
   "react.js": react,
   react,
   "vue.js": mk(siVuedotjs),
@@ -36,18 +48,18 @@ const icons: Record<string, Icon> = {
   mongodb: mk(siMongodb),
   typescript: mk(siTypescript),
   php: mk(siPhp),
-  "next.js": mk(siNextdotjs, true),
+  "next.js": mk(siNextdotjs),
   "node.js": mk(siNodedotjs),
   "tailwind css": mk(siTailwindcss),
   postgresql: mk(siPostgresql),
   sqlite: mk(siSqlite),
   supabase: mk(siSupabase),
   git: mk(siGit),
-  github: mk(siGithub, true),
+  github: mk(siGithub),
   gitlab: mk(siGitlab),
   docker: mk(siDocker),
   figma: mk(siFigma),
-  notion: mk(siNotion, true),
+  notion: mk(siNotion),
   miro: mk(siMiro),
   postman: mk(siPostman),
   "vs code": {
@@ -55,8 +67,8 @@ const icons: Record<string, Icon> = {
     path: "M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zm-5.146 14.861L10.826 12l7.178-5.448v10.896z",
   },
   claude: mk(siClaude),
-  "github copilot": mk(siGithubcopilot, true),
-  opencode: mk(siOpencode, true),
+  "github copilot": mk(siGithubcopilot),
+  opencode: mk(siOpencode),
   laravel: mk(siLaravel),
   laragon: mk(siLaragon),
   vite: mk(siVite),

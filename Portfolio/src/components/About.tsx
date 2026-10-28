@@ -1,8 +1,55 @@
+import type { ReactNode } from "react"
 import { m } from "framer-motion"
 import { Link } from "react-router-dom"
 import { useLanguage } from "../context/LanguageContext"
-import { translations } from "../translations/translations"
+import { translations, type StatIconName } from "../translations/translations"
 import pacificoCrest from "../assets/aboutme/CAP.webp"
+
+// Íconos de línea en lugar de emojis: los emojis cambian según el sistema operativo
+// y no combinan con el resto de los íconos del sitio.
+const statIconPaths: Record<StatIconName, ReactNode> = {
+  education: (
+    <>
+      <path d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z" />
+      <path d="M22 10v6" />
+      <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+    </>
+  ),
+  experience: (
+    <>
+      <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+      <rect x="2" y="6" width="20" height="14" rx="2" />
+    </>
+  ),
+  languages: (
+    <>
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+      <path d="M2 12h20" />
+    </>
+  ),
+  location: (
+    <>
+      <path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0" />
+      <circle cx="12" cy="10" r="3" />
+    </>
+  ),
+  interests: (
+    <>
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2v20" />
+      <path d="M2 12h20" />
+      <path d="M5.5 4.5c2.5 2 3.5 4.5 3.5 7.5s-1 5.5-3.5 7.5" />
+      <path d="M18.5 4.5c-2.5 2-3.5 4.5-3.5 7.5s1 5.5 3.5 7.5" />
+    </>
+  ),
+}
+
+const StatIcon = ({ name }: { name: StatIconName }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 shrink-0 text-primary" aria-hidden="true">
+    {statIconPaths[name]}
+  </svg>
+)
 
 type Country = "france" | "spain" | "england" | "brazil"
 
@@ -58,7 +105,7 @@ const About = () => {
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
 
-        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-16 text-center tracking-tight">
+        <h2 className="text-3xl md:text-4xl font-bold text-heading mb-16 text-center tracking-tight">
           {t.title}
         </h2>
 
@@ -66,52 +113,52 @@ const About = () => {
 
           {/* Texto */}
           <div className="flex flex-col gap-8">
-            <p className="text-foreground text-base leading-relaxed text-justify">{t.intro}</p>
+            <p className="text-foreground text-base leading-relaxed">{t.intro}</p>
             <div className="flex items-center gap-4">
               <img
                 src={pacificoCrest}
                 alt="Escudo del Club Atlético Pacífico"
                 className="h-24 w-24 shrink-0 object-contain"
               />
-              <p className="text-foreground text-base leading-relaxed text-justify">
+              <p className="text-foreground text-base leading-relaxed">
                 {t.basketBeforeClub}
-                <span className="text-primary font-medium">{t.clubName}</span>
+                <span className="text-heading font-medium">{t.clubName}</span>
                 {t.basketAfterClub}
               </p>
             </div>
-            <p className="text-foreground text-base leading-relaxed text-justify">
-              {t.bmxBefore}<span className="font-semibold text-primary">{t.bmxHighlight}</span>{t.bmxAfter}
+            <p className="text-foreground text-base leading-relaxed">
+              {t.bmxBefore}<span className="font-semibold text-heading">{t.bmxHighlight}</span>{t.bmxAfter}
             </p>
-            <p className="text-foreground text-base leading-relaxed text-justify">
-              {t.photographyBefore}<span className="font-semibold text-primary">{t.photographyHighlight}</span>{t.photographyAfter}
+            <p className="text-foreground text-base leading-relaxed">
+              {t.photographyBefore}<span className="font-semibold text-heading">{t.photographyHighlight}</span>{t.photographyAfter}
             </p>
-            <p className="text-foreground text-base leading-relaxed text-justify">
+            <p className="text-foreground text-base leading-relaxed">
               {t.travelBefore}
               <span className="whitespace-nowrap">
-                <span className="font-semibold text-primary">{t.countryFrance}</span>
+                <span className="font-semibold text-heading">{t.countryFrance}</span>
                 <CountryFlag country="france" label={t.countryFrance} />
               </span>
               {t.travelBetweenFranceSpain}
               <span className="whitespace-nowrap">
-                <span className="font-semibold text-primary">{t.countrySpain}</span>
+                <span className="font-semibold text-heading">{t.countrySpain}</span>
                 <CountryFlag country="spain" label={t.countrySpain} />
               </span>
               {t.travelBetweenSpainEngland}
               <span className="whitespace-nowrap">
-                <span className="font-semibold text-primary">{t.countryEngland}</span>
+                <span className="font-semibold text-heading">{t.countryEngland}</span>
                 <CountryFlag country="england" label={t.countryEngland} />
               </span>
               {t.travelBetweenEnglandBrazil}
               <span className="whitespace-nowrap">
-                <span className="font-semibold text-primary">{t.countryBrazil}</span>
+                <span className="font-semibold text-heading">{t.countryBrazil}</span>
                 <CountryFlag country="brazil" label={t.countryBrazil} />
               </span>
               {t.travelAfter}
             </p>
-            <p className="text-foreground text-base leading-relaxed text-justify">
-              {t.cookingBefore}<span className="font-semibold text-primary">{t.cookingHighlight}</span>{t.cookingAfter}
+            <p className="text-foreground text-base leading-relaxed">
+              {t.cookingBefore}<span className="font-semibold text-heading">{t.cookingHighlight}</span>{t.cookingAfter}
             </p>
-            <p className="text-foreground text-base leading-relaxed text-justify">{t.closing}</p>
+            <p className="text-foreground text-base leading-relaxed">{t.closing}</p>
             <Link
               to="/work#experience"
               className="w-fit rounded-full border border-primary px-5 py-2.5 text-sm text-primary transition-all duration-300 ease-out hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
@@ -135,10 +182,10 @@ const About = () => {
                     : "bg-transparent backdrop-blur-sm border border-border/40"
                 }`}
               >
-                <span className="text-2xl">{stat.icon}</span>
+                <StatIcon name={stat.icon} />
                 <div className="flex-1">
                   <p
-                    className={`text-xs uppercase tracking-widest mb-1 text-primary ${
+                    className={`text-xs uppercase tracking-widest mb-1 text-muted-foreground ${
                       stat.highlight ? "font-bold" : "font-semibold"
                     }`}
                   >
