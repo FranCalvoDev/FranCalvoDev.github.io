@@ -82,7 +82,7 @@ const Hero = () => {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <m.div
-            className="flex flex-col items-center gap-6"
+            className="flex flex-col items-center gap-8"
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
@@ -90,7 +90,7 @@ const Hero = () => {
           >
             {/* Saludo + Nombre */}
             <m.div variants={fadeLeft} className="flex flex-col items-center gap-1">
-              <span className="text-muted-foreground text-sm font-medium tracking-widest uppercase">
+              <span className="text-primary text-sm font-medium tracking-widest uppercase">
                 {t.greeting}
               </span>
               <h1 className="text-5xl md:text-6xl lg:text-[80px] font-extrabold text-foreground leading-tight lg:leading-[84px] lg:tracking-[-1.2px]">
@@ -107,7 +107,7 @@ const Hero = () => {
               {t.titleLine1}{" "}
               <span className="text-heading">{t.titleLine1Highlight} </span> <br />
               {t.titleLine2}{" "}
-              <span className="text-heading">{t.titleLine2Highlight}</span>
+              <span className="text-primary">{t.titleLine2Highlight}</span>
             </m.h2>
 
             {/* Descripción */}
