@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import PageHeader from "../components/PageHeader"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
@@ -50,7 +50,7 @@ const MorePage = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
           {cards.map((card) => (
-            <motion.div
+            <m.div
               key={card.path}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -67,10 +67,10 @@ const MorePage = () => {
                 <h2 className="text-xl font-semibold text-foreground">{card.title}</h2>
                 <p className="text-muted-foreground text-sm">{card.description}</p>
               </Link>
-            </motion.div>
+            </m.div>
           ))}
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -81,7 +81,7 @@ const MorePage = () => {
               {t.comingSoon}
             </span>
             <p className="text-muted-foreground text-sm max-w-md">{t.comingSoonDesc}</p>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { TechIcon } from "./TechIcon"
@@ -10,7 +10,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="bg-background/55 py-16 md:py-20 px-6 md:px-8">
-      <motion.div
+      <m.div
         className="max-w-6xl mx-auto"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -27,7 +27,7 @@ const Skills = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {t.categories.map((group, index) => (
-            <motion.div
+            <m.div
               key={group.category}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -54,11 +54,11 @@ const Skills = () => {
                   return <TechIcon key={skill} name={skill} icon={icon} />
                 })}
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
-      </motion.div>
+      </m.div>
     </section>
   )
 }

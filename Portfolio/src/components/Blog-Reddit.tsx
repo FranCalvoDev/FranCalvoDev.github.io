@@ -1,19 +1,22 @@
-import { useEffect, useMemo, useState } from "react"
-import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
+import { m } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { fetchRedditPostsRss, type RedditPost } from "../utils/redditRss"
 import { UsernameLink } from "./SocialIcons"
 
+// Crear un Intl.DateTimeFormat es caro: se arma uno por idioma y se reutiliza en cada post
+const dateOptions: Intl.DateTimeFormatOptions = { day: "2-digit", month: "short", year: "numeric" }
+const dateFormatters = {
+  es: new Intl.DateTimeFormat("es-AR", dateOptions),
+  en: new Intl.DateTimeFormat("en-US", dateOptions),
+}
+
 const formatDate = (value: string, language: "es" | "en") => {
   // Una fecha inválida haría que Intl lance una excepción y se caiga toda la página
   const date = new Date(value)
   if (Number.isNaN(date.getTime())) return ""
-  return new Intl.DateTimeFormat(language === "es" ? "es-AR" : "en-US", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(date)
+  return dateFormatters[language].format(date)
 }
 
 const BlogReddit = () => {
@@ -22,14 +25,17 @@ const BlogReddit = () => {
 
   const [posts, setPosts] = useState<RedditPost[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  // Solo un flag: el texto se traduce al renderizar, así cambiar de idioma no vuelve a pedir los posts
+  const [failed, setFailed] = useState(false)
+  // Mensaje traducido para el visitante, no el error técnico del navegador ("Failed to fetch")
+  const error = failed ? t.error : null
 
   useEffect(() => {
     let cancelled = false
 
     const loadPosts = async () => {
       setLoading(true)
-      setError(null)
+      setFailed(false)
 
       try {
         const data = await fetchRedditPostsRss(10)
@@ -37,9 +43,8 @@ const BlogReddit = () => {
           setPosts(data)
         }
       } catch {
-        // Mensaje traducido para el visitante, no el error técnico del navegador ("Failed to fetch")
         if (!cancelled) {
-          setError(t.error)
+          setFailed(true)
         }
       } finally {
         if (!cancelled) {
@@ -53,18 +58,13 @@ const BlogReddit = () => {
     return () => {
       cancelled = true
     }
-  }, [t.error])
+  }, [])
 
-  const headerText = useMemo(() => {
-    if (loading) return t.loading
-    if (error) return error
-    if (!posts.length) return t.empty
-    
-  }, [error, loading, posts.length, t.empty, t.loading, ])
+  const headerText = loading ? t.loading : error ?? (posts.length ? undefined : t.empty)
 
   return (
     <div>
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -78,7 +78,7 @@ const BlogReddit = () => {
         <p className="text-muted-foreground text-sm mt-1">
           {headerText}
         </p>
-      </motion.div>
+      </m.div>
 
       {loading && (
         <div className="grid grid-cols-1 gap-6">
@@ -99,7 +99,7 @@ const BlogReddit = () => {
       {!loading && !error && posts.length > 0 && (
         <div className="grid grid-cols-1 gap-6">
           {posts.map((post) => (
-            <motion.article
+            <m.article
               key={post.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -134,7 +134,7 @@ const BlogReddit = () => {
                   {t.openInReddit}
                 </a>
               </div>
-            </motion.article>
+            </m.article>
           ))}
         </div>
       )}

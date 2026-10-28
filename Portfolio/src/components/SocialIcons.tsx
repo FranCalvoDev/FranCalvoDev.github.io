@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { SOCIAL_LINKS } from "../utils/socialLinks"
 
 type Platform = keyof typeof SOCIAL_LINKS
@@ -32,7 +32,7 @@ export const SocialIconsRow = () => (
       }
 
       return url ? (
-        <motion.a
+        <m.a
           key={platform}
           href={url}
           target="_blank"
@@ -42,16 +42,16 @@ export const SocialIconsRow = () => (
           {...motionProps}
         >
           <PlatformIcon platform={platform} />
-        </motion.a>
+        </m.a>
       ) : (
-        <motion.span
+        <m.span
           key={platform}
           aria-label={platform}
           className={classes}
           {...motionProps}
         >
           <PlatformIcon platform={platform} />
-        </motion.span>
+        </m.span>
       )
     })}
   </div>

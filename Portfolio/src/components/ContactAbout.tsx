@@ -1,11 +1,11 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { Link } from "react-router-dom"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { CONTACT } from "../utils/contactInfo"
 import PageHeader from "./PageHeader"
 import { LinkedInIcon, PinIcon } from "./ContactIcons"
-import photo from "../assets/contact/francisco-retrato.jpg"
+import photo from "../assets/contact/francisco-retrato.webp"
 
 const linkClass =
   "inline-flex items-center gap-2 text-sm font-medium text-primary underline-offset-4 transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
@@ -21,7 +21,7 @@ const ContactAbout = () => {
         <PageHeader title={t.title} as="h2" />
 
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-14">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -41,9 +41,9 @@ const ContactAbout = () => {
               <PinIcon className="h-3.5 w-3.5 text-primary" />
               {location}
             </span>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -117,7 +117,7 @@ const ContactAbout = () => {
                 {t.moreWork} →
               </Link>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

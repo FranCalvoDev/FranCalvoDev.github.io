@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import PageHeader from "./PageHeader"
@@ -17,7 +17,7 @@ const Testimonials = () => {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {t.items.map((item, index) => (
-            <motion.figure
+            <m.figure
               key={item.name}
               initial={{ opacity: 0, y: 26 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ const Testimonials = () => {
                 <p className="font-semibold text-primary">{item.name}</p>
                 <p className="text-sm text-foreground">{item.business}</p>
               </figcaption>
-            </motion.figure>
+            </m.figure>
           ))}
         </div>
       </div>

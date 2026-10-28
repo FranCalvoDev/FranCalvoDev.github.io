@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import PageHeader from "./PageHeader"
@@ -14,7 +14,7 @@ const ContactProcess = () => {
 
         <ol className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {t.steps.map((step, index) => (
-            <motion.li
+            <m.li
               key={step.title}
               initial={{ opacity: 0, y: 26 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ const ContactProcess = () => {
                 <h3 className="text-lg font-semibold text-white">{step.title}</h3>
               </div>
               <p className="text-sm leading-relaxed text-foreground">{step.text}</p>
-            </motion.li>
+            </m.li>
           ))}
         </ol>
       </div>

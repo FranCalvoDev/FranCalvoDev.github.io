@@ -1,8 +1,8 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { Link } from "react-router-dom"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
-import pacificoCrest from "../assets/aboutme/CAP.png"
+import pacificoCrest from "../assets/aboutme/CAP.webp"
 
 type Country = "france" | "spain" | "england" | "brazil"
 
@@ -50,7 +50,7 @@ const About = () => {
 
   return (
     <section id="about" className="bg-background/55 py-16 md:py-20 px-6 md:px-8">
-      <motion.div
+      <m.div
         className="max-w-6xl mx-auto"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -123,7 +123,7 @@ const About = () => {
           {/* Cards de datos */}
           <div className="grid grid-cols-1 gap-6">
             {t.stats.map((stat, index) => (
-              <motion.div
+              <m.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 26 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -177,12 +177,12 @@ const About = () => {
                     </p>
                   )}
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
 
         </div>
-      </motion.div>
+      </m.div>
     </section>
   )
 }

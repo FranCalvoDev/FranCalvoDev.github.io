@@ -1,10 +1,10 @@
-import { motion, useReducedMotion } from "framer-motion"
+import { m, useReducedMotion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { fadeUp, staggerContainer } from "../utils/animations"
 import { CONTACT_FORM_ID, whatsappUrl } from "../utils/contactInfo"
 import { CheckCircleIcon, PinIcon, WhatsAppIcon } from "./ContactIcons"
-import avatar from "../assets/contact/francisco-avatar.jpg"
+import avatar from "../assets/contact/francisco-avatar.webp"
 
 const ContactHero = () => {
   const { language } = useLanguage()
@@ -19,14 +19,14 @@ const ContactHero = () => {
 
   return (
     <section className="bg-background/55 px-6 pt-24 pb-14 md:px-8 md:pt-36 md:pb-24">
-      <motion.div
+      <m.div
         className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center md:gap-8"
         variants={staggerContainer}
         initial="hidden"
         animate="show"
       >
         {/* Persona real detrás del sitio: foto, nombre y ubicación */}
-        <motion.div variants={fadeUp} className="flex items-center gap-4 text-left">
+        <m.div variants={fadeUp} className="flex items-center gap-4 text-left">
           <img
             src={avatar}
             alt="Francisco Calvo"
@@ -42,10 +42,10 @@ const ContactHero = () => {
               {t.location}
             </span>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Frase de posicionamiento */}
-        <motion.div variants={fadeUp} className="flex flex-col items-center gap-4">
+        <m.div variants={fadeUp} className="flex flex-col items-center gap-4">
           <span className="text-xs font-medium uppercase tracking-widest text-primary md:text-sm">
             {t.kicker}
           </span>
@@ -55,10 +55,10 @@ const ContactHero = () => {
             {t.titleEnd}
           </h1>
           <p className="max-w-xl text-base leading-relaxed text-foreground md:text-lg">{t.lead}</p>
-        </motion.div>
+        </m.div>
 
         {/* CTAs: WhatsApp primero, formulario como alternativa */}
-        <motion.div variants={fadeUp} className="flex w-full flex-col items-center gap-4">
+        <m.div variants={fadeUp} className="flex w-full flex-col items-center gap-4">
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
             <a
               href={whatsappUrl(whatsappMessage)}
@@ -81,8 +81,8 @@ const ContactHero = () => {
             <CheckCircleIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary sm:mt-0" />
             {t.reassurance}
           </p>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </section>
   )
 }

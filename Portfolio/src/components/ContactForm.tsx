@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { CONTACT, CONTACT_FORM_ID, whatsappUrl } from "../utils/contactInfo"
@@ -28,7 +28,7 @@ const ContactForm = () => {
 
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-5 lg:gap-10">
           {/* Cuestionario interactivo: preguntas de opción y al final el email */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -36,10 +36,10 @@ const ContactForm = () => {
             className="lg:col-span-3"
           >
             <ContactQuiz />
-          </motion.div>
+          </m.div>
 
           {/* Canales directos, para quien prefiere no completar nada */}
-          <motion.aside
+          <m.aside
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
@@ -90,7 +90,7 @@ const ContactForm = () => {
                 </span>
               </li>
             </ul>
-          </motion.aside>
+          </m.aside>
         </div>
       </div>
     </section>

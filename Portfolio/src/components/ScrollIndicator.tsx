@@ -11,24 +11,32 @@ const ScrollIndicator = () => {
   const { language } = useLanguage()
 
   useEffect(() => {
+    // Leer scrollHeight fuerza un cálculo de layout: con requestAnimationFrame se hace
+    // una vez por frame en lugar de en cada evento de scroll.
+    let frame = 0
     const checkScrollable = () => {
+      frame = 0
       const remaining =
         document.documentElement.scrollHeight - window.innerHeight - window.scrollY
       setVisible(remaining > SCROLL_THRESHOLD)
     }
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(checkScrollable)
+    }
 
     checkScrollable()
-    window.addEventListener("scroll", checkScrollable, { passive: true })
-    window.addEventListener("resize", checkScrollable)
+    window.addEventListener("scroll", schedule, { passive: true })
+    window.addEventListener("resize", schedule)
 
     // El contenido puede cambiar de alto (imágenes, fuentes, animaciones) sin
     // disparar scroll/resize, así que también observamos el body.
-    const observer = new ResizeObserver(checkScrollable)
+    const observer = new ResizeObserver(schedule)
     observer.observe(document.body)
 
     return () => {
-      window.removeEventListener("scroll", checkScrollable)
-      window.removeEventListener("resize", checkScrollable)
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener("scroll", schedule)
+      window.removeEventListener("resize", schedule)
       observer.disconnect()
     }
   }, [])

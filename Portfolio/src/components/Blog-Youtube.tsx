@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { fetchYoutubeVideos, type YoutubeVideo } from "../utils/youtubeRss"
@@ -35,7 +35,7 @@ const BlogYoutube = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -45,7 +45,7 @@ const BlogYoutube = () => {
           YouTube
         </h2>
         <UsernameLink platform="youtube" />
-      </motion.div>
+      </m.div>
 
       {loading && <div className="aspect-video rounded-3xl bg-muted/60 animate-pulse" />}
 
@@ -56,7 +56,7 @@ const BlogYoutube = () => {
       )}
 
       {featured && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -74,13 +74,13 @@ const BlogYoutube = () => {
             />
           </div>
           <h3 className="text-primary text-lg font-semibold leading-snug p-5">{featured.title}</h3>
-        </motion.div>
+        </m.div>
       )}
 
       {others.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {others.map((video) => (
-            <motion.a
+            <m.a
               key={video.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -98,7 +98,7 @@ const BlogYoutube = () => {
                 className="aspect-video w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
               />
               <p className="text-sm text-foreground leading-snug p-3 line-clamp-2">{video.title}</p>
-            </motion.a>
+            </m.a>
           ))}
         </div>
       )}

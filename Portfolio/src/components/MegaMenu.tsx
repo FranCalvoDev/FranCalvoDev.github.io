@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type FocusEvent, typ
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import MegaMenuCard from "./MegaMenuCard"
-import deskPhoto from "../assets/specs-ph/desk.jpg"
+import deskPhoto from "../assets/specs-ph/desk.webp"
 
 type MegaMenuItem = {
   title: string

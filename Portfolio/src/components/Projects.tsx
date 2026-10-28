@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
+import { m } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import PageHeader from "./PageHeader"
@@ -32,22 +32,34 @@ const ProjectCarousel = ({
   onOpen: () => void
 }) => {
   const [current, setCurrent] = useState(0)
+  const [inView, setInView] = useState(false)
+  const rootRef = useRef<HTMLButtonElement>(null)
   const { language } = useLanguage()
   const t = translations[language].projects
   const imageSoon = t.imageSoon
   const galleryHint = t.galleryHint
 
+  // Solo rota mientras la tarjeta está en pantalla: fuera de vista no hay renders ni repintados del fondo con blur
   useEffect(() => {
-    if (images.length <= 1) return
+    const node = rootRef.current
+    if (!node || images.length <= 1) return
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting))
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [images.length])
+
+  useEffect(() => {
+    if (!inView) return
 
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length)
     }, 3000)
     return () => clearInterval(interval)
-  }, [images.length])
+  }, [inView, images.length])
 
   return (
     <button
+      ref={rootRef}
       type="button"
       onClick={onOpen}
       aria-label={fill(t.galleryOpen, { title })}
@@ -222,7 +234,7 @@ const Projects = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {t.items.map((project) => (
-            <motion.div
+            <m.div
               key={project.title}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -303,7 +315,7 @@ const Projects = () => {
                 )}
               </div>
 
-            </motion.div>
+            </m.div>
           ))}
         </div>
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react"
-import { motion, useReducedMotion } from "framer-motion"
+import { m, useReducedMotion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations, type QuizMatch, type QuizQuestion } from "../translations/translations"
 import { CONTACT, whatsappUrl } from "../utils/contactInfo"
@@ -225,7 +225,7 @@ const ContactQuiz = () => {
         </span>
       </div>
       <div aria-hidden="true" className="mt-3 h-1.5 overflow-hidden rounded-full bg-border/30">
-        <motion.div
+        <m.div
           className="h-full rounded-full bg-primary"
           initial={false}
           animate={{ width: `${((step + 1) / total) * 100}%` }}
@@ -233,7 +233,7 @@ const ContactQuiz = () => {
         />
       </div>
 
-      <motion.div
+      <m.div
         key={step}
         initial={reduceMotion ? false : { opacity: 0, x: direction * 24 }}
         animate={{ opacity: 1, x: 0 }}
@@ -455,7 +455,7 @@ const ContactQuiz = () => {
             <p className="text-center text-xs text-foreground/80 sm:text-right">{t.privacy}</p>
           </form>
         )}
-      </motion.div>
+      </m.div>
     </div>
   )
 }

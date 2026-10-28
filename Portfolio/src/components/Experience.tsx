@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import PageHeader from "./PageHeader"
@@ -15,7 +15,7 @@ const Experience = () => {
 
         <div className="flex flex-col gap-10">
           {t.items.map((exp) => (
-            <motion.div
+            <m.div
               key={exp.role}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ const Experience = () => {
                 ))}
               </ul>
 
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
