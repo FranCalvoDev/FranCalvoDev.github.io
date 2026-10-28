@@ -18,7 +18,7 @@ const Skills = () => {
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
 
-        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 text-center tracking-tight">
+        <h2 className="text-3xl md:text-4xl font-bold text-heading mb-4 text-center tracking-tight">
           {t.title}
         </h2>
         <p className="text-muted-foreground text-sm md:text-base text-center mb-16">
@@ -35,7 +35,7 @@ const Skills = () => {
               transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
               className="relative bg-transparent backdrop-blur-sm border border-border/40 rounded-3xl p-7 shadow-[0_2px_20px_rgba(0,0,0,0.22)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/40"
             >
-              <h3 className="text-primary font-semibold text-lg pb-4 mb-5 border-b border-border/40">
+              <h3 className="text-heading font-semibold text-lg pb-4 mb-5 border-b border-border/40">
                 {group.category}
               </h3>
               <div className="flex flex-wrap gap-3">

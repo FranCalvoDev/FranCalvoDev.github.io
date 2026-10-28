@@ -73,7 +73,7 @@ const BlogYoutube = () => {
               className="w-full h-full"
             />
           </div>
-          <h3 className="text-primary text-lg font-semibold leading-snug p-5">{featured.title}</h3>
+          <h3 className="text-heading text-lg font-semibold leading-snug p-5">{featured.title}</h3>
         </m.div>
       )}
 

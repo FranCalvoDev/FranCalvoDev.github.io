@@ -12,7 +12,7 @@ type PageHeaderProps = {
 const PageHeader = ({ title, subtitle, as: Heading = "h1", titleAdornment }: PageHeaderProps) => (
   <div className="flex flex-col items-center text-center gap-4 mb-12 md:mb-16">
     <div className="flex items-center justify-center gap-4 md:gap-5">
-      <Heading className="text-3xl md:text-4xl font-bold text-primary tracking-tight">
+      <Heading className="text-3xl md:text-4xl font-bold text-heading tracking-tight">
         {title}
       </Heading>
       {titleAdornment}
