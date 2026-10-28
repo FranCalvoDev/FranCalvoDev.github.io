@@ -1,14 +1,1 @@
-{
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "portfolio-fc",
-  "compatibility_date": "2026-05-11",
-  "observability": {
-    "enabled": true
-  },
-  "assets": {
-    "directory": "Portfolio/dist"
-  },
-  "compatibility_flags": [
-    "nodejs_compat"
-  ]
-}
+
