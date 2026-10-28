@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import { fadeUp, fadeLeft, fadeRight, staggerContainer } from "../utils/animations"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
+import { CONTACT } from "../utils/contactInfo"
+import { LinkedInIcon } from "./ContactIcons"
 
 // NOTA: foto/carrusel del hero deshabilitados temporalmente a la espera
 // de la reestructuración visual (ver comentarios más abajo).
@@ -18,9 +20,12 @@ const GitHubIcon = () => (
   </svg>
 )
 
-const LinkedInIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-    <path d="M6.94 8.5H3.56V20.5H6.94V8.5ZM5.25 3.5A1.97 1.97 0 1 0 5.25 7.44 1.97 1.97 0 0 0 5.25 3.5ZM20.44 20.5H17.06V14.75c0-1.37-.03-3.13-1.91-3.13-1.92 0-2.21 1.5-2.21 3.04V20.5H9.56V8.5h3.24v1.64h.05c.45-.85 1.56-1.75 3.21-1.75 3.43 0 4.06 2.26 4.06 5.19V20.5Z" />
+const DownloadIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z" />
+    <path d="M14 3v5h5" />
+    <path d="M12 11v6" />
+    <path d="m9 14 3 3 3-3" />
   </svg>
 )
 
@@ -36,20 +41,20 @@ const DownloadIcon = () => (
 // Efecto "máquina de escribir": tipea el texto letra a letra y deja
 // un cursor parpadeante al final, de forma sutil.
 const useTypewriter = (text: string, speed = 28) => {
-  const [displayed, setDisplayed] = useState("")
+  // El progreso guarda a qué texto pertenece: si cambia el texto (idioma), arranca de cero sin un setState extra
+  const [typed, setTyped] = useState({ text, count: 0 })
 
   useEffect(() => {
-    setDisplayed("")
-    let i = 0
+    let count = 0
     const interval = window.setInterval(() => {
-      i += 1
-      setDisplayed(text.slice(0, i))
-      if (i >= text.length) window.clearInterval(interval)
+      count += 1
+      setTyped({ text, count })
+      if (count >= text.length) window.clearInterval(interval)
     }, speed)
     return () => window.clearInterval(interval)
   }, [text, speed])
 
-  return displayed
+  return typed.text === text ? text.slice(0, typed.count) : ""
 }
 
 const Hero = () => {
@@ -140,7 +145,7 @@ const Hero = () => {
               {[
                 { href: "https://github.com/FranCalvoDev", label: "GitHub", ariaLabel: "GitHub", icon: <GitHubIcon /> },
                 { href: cvFile, label: t.cvLabel, ariaLabel: t.downloadCV, icon: <DownloadIcon />, download: true },
-                { href: "https://www.linkedin.com/in/francisco-calvo-5445582ba/", label: "LinkedIn", ariaLabel: "LinkedIn", icon: <LinkedInIcon /> },
+                { href: CONTACT.linkedin, label: "LinkedIn", ariaLabel: "LinkedIn", icon: <LinkedInIcon /> },
               ].map(({ href, label, ariaLabel, icon, download }, i) => (
                 <a
                   key={label}

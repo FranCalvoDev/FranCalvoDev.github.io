@@ -1,7 +1,8 @@
 import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
-import { iconFor, TechIcon } from "./TechIcon"
+import { TechIcon } from "./TechIcon"
+import { iconFor } from "../utils/techIcons"
 
 const Skills = () => {
   const { language } = useLanguage()

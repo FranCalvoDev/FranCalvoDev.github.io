@@ -11,12 +11,11 @@
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <meta name="googlebot" content="index,follow" />
     <link rel="canonical" href="https://francalvodev.github.io/" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.allorigins.win https://old.reddit.com https://www.reddit.com; upgrade-insecure-requests" />
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()" />
-    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
-    <meta http-equiv="Cross-Origin-Resource-Policy" content="same-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self' https://formspree.io; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://api.allorigins.win https://api.rss2json.com https://old.reddit.com https://www.reddit.com https://formspree.io; upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <!-- X-Content-Type-Options, Permissions-Policy y las políticas Cross-Origin (COOP/CORP) solo
+         tienen efecto como cabeceras HTTP: en un <meta> el navegador las ignora, y GitHub Pages no
+         permite configurar cabeceras. Si el sitio se muda a un hosting que sí lo permita, van ahí. -->
 
     <!-- SEO básico -->
     <title>Francisco Calvo | Full-Stack Developer & Systems Analyst</title>

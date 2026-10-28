@@ -63,6 +63,71 @@ export type SkillCategory = {
   items: string[]
 }
 
+export type CaseStudy = {
+  client: string
+  sector: string
+  status: "finished" | "inprogress"
+  headline: string
+  challenge: string
+  solution: string
+  results: string[]
+  techs: string[]
+  images: string[]
+  coverAlt: string
+}
+
+export type Testimonial = {
+  quote: string
+  name: string
+  business: string
+}
+
+export type ContactFact = {
+  icon: string
+  title: string
+  text: string
+}
+
+export type EducationItem = {
+  title: string
+  institution: string
+  period: string
+  status?: string
+  href?: string
+}
+
+export type EducationGroup = {
+  label: string
+  items: EducationItem[]
+}
+
+export type QuizOption = {
+  id: string
+  icon: string
+  label: string
+  hint?: string
+}
+
+export type QuizQuestion = {
+  id: string
+  step: string
+  title: string
+  multiple?: boolean
+  options: QuizOption[]
+}
+
+// Caso real que se muestra al final según el rubro y los objetivos elegidos
+export type QuizMatch = {
+  business: string[]
+  goals: string[]
+  text: string
+}
+
+export type ProcessStep = {
+  title: string
+  text: string
+}
+
 export type SpecItemTranslation = {
   name: string
   labels: Record<string, string>
@@ -262,7 +327,7 @@ export const translations = {
           value: [
             { icon: "🛠️", text: "Analista / Soporte IT", href: "/work#projects" },
             { icon: "👟", text: "Sistema para zapatería", href: "/work#projects" },
-            { icon: "🐍", text: "Migración PHP", href: "/work#projects" },
+            { icon: "📦", text: "ERP para PyB Pigüé", href: "/work#projects" },
           ],
         },
         { icon: "🌍", label: "Idiomas", value: "Español · Inglés" },
@@ -296,6 +361,12 @@ export const translations = {
       linksSoon: "Links disponibles próximamente",
       privateProject: "Proyecto privado",
       galleryHint: "Clickea y navega",
+      galleryOpen: "Abrir la galería de {title}",
+      galleryLabel: "Galería de imágenes de {title}",
+      galleryClose: "Cerrar la galería",
+      galleryPrevious: "Imagen anterior",
+      galleryNext: "Imagen siguiente",
+      screenshotAlt: "{title}: captura {n}",
       items: [
              {
           title: "Portfolio Personal",
@@ -321,10 +392,10 @@ export const translations = {
         },
   
         {
-          title: "Distribuidora",
-          category: "Modernización de sistema legacy",
+          title: "PyB Pigüé",
+          category: "ERP para distribuidora comercial",
           description:
-            "**Migración y modernización de sistema legacy** desarrollado en PHP para una distribuidora de Coronel Dorrego que abastece a toda la zona. Proyecto en proceso de desarrollo activo.",
+            "**ERP a medida** para PyB Pigüé, distribuidora comercial: ventas y pedidos, stock, clientes, reparto y finanzas en un solo sistema. Proyecto en desarrollo activo.",
           techs: ["PHP", "MySQL", "JavaScript"],
           github: null,
           demo: null,
@@ -343,7 +414,7 @@ export const translations = {
           title: "Rominetta",
           category: "Gestión de inventario y punto de venta",
           description:
-            "**Sistema de control de inventario** por matriz de tallas, punto de venta  y registro de ventas para una tienda de calzado.",
+            "**Sistema de control de inventario** por matriz de tallas, punto de venta, registro de ventas y facturación electrónica con ARCA para una tienda de calzado.",
           techs: ["React", "TypeScript", "Node.js", "SQLite"],
           github: null,
           demo: null,
@@ -434,15 +505,299 @@ export const translations = {
       ] as ExperienceItem[],
     },
     contact: {
-      title: "Contacto",
-      subtitle: "¿Tenés alguna propuesta o consulta? Escribime y te respondo a la brevedad.",
-      nameLbl: "Nombre",
-      namePlaceholder: "Tu nombre",
-      emailLbl: "Email",
-      emailPlaceholder: "tu@email.com",
-      messageLbl: "Mensaje",
-      messagePlaceholder: "Escribí tu mensaje...",
-      send: "Enviar mensaje",
+      pageTitle: "Contacto · Francisco Calvo — Sistemas a medida en Bahía Blanca y CABA",
+      whatsappMessage: "¡Hola, Francisco! Vi tu página y quiero consultarte por un sistema para mi negocio.",
+      hero: {
+        role: "Analista de Sistemas · Desarrollador",
+        location: "Bahía Blanca y CABA",
+        kicker: "Sistemas a medida para comercios y pymes",
+        titleStart: "Ordená tu negocio con un sistema ",
+        titleHighlight: "hecho a tu medida",
+        titleEnd: ".",
+        lead: "Stock, ventas, pedidos y clientes en un solo lugar. Lo diseño y lo programo yo, pensando en cómo trabaja tu negocio.",
+        whatsappCta: "Escribime por WhatsApp",
+        formCta: "Contame tu caso en 1 minuto",
+        reassurance: "Hablás directamente conmigo. La primera charla es sin compromiso.",
+      },
+      cases: {
+        title: "Casos reales",
+        subtitle: "Dos negocios, dos problemas concretos y una solución a medida para cada uno.",
+        challengeLabel: "El desafío",
+        solutionLabel: "La solución",
+        resultsLabel: "Resultado",
+        progressLabel: "Lo que ya incluye",
+        finished: "Finalizado",
+        inProgress: "En desarrollo",
+        techLabel: "Hecho con",
+        viewScreens: "Ver capturas",
+        items: [
+          {
+            client: "Rominetta",
+            sector: "Tienda de calzado",
+            status: "finished",
+            headline: "Stock por talle, ventas y facturación con ARCA en un solo sistema.",
+            challenge:
+              "En una zapatería, cada modelo se vende en siete talles. Sin un sistema, saber qué queda, qué se vendió y qué hay que reponer lleva tiempo y genera errores.",
+            solution:
+              "Diseñé y programé un sistema de gestión para el local: matriz de talles, punto de venta y registro de cada venta.",
+            results: [
+              "Stock de cada modelo por talle, del 35 al 41, en una sola pantalla.",
+              "Cada venta descuenta el stock en el momento.",
+              "Facturación electrónica integrada con ARCA (ex AFIP).",
+              "Alertas cuando un talle está por agotarse.",
+              "Cobro con tarjeta, sin contacto o en efectivo, y resumen de las ventas del día.",
+            ],
+            techs: ["React", "TypeScript", "Node.js", "SQLite"],
+            images: [protoRominetta1, protoRominetta3, protoRominetta2],
+            coverAlt:
+              "Panel del sistema de Rominetta con las ventas del día, el valor del stock y las alertas de talles por agotarse",
+          },
+          {
+            client: "PyB Pigüé",
+            sector: "Distribuidora comercial",
+            status: "inprogress",
+            headline: "Ventas, stock, reparto y finanzas en un solo ERP hecho a medida.",
+            challenge:
+              "Una distribuidora maneja al mismo tiempo ventas, pedidos, stock, reparto y cobranzas, y necesita ver todo en un solo lugar para tener el control.",
+            solution:
+              "Un ERP a medida que reúne ventas, pedidos, stock, clientes, reparto y finanzas en un solo sistema.",
+            results: [
+              "Toma de pedidos y listas de precios según el tipo de cliente.",
+              "Hojas de ruta y seguimiento de cada envío.",
+              "Stock con alertas de mínimo y control de mermas.",
+              "Cobranzas, cuentas corrientes y control de caja diaria.",
+              "Un acceso para cada rol: administración, preventa y reparto.",
+            ],
+            techs: ["PHP", "MySQL", "JavaScript"],
+            images: [
+              distribuidoraVarela2,
+              distribuidoraVarela3,
+              distribuidoraVarela6,
+              distribuidoraVarela5,
+              distribuidoraVarela4,
+              distribuidoraVarela7,
+            ],
+            coverAlt:
+              "Menú principal del ERP de PyB Pigüé, con los módulos de venta, entregas, finanzas, stock y clientes",
+          },
+        ] as CaseStudy[],
+      },
+      testimonials: {
+        title: "Lo que dicen mis clientes",
+        // La sección se muestra sola cuando hay al menos un testimonio real, con nombre y negocio:
+        // { quote: "…", name: "Nombre Apellido", business: "Negocio, ciudad" }
+        items: [] as Testimonial[],
+      },
+      about: {
+        title: "Quién está detrás",
+        intro:
+          "Soy Francisco Calvo, analista de sistemas y desarrollador. Trabajo con comercios y pymes: entiendo cómo funciona tu negocio y lo convierto en un sistema que usás todos los días.",
+        photoAlt: "Retrato de Francisco Calvo",
+        location: {
+          icon: "📍",
+          title: "Bahía Blanca y CABA",
+          text: "Vivo entre las dos ciudades y trabajo con negocios de ambas y sus alrededores, en persona o a distancia.",
+        } as ContactFact,
+        educationTitle: "Formación",
+        education: [
+          {
+            label: "Educación formal",
+            items: [
+              {
+                title: "Técnico Superior en Análisis de Sistemas",
+                institution: "Instituto Juan XXIII",
+                period: "2023 – 2026",
+                status: "En curso, +90 %",
+                href: "https://juan23.edu.ar/carreras/tecnicatura-superior-en-analisis-de-sistemas/",
+              },
+              {
+                title: "Bachiller en Economía y Administración",
+                institution: "Escuela Superior de Comercio “Prof. Prudencio Cornejo” (EPUNS)",
+                period: "2021",
+              },
+            ],
+          },
+          {
+            label: "Cursos y certificaciones",
+            items: [
+              {
+                title: "Backend Developer",
+                institution: "Universidad Tecnológica Nacional (UTN)",
+                period: "2026",
+                status: "En curso",
+                href: "https://sceu.frba.utn.edu.ar/e-learning/detalle/curso/3801/curso-de-backend-developer-turno-manana",
+              },
+              {
+                title: "Web Designer",
+                institution: "Digital House, con aval de Mercado Libre y Globant",
+                period: "2024",
+                href: "https://www.digitalhouse.com/productos/programacion/web-designer",
+              },
+              {
+                title: "Python — Programación Inicial",
+                institution: "Ministerio de Educación de la Ciudad de Buenos Aires",
+                period: "2024",
+              },
+              {
+                title: "First Certificate in English (B2)",
+                institution: "Cambridge Assessment English",
+                period: "2022",
+                href: "https://www.cambridgeenglish.org/es/exams-and-tests/first/",
+              },
+            ],
+          },
+        ] as EducationGroup[],
+        linkedin: "Ver mi perfil en LinkedIn",
+        moreWork: "Ver todos mis proyectos",
+      },
+      process: {
+        title: "Cómo trabajamos",
+        subtitle: "Un proceso simple, sin tecnicismos y sin sorpresas.",
+        steps: [
+          {
+            title: "Charlamos",
+            text: "Me contás cómo trabajás hoy y qué te complica. Si estás en Bahía Blanca o en CABA, lo vemos en persona.",
+          },
+          {
+            title: "Te paso una propuesta",
+            text: "Por escrito: qué incluye, en cuánto tiempo y cuánto cuesta. Sin letra chica.",
+          },
+          {
+            title: "Lo construimos juntos",
+            text: "Te muestro avances para que los pruebes y ajustemos sobre la marcha.",
+          },
+          {
+            title: "Te lo entrego y te acompaño",
+            text: "Lo dejo funcionando, te enseño a usarlo y te dejo todo documentado. Después, sigo dando soporte.",
+          },
+        ] as ProcessStep[],
+      },
+      form: {
+        title: "Contame tu caso",
+        subtitle: "Cinco preguntas rápidas, menos de un minuto. Al final dejás tu email y te respondo personalmente.",
+        channelsTitle: "¿Preferís hablar ahora?",
+        channelsText: "Escribime o llamame directamente.",
+        phoneLabel: "Teléfono",
+        emailLabel: "Email",
+        locationLabel: "Ubicación",
+        locations: ["Bahía Blanca, Buenos Aires", "CABA, Buenos Aires"],
+      },
+      quiz: {
+        stepWord: "Paso",
+        ofWord: "de",
+        back: "Atrás",
+        next: "Siguiente",
+        multipleHint: "Podés elegir varias opciones.",
+        contactStep: "Tus datos",
+        // Los "id" no se traducen: se usan para guardar el progreso y elegir el caso parecido
+        questions: [
+          {
+            id: "negocio",
+            step: "Negocio",
+            title: "¿Qué tipo de negocio tenés?",
+            options: [
+              { id: "comercio", icon: "🛍️", label: "Comercio o local", hint: "Ropa, calzado, ferretería, almacén…" },
+              { id: "distribuidora", icon: "🚚", label: "Distribuidora o mayorista" },
+              { id: "produccion", icon: "🏭", label: "Fábrica o taller" },
+              { id: "servicios", icon: "💼", label: "Servicios", hint: "Estudio, consultorio, agencia…" },
+              { id: "gastronomia", icon: "🍽️", label: "Gastronomía" },
+              { id: "otro", icon: "✨", label: "Otro rubro" },
+            ],
+          },
+          {
+            id: "objetivos",
+            step: "Objetivos",
+            title: "¿Qué te gustaría resolver?",
+            multiple: true,
+            options: [
+              { id: "stock", icon: "📦", label: "Controlar el stock" },
+              { id: "ventas", icon: "💰", label: "Ventas y caja" },
+              { id: "facturacion", icon: "🧾", label: "Facturación con ARCA" },
+              { id: "pedidos", icon: "🛒", label: "Pedidos y clientes" },
+              { id: "reparto", icon: "🗺️", label: "Reparto y logística" },
+              { id: "online", icon: "🌐", label: "Vender online o por WhatsApp" },
+              { id: "reportes", icon: "📈", label: "Reportes del negocio" },
+              { id: "automatizar", icon: "⚙️", label: "Automatizar tareas repetitivas" },
+            ],
+          },
+          {
+            id: "situacion",
+            step: "Situación actual",
+            title: "¿Cómo lo manejás hoy?",
+            options: [
+              { id: "papel", icon: "📝", label: "En papel o en un cuaderno" },
+              { id: "planillas", icon: "🗂️", label: "Con planillas de Excel" },
+              { id: "sistema", icon: "💻", label: "Con un sistema que ya no me alcanza" },
+              { id: "nada", icon: "🌱", label: "Todavía no lo manejo, estoy arrancando" },
+            ],
+          },
+          {
+            id: "equipo",
+            step: "Equipo",
+            title: "¿Cuántas personas trabajan en el negocio?",
+            options: [
+              { id: "solo", icon: "👤", label: "Solo yo" },
+              { id: "chico", icon: "👥", label: "De 2 a 5" },
+              { id: "mediano", icon: "🏬", label: "De 6 a 20" },
+              { id: "grande", icon: "🏢", label: "Más de 20" },
+            ],
+          },
+          {
+            id: "plazo",
+            step: "Plazo",
+            title: "¿Para cuándo lo necesitás?",
+            options: [
+              { id: "ya", icon: "🔥", label: "Lo antes posible" },
+              { id: "pronto", icon: "📅", label: "En 1 a 3 meses" },
+              { id: "explorando", icon: "🧭", label: "Sin apuro, estoy averiguando" },
+            ],
+          },
+        ] as QuizQuestion[],
+        contactTitle: "¡Último paso! Dejame tus datos y te respondo.",
+        summaryTitle: "Tu caso",
+        matches: [
+          {
+            business: ["comercio"],
+            goals: ["stock", "ventas", "facturacion"],
+            text: "Es parecido al sistema que hice para Rominetta: stock por talle, ventas y facturación con ARCA.",
+          },
+          {
+            business: ["distribuidora"],
+            goals: ["pedidos", "reparto", "stock"],
+            text: "Es parecido al ERP que desarrollamos para PyB Pigüé: pedidos, stock, reparto y finanzas en un solo sistema.",
+          },
+          {
+            business: [],
+            goals: ["online"],
+            text: "Es parecido al catálogo online de HSG Hogar, con pedidos coordinados por WhatsApp.",
+          },
+          {
+            business: ["servicios"],
+            goals: ["automatizar"],
+            text: "Es parecido a lo que hice en un estudio contable: automatizar tareas administrativas con Python.",
+          },
+        ] as QuizMatch[],
+        matchFallback: "Cada sistema lo diseño a medida de cómo trabaja tu negocio.",
+        promise: "Te respondo personalmente con una primera idea para tu caso, sin compromiso.",
+        nameLbl: "Nombre",
+        namePlaceholder: "Nombre y apellido",
+        emailLbl: "Email",
+        emailPlaceholder: "tu@email.com",
+        phoneLbl: "WhatsApp (opcional)",
+        phonePlaceholder: "Ej.: 291 000-0000",
+        phoneHint: "Con característica, por ejemplo: 291 000-0000",
+        addComment: "Agregar un comentario",
+        commentLbl: "Comentario (opcional)",
+        commentPlaceholder: "Contame algo más de tu negocio, si querés.",
+        send: "Enviar mis respuestas",
+        sending: "Enviando…",
+        privacy: "Uso tus datos solo para responderte.",
+        successTitle: "¡Gracias, {name}!",
+        successText: "Recibí tus respuestas. Te escribo a {email} a la brevedad.",
+        successUrgent: "¿Es urgente? Mandame tus respuestas por WhatsApp:",
+        error: "No se pudieron enviar tus respuestas. Probá de nuevo o mandámelas por WhatsApp:",
+        whatsappIntro: "¡Hola, Francisco! Completé el cuestionario de tu web:",
+      },
     },
     footer: {
       rights: "Todos los derechos reservados",
@@ -452,12 +807,12 @@ export const translations = {
       pageIntro: "Acá comparto lo que voy creando: videos, ideas y notas sobre desarrollo y tecnología.",
       feedTitle: "Actualizado en tiempo real desde Reddit.",
       loading: "Cargando publicaciones...",
-      empty: "Todavia no hay publicaciones para mostrar.",
+      empty: "Todavía no hay publicaciones para mostrar.",
       error: "No pude cargar el RSS de Reddit en este momento.",
       noExcerpt: "Sin extracto disponible.",
       openInReddit: "Abrir en Reddit",
-      youtubeEmpty: "Todavia no hay videos para mostrar.",
-      tiktokSoon: "Proximamente mi TikTok.",
+      youtubeEmpty: "Todavía no hay videos para mostrar.",
+      tiktokSoon: "Próximamente mi TikTok.",
       visitTiktok: "Ver perfil",
     },
     more: {
@@ -559,7 +914,7 @@ export const translations = {
           value: [
             { icon: "🛠️", text: "Systems Analyst / IT Support", href: "/work#projects" },
             { icon: "👟", text: "Shoe store system", href: "/work#projects" },
-            { icon: "🐍", text: "PHP migration", href: "/work#projects" },
+            { icon: "📦", text: "ERP for PyB Pigüé", href: "/work#projects" },
           ],
         },
         { icon: "🌍", label: "Languages", value: "Spanish · English" },
@@ -593,6 +948,12 @@ export const translations = {
       linksSoon: "Links coming soon",
       privateProject: "Private project",
       galleryHint: "Click and browse",
+      galleryOpen: "Open {title} image gallery",
+      galleryLabel: "{title} image gallery",
+      galleryClose: "Close image gallery",
+      galleryPrevious: "Previous image",
+      galleryNext: "Next image",
+      screenshotAlt: "{title} screenshot {n}",
       items: [
          {
           title: "Personal Portfolio",
@@ -617,10 +978,10 @@ export const translations = {
           images: [sneakerhub1, sneakerhub2, sneakerhub3, sneakerhub4, sneakerhub5],
         },
         {
-          title: "PHP Software Migration",
-          category: "Legacy system modernization",
+          title: "PyB Pigüé",
+          category: "ERP for a commercial distributor",
           description:
-            "**Migration and modernization of a legacy system** developed in PHP. Project under active development.",
+            "**Custom ERP** for PyB Pigüé, a commercial distributor: sales and orders, stock, customers, deliveries and finance in one system. Project under active development.",
           techs: ["PHP", "MySQL", "JavaScript"],
           github: null,
           demo: null,
@@ -639,7 +1000,7 @@ export const translations = {
           title: "Rominetta Management System Prototype",
           category: "Inventory management & point of sale",
           description:
-            "**Inventory control system** by size matrix, point of sale and sales tracking for a footwear store.",
+            "**Inventory control system** by size matrix, point of sale, sales tracking and electronic invoicing through ARCA (Argentina's tax agency) for a footwear store.",
           techs: ["React", "TypeScript", "Node.js", "SQLite"],
           github: null,
           demo: null,
@@ -728,15 +1089,294 @@ export const translations = {
       ] as ExperienceItem[],
     },
     contact: {
-      title: "Contact",
-      subtitle: "Have a proposal or question? Write to me and I'll get back to you shortly.",
-      nameLbl: "Name",
-      namePlaceholder: "Your name",
-      emailLbl: "Email",
-      emailPlaceholder: "your@email.com",
-      messageLbl: "Message",
-      messagePlaceholder: "Write your message...",
-      send: "Send message",
+      pageTitle: "Contact · Francisco Calvo — Custom software in Bahía Blanca & Buenos Aires",
+      whatsappMessage: "Hi, Francisco! I saw your website and I'd like to ask about a system for my business.",
+      hero: {
+        role: "Systems Analyst · Developer",
+        location: "Bahía Blanca & Buenos Aires",
+        kicker: "Custom software for shops and small businesses",
+        titleStart: "Get your business in order with a ",
+        titleHighlight: "custom-built system",
+        titleEnd: ".",
+        lead: "Stock, sales, orders and customers in one place. I design and build it myself, around the way your business works.",
+        whatsappCta: "Message me on WhatsApp",
+        formCta: "Answer 5 quick questions",
+        reassurance: "You talk to me directly. The first conversation comes with no commitment.",
+      },
+      cases: {
+        title: "Real cases",
+        subtitle: "Two businesses, two concrete problems and a custom solution for each one.",
+        challengeLabel: "The challenge",
+        solutionLabel: "The solution",
+        resultsLabel: "Result",
+        progressLabel: "What it already includes",
+        finished: "Completed",
+        inProgress: "In progress",
+        techLabel: "Built with",
+        viewScreens: "View screenshots",
+        items: [
+          {
+            client: "Rominetta",
+            sector: "Shoe store",
+            status: "finished",
+            headline: "Stock by size, sales and electronic invoicing in one system.",
+            challenge:
+              "In a shoe store, every model comes in seven sizes. Without a system, knowing what's left, what sold and what to restock takes time and leads to mistakes.",
+            solution:
+              "I designed and built a management system for the store: a size matrix, a point of sale and a record of every sale.",
+            results: [
+              "Stock for every model by size, from 35 to 41, on a single screen.",
+              "Every sale updates the stock instantly.",
+              "Electronic invoicing integrated with ARCA, Argentina's tax agency.",
+              "Alerts when a size is about to run out.",
+              "Card, contactless and cash payments, plus a daily sales summary.",
+            ],
+            techs: ["React", "TypeScript", "Node.js", "SQLite"],
+            images: [protoRominetta1, protoRominetta3, protoRominetta2],
+            coverAlt: "Rominetta's dashboard showing today's sales, stock value and low-stock size alerts",
+          },
+          {
+            client: "PyB Pigüé",
+            sector: "Commercial distributor",
+            status: "inprogress",
+            headline: "Sales, stock, deliveries and finance in one custom-built ERP.",
+            challenge:
+              "A distributor handles sales, orders, stock, deliveries and collections all at once, and needs to see everything in one place to stay in control.",
+            solution:
+              "A custom ERP that brings sales, orders, stock, customers, deliveries and finance together in one system.",
+            results: [
+              "Order taking and price lists by customer type.",
+              "Delivery routes and tracking for every shipment.",
+              "Stock with minimum-level alerts and shrinkage control.",
+              "Collections, customer accounts and daily cash control.",
+              "Separate access for each role: admin, sales and delivery.",
+            ],
+            techs: ["PHP", "MySQL", "JavaScript"],
+            images: [
+              distribuidoraVarela2,
+              distribuidoraVarela3,
+              distribuidoraVarela6,
+              distribuidoraVarela5,
+              distribuidoraVarela4,
+              distribuidoraVarela7,
+            ],
+            coverAlt: "Main menu of PyB Pigüé's ERP, with sales, deliveries, finance, stock and customer modules",
+          },
+        ] as CaseStudy[],
+      },
+      testimonials: {
+        title: "What my clients say",
+        items: [] as Testimonial[],
+      },
+      about: {
+        title: "Who's behind this",
+        intro:
+          "I'm Francisco Calvo, a systems analyst and developer. I work with shops and small businesses: I learn how your business runs and turn it into a system you use every day.",
+        photoAlt: "Portrait of Francisco Calvo",
+        location: {
+          icon: "📍",
+          title: "Bahía Blanca & Buenos Aires",
+          text: "I split my time between both cities and work with businesses in each and the surrounding areas, in person or remotely.",
+        } as ContactFact,
+        educationTitle: "Education",
+        education: [
+          {
+            label: "Formal education",
+            items: [
+              {
+                title: "Systems Analysis Technician",
+                institution: "Instituto Juan XXIII",
+                period: "2023 – 2026",
+                status: "In progress, 90%+",
+                href: "https://juan23.edu.ar/carreras/tecnicatura-superior-en-analisis-de-sistemas/",
+              },
+              {
+                title: "High school diploma in Economics and Administration",
+                institution: "Escuela Superior de Comercio “Prof. Prudencio Cornejo” (EPUNS)",
+                period: "2021",
+              },
+            ],
+          },
+          {
+            label: "Courses & certifications",
+            items: [
+              {
+                title: "Backend Developer",
+                institution: "Universidad Tecnológica Nacional (UTN)",
+                period: "2026",
+                status: "In progress",
+                href: "https://sceu.frba.utn.edu.ar/e-learning/detalle/curso/3801/curso-de-backend-developer-turno-manana",
+              },
+              {
+                title: "Web Designer",
+                institution: "Digital House, endorsed by Mercado Libre and Globant",
+                period: "2024",
+                href: "https://www.digitalhouse.com/productos/programacion/web-designer",
+              },
+              {
+                title: "Python — Introduction to Programming",
+                institution: "Ministry of Education, City of Buenos Aires",
+                period: "2024",
+              },
+              {
+                title: "First Certificate in English (B2)",
+                institution: "Cambridge Assessment English",
+                period: "2022",
+                href: "https://www.cambridgeenglish.org/es/exams-and-tests/first/",
+              },
+            ],
+          },
+        ] as EducationGroup[],
+        linkedin: "See my LinkedIn profile",
+        moreWork: "See all my projects",
+      },
+      process: {
+        title: "How we'll work",
+        subtitle: "A simple process, no jargon and no surprises.",
+        steps: [
+          {
+            title: "We talk",
+            text: "You tell me how you work today and what's getting in the way. If you're in Bahía Blanca or Buenos Aires, we can meet in person.",
+          },
+          {
+            title: "You get a proposal",
+            text: "In writing: what's included, how long it takes and what it costs. No fine print.",
+          },
+          {
+            title: "We build it together",
+            text: "I show you progress so you can try it out and we can adjust as we go.",
+          },
+          {
+            title: "Delivery and support",
+            text: "I leave it up and running, show you how to use it and document everything. After that, I keep providing support.",
+          },
+        ] as ProcessStep[],
+      },
+      form: {
+        title: "Tell me about your case",
+        subtitle: "Five quick questions, under a minute. At the end you leave your email and I'll reply personally.",
+        channelsTitle: "Prefer to talk now?",
+        channelsText: "Message or call me directly.",
+        phoneLabel: "Phone",
+        emailLabel: "Email",
+        locationLabel: "Location",
+        locations: ["Bahía Blanca, Argentina", "Buenos Aires, Argentina"],
+      },
+      quiz: {
+        stepWord: "Step",
+        ofWord: "of",
+        back: "Back",
+        next: "Next",
+        multipleHint: "You can pick more than one.",
+        contactStep: "Your details",
+        questions: [
+          {
+            id: "negocio",
+            step: "Business",
+            title: "What kind of business do you run?",
+            options: [
+              { id: "comercio", icon: "🛍️", label: "Shop or store", hint: "Clothing, shoes, hardware, groceries…" },
+              { id: "distribuidora", icon: "🚚", label: "Distributor or wholesaler" },
+              { id: "produccion", icon: "🏭", label: "Factory or workshop" },
+              { id: "servicios", icon: "💼", label: "Services", hint: "Firm, practice, agency…" },
+              { id: "gastronomia", icon: "🍽️", label: "Food and hospitality" },
+              { id: "otro", icon: "✨", label: "Something else" },
+            ],
+          },
+          {
+            id: "objetivos",
+            step: "Goals",
+            title: "What would you like to solve?",
+            multiple: true,
+            options: [
+              { id: "stock", icon: "📦", label: "Stock control" },
+              { id: "ventas", icon: "💰", label: "Sales and checkout" },
+              { id: "facturacion", icon: "🧾", label: "Electronic invoicing (ARCA)" },
+              { id: "pedidos", icon: "🛒", label: "Orders and customers" },
+              { id: "reparto", icon: "🗺️", label: "Deliveries and logistics" },
+              { id: "online", icon: "🌐", label: "Selling online or via WhatsApp" },
+              { id: "reportes", icon: "📈", label: "Business reports" },
+              { id: "automatizar", icon: "⚙️", label: "Automating repetitive tasks" },
+            ],
+          },
+          {
+            id: "situacion",
+            step: "Current setup",
+            title: "How do you handle it today?",
+            options: [
+              { id: "papel", icon: "📝", label: "On paper or in a notebook" },
+              { id: "planillas", icon: "🗂️", label: "With Excel spreadsheets" },
+              { id: "sistema", icon: "💻", label: "With a system that no longer fits" },
+              { id: "nada", icon: "🌱", label: "I don't yet, I'm just starting" },
+            ],
+          },
+          {
+            id: "equipo",
+            step: "Team",
+            title: "How many people work in the business?",
+            options: [
+              { id: "solo", icon: "👤", label: "Just me" },
+              { id: "chico", icon: "👥", label: "2 to 5" },
+              { id: "mediano", icon: "🏬", label: "6 to 20" },
+              { id: "grande", icon: "🏢", label: "More than 20" },
+            ],
+          },
+          {
+            id: "plazo",
+            step: "Timeline",
+            title: "When do you need it?",
+            options: [
+              { id: "ya", icon: "🔥", label: "As soon as possible" },
+              { id: "pronto", icon: "📅", label: "Within 1 to 3 months" },
+              { id: "explorando", icon: "🧭", label: "No rush, just exploring" },
+            ],
+          },
+        ] as QuizQuestion[],
+        contactTitle: "Last step! Leave your details and I'll reply.",
+        summaryTitle: "Your case",
+        matches: [
+          {
+            business: ["comercio"],
+            goals: ["stock", "ventas", "facturacion"],
+            text: "It's similar to the system I built for Rominetta: stock by size, sales and electronic invoicing.",
+          },
+          {
+            business: ["distribuidora"],
+            goals: ["pedidos", "reparto", "stock"],
+            text: "It's similar to the ERP we're building for PyB Pigüé: orders, stock, deliveries and finance in one system.",
+          },
+          {
+            business: [],
+            goals: ["online"],
+            text: "It's similar to HSG Hogar's online catalog, with orders handled over WhatsApp.",
+          },
+          {
+            business: ["servicios"],
+            goals: ["automatizar"],
+            text: "It's similar to my work at an accounting firm: automating admin tasks with Python.",
+          },
+        ] as QuizMatch[],
+        matchFallback: "Every system I build is designed around the way your business works.",
+        promise: "I'll reply personally with a first idea for your case, no commitment.",
+        nameLbl: "Name",
+        namePlaceholder: "First and last name",
+        emailLbl: "Email",
+        emailPlaceholder: "you@email.com",
+        phoneLbl: "WhatsApp (optional)",
+        phonePlaceholder: "e.g. +54 291 000-0000",
+        phoneHint: "Include the area code, e.g. +54 291 000-0000",
+        addComment: "Add a comment",
+        commentLbl: "Comment (optional)",
+        commentPlaceholder: "Tell me a bit more about your business, if you like.",
+        send: "Send my answers",
+        sending: "Sending…",
+        privacy: "I'll only use your details to get back to you.",
+        successTitle: "Thanks, {name}!",
+        successText: "I got your answers. I'll write to {email} shortly.",
+        successUrgent: "Urgent? Send me your answers on WhatsApp:",
+        error: "Your answers couldn't be sent. Please try again or send them to me on WhatsApp:",
+        whatsappIntro: "Hi, Francisco! I filled out the questionnaire on your website:",
+      },
     },
     footer: {
       rights: "All rights reserved",

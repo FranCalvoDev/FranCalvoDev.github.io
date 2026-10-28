@@ -1,5 +1,6 @@
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
+import { CONTACT } from "../utils/contactInfo"
 
 const Footer = () => {
   const { language } = useLanguage()
@@ -22,7 +23,7 @@ const Footer = () => {
         {/* Links */}
         <div className="flex gap-6">
           <a
-            href="https://www.linkedin.com/in/francisco-calvo-5445582ba/"
+            href={CONTACT.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="text-foreground text-sm hover:text-primary transition"

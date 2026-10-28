@@ -190,7 +190,8 @@ const Navbar = () => {
               </li>
             ))}
             <li className="flex-1">
-              <MegaMenu />
+              {/* La key por ruta reinicia el menú al navegar, así se cierra solo en cada cambio de página */}
+              <MegaMenu key={location.pathname} />
             </li>
           </ul>
 

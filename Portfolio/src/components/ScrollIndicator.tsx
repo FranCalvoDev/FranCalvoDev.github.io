@@ -49,6 +49,9 @@ const ScrollIndicator = () => {
 
   const isHome = location.pathname === "/"
 
+  // En la landing de contacto ya está el botón flotante de WhatsApp; la flecha taparía contenido.
+  if (location.pathname === "/contact") return null
+
   return (
     <button
       onClick={handleClick}

@@ -3,7 +3,8 @@ import { motion } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import PageHeader from "./PageHeader"
-import { iconFor, TechIcon } from "./TechIcon"
+import { TechIcon } from "./TechIcon"
+import { iconFor } from "../utils/techIcons"
 
 // Resalta en verde las partes marcadas con **...** (tipo de proyecto) dentro de la descripción
 const highlight = (text: string) =>
@@ -17,6 +18,10 @@ const highlight = (text: string) =>
     )
   )
 
+// Completa los textos traducidos con {title} y {n}
+const fill = (template: string, values: Record<string, string | number>) =>
+  template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""))
+
 const ProjectCarousel = ({
   images,
   title,
@@ -28,8 +33,9 @@ const ProjectCarousel = ({
 }) => {
   const [current, setCurrent] = useState(0)
   const { language } = useLanguage()
-  const imageSoon = translations[language].projects.imageSoon
-  const galleryHint = translations[language].projects.galleryHint
+  const t = translations[language].projects
+  const imageSoon = t.imageSoon
+  const galleryHint = t.galleryHint
 
   useEffect(() => {
     if (images.length <= 1) return
@@ -44,7 +50,7 @@ const ProjectCarousel = ({
     <button
       type="button"
       onClick={onOpen}
-      aria-label={`Open ${title} image gallery`}
+      aria-label={fill(t.galleryOpen, { title })}
       className="group relative block w-full aspect-[16/10] rounded-2xl overflow-hidden mb-5 bg-[#071007] cursor-zoom-in"
     >
       {images.length > 0 && (
@@ -59,7 +65,7 @@ const ProjectCarousel = ({
         <img
           key={index}
           src={src}
-          alt={`${title} screenshot ${index + 1}`}
+          alt={fill(t.screenshotAlt, { title, n: index + 1 })}
           loading={index === 0 ? "eager" : "lazy"}
           decoding="async"
           onError={(e) => {
@@ -102,7 +108,7 @@ const ProjectCarousel = ({
   )
 }
 
-const ProjectLightbox = ({
+export const ProjectLightbox = ({
   title,
   images,
   current,
@@ -115,6 +121,9 @@ const ProjectLightbox = ({
   onClose: () => void
   onChange: (index: number) => void
 }) => {
+  const { language } = useLanguage()
+  const t = translations[language].projects
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose()
@@ -134,7 +143,7 @@ const ProjectLightbox = ({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`${title} image gallery`}
+      aria-label={fill(t.galleryLabel, { title })}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-8"
       onClick={onClose}
     >
@@ -147,7 +156,7 @@ const ProjectLightbox = ({
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close image gallery"
+            aria-label={t.galleryClose}
             className="rounded-full border border-border/40 bg-transparent backdrop-blur-sm px-4 py-2 text-xl leading-none text-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
           >
             ×
@@ -157,7 +166,7 @@ const ProjectLightbox = ({
         <div className="relative flex min-h-0 w-full flex-1 items-center justify-center">
           <img
             src={images[current]}
-            alt={`${title} screenshot ${current + 1}`}
+            alt={fill(t.screenshotAlt, { title, n: current + 1 })}
             className="max-h-full max-w-full rounded-xl object-contain shadow-2xl"
           />
 
@@ -166,7 +175,7 @@ const ProjectLightbox = ({
               <button
                 type="button"
                 onClick={() => onChange((current - 1 + images.length) % images.length)}
-                aria-label="Previous image"
+                aria-label={t.galleryPrevious}
                 className="absolute left-2 rounded-full bg-background/80 px-4 py-3 text-2xl text-primary transition-colors hover:bg-primary hover:text-primary-foreground md:left-6"
               >
                 ‹
@@ -174,7 +183,7 @@ const ProjectLightbox = ({
               <button
                 type="button"
                 onClick={() => onChange((current + 1) % images.length)}
-                aria-label="Next image"
+                aria-label={t.galleryNext}
                 className="absolute right-2 rounded-full bg-background/80 px-4 py-3 text-2xl text-primary transition-colors hover:bg-primary hover:text-primary-foreground md:right-6"
               >
                 ›

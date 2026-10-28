@@ -28,7 +28,9 @@ export const fetchYoutubeVideos = async (limit = 4): Promise<YoutubeVideo[]> => 
 
   return payload.items.slice(0, limit).flatMap((item) => {
     const id = item.guid?.replace("yt:video:", "") || item.link?.match(/[?&]v=([\w-]{11})/)?.[1]
-    if (!id) return []
+    // El feed llega por un proxy de terceros: solo se acepta un ID de video con el formato real de YouTube
+    if (!id || !/^[\w-]{11}$/.test(id)) return []
+    const published = item.pubDate ? new Date(item.pubDate.replace(" ", "T") + "Z") : null
 
     return [
       {
@@ -36,7 +38,7 @@ export const fetchYoutubeVideos = async (limit = 4): Promise<YoutubeVideo[]> => 
         title: item.title?.trim() || "",
         url: `https://www.youtube.com/watch?v=${id}`,
         thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
-        createdAt: item.pubDate ? new Date(item.pubDate.replace(" ", "T") + "Z").toISOString() : "",
+        createdAt: published && !Number.isNaN(published.getTime()) ? published.toISOString() : "",
       },
     ]
   })
