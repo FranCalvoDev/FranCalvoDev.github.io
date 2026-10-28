@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { fadeUp, fadeLeft, fadeRight, staggerContainer } from "../utils/animations"
@@ -48,10 +48,20 @@ const useTypewriter = (text: string, speed = 28) => {
   return typed.text === text ? text.slice(0, typed.count) : ""
 }
 
+// Componente aparte: el setState de cada letra solo re-renderiza este <span>, no todo el Hero con sus componentes animados
+const TypewriterText = ({ text }: { text: string }) => {
+  const typed = useTypewriter(text)
+  return (
+    <span>
+      {typed}
+      <span className="typewriter-caret inline-block w-0.5 h-4 -mb-0.5 ml-0.5 bg-primary align-middle" />
+    </span>
+  )
+}
+
 const Hero = () => {
   const { language } = useLanguage()
   const t = translations[language].hero
-  const typedDescPart1 = useTypewriter(t.descPart1)
 
   const cvFile =
     language === "es"
@@ -65,13 +75,13 @@ const Hero = () => {
     >
       <div className="max-w-3xl mx-auto w-full flex justify-center text-center">
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <motion.div
+          <m.div
             className="flex flex-col items-center gap-8"
             variants={staggerContainer}
             initial="hidden"
@@ -79,7 +89,7 @@ const Hero = () => {
             viewport={{ once: true, amount: 0.25 }}
           >
             {/* Saludo + Nombre */}
-            <motion.div variants={fadeLeft} className="flex flex-col items-center gap-1">
+            <m.div variants={fadeLeft} className="flex flex-col items-center gap-1">
               <span className="text-primary text-sm font-medium tracking-widest uppercase">
                 {t.greeting}
               </span>
@@ -87,10 +97,10 @@ const Hero = () => {
                 Francisco <br />
                 <span className="text-primary">Calvo</span>
               </h1>
-            </motion.div>
+            </m.div>
 
             {/* Título */}
-            <motion.h2
+            <m.h2
               variants={fadeRight}
               className="gap-1 text-xl md:text-2xl text-muted-foreground font-medium"
             >
@@ -98,25 +108,22 @@ const Hero = () => {
               <span className="text-primary">{t.titleLine1Highlight} </span> <br />
               {t.titleLine2}{" "}
               <span className="text-primary">{t.titleLine2Highlight}</span>
-            </motion.h2>
+            </m.h2>
 
             {/* Descripción */}
-            <motion.p
+            <m.p
               variants={fadeUp}
               className="text-foreground text-base leading-relaxed max-w-md text-justify"
             >
-              <span>
-                {typedDescPart1}
-                <span className="typewriter-caret inline-block w-0.5 h-4 -mb-0.5 ml-0.5 bg-primary align-middle" />
-              </span>
+              <TypewriterText text={t.descPart1} />
               <span className="mt-2 block">
                 {t.descBilingual}
                 <span className="text-primary">{t.descBilingualHighlight}</span>.
               </span>
-            </motion.p>
+            </m.p>
 
             {/* CTAs */}
-            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
+            <m.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
               <Link
                 to="/work"
                 className="bg-primary text-primary-foreground font-semibold text-base px-7 py-3.5 rounded-full hover:opacity-90 transition-all duration-300 ease-out active:scale-95"
@@ -129,10 +136,10 @@ const Hero = () => {
               >
                 {t.contactMe}
               </Link>
-            </motion.div>
+            </m.div>
 
             {/* Acciones minimalistas */}
-            <motion.div variants={fadeUp} className="flex items-start justify-center gap-8 sm:gap-12">
+            <m.div variants={fadeUp} className="flex items-start justify-center gap-8 sm:gap-12">
               {[
                 { href: "https://github.com/FranCalvoDev", label: "GitHub", ariaLabel: "GitHub", icon: <GitHubIcon /> },
                 { href: cvFile, label: t.cvLabel, ariaLabel: t.downloadCV, icon: <DownloadIcon />, download: true },
@@ -171,10 +178,10 @@ const Hero = () => {
                   </span>
                 </a>
               ))}
-            </motion.div>
+            </m.div>
 
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
       </div>
     </section>

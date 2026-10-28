@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations, type CaseStudy } from "../translations/translations"
 import PageHeader from "./PageHeader"
@@ -31,7 +31,7 @@ const CaseStudies = () => {
             const finished = item.status === "finished"
 
             return (
-              <motion.article
+              <m.article
                 key={item.client}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +143,7 @@ const CaseStudies = () => {
                     })}
                   </div>
                 </div>
-              </motion.article>
+              </m.article>
             )
           })}
         </div>

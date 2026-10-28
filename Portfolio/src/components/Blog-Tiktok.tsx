@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { SOCIAL_LINKS } from "../utils/socialLinks"
@@ -12,7 +12,7 @@ const BlogTiktok = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -22,8 +22,8 @@ const BlogTiktok = () => {
           TikTok
         </h2>
         <UsernameLink platform="tiktok" />
-      </motion.div>
-      <motion.div
+      </m.div>
+      <m.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -41,7 +41,7 @@ const BlogTiktok = () => {
             {t.visitTiktok}
           </a>
         )}
-      </motion.div>
+      </m.div>
     </div>
   )
 }

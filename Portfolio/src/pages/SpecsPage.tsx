@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import PageHeader from "../components/PageHeader"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import { specsItems } from "../data/specsItems"
-import deskPhoto  from "../assets/specs-ph/desk.jpg"
+import deskPhoto  from "../assets/specs-ph/desk.webp"
 
 const SpecsPage = () => {
   const { language } = useLanguage()
@@ -24,7 +24,7 @@ const SpecsPage = () => {
         <PageHeader title={t.specs.title} subtitle={t.specs.description} />
       </div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -83,9 +83,9 @@ const SpecsPage = () => {
             <p className="text-xs text-muted-foreground">{t.specs.viewSpecs}</p>
           </div>
         )}
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -119,7 +119,7 @@ const SpecsPage = () => {
             ← {t.back}
           </Link>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   )
 }

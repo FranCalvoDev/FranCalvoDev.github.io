@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 
 type PageHeaderProps = {
   title: string
@@ -19,7 +19,7 @@ const PageHeader = ({ title, subtitle, as: Heading = "h1", titleAdornment }: Pag
     </div>
     <span aria-hidden="true" className="block h-px w-12 bg-primary/60" />
     {subtitle && (
-      <motion.p
+      <m.p
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -27,7 +27,7 @@ const PageHeader = ({ title, subtitle, as: Heading = "h1", titleAdornment }: Pag
         className="text-muted-foreground text-base md:text-lg max-w-xl"
       >
         {subtitle}
-      </motion.p>
+      </m.p>
     )}
   </div>
 )
