@@ -29,6 +29,15 @@ const getSubredditFromUrl = (url: string) => {
 const normalizeRedditPostUrl = (url: string) =>
   url.replace(/^https?:\/\/old\.reddit\.com(?=\/|$)/i, "https://www.reddit.com")
 
+// Los posts pueden llegar por proxies de terceros: solo se aceptan links a reddit.com
+const isRedditUrl = (url: string) => /^https:\/\/(www\.)?reddit\.com\//i.test(url)
+
+// Fecha ISO segura: una fecha inválida no debe romper el feed entero
+const toIsoDate = (value: string | undefined) => {
+  const date = value ? new Date(value) : new Date()
+  return Number.isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString()
+}
+
 const normalizePosts = (posts: RedditPost[], limit: number) => posts.slice(0, limit)
 
 const fetchLocalPosts = async (limit: number): Promise<RedditPost[]> => {
@@ -90,7 +99,7 @@ const fetchViaRss2Json = async (limit: number): Promise<RedditPost[]> => {
       title: item.title?.trim() || "",
       text,
       url,
-      createdAt: item.pubDate ? new Date(item.pubDate).toISOString() : new Date().toISOString(),
+      createdAt: toIsoDate(item.pubDate),
       subreddit: category || getSubredditFromUrl(url),
     }
   })
@@ -104,23 +113,26 @@ const fetchRssXml = async (url: string) => {
   ]
 
   for (let index = 0; index < attempts.length; index += 1) {
-    const endpoint = attempts[index]
-    const response = await fetch(endpoint)
-    if (!response.ok) {
-      continue
-    }
-
-    if (index === 2) {
-      const payload = (await response.json()) as { contents?: string }
-      if (payload.contents) {
-        return payload.contents
+    try {
+      const response = await fetch(attempts[index])
+      if (!response.ok) {
+        continue
       }
-      continue
-    }
 
-    const xml = await response.text()
-    if (xml) {
-      return xml
+      if (index === 2) {
+        const payload = (await response.json()) as { contents?: string }
+        if (payload.contents) {
+          return payload.contents
+        }
+        continue
+      }
+
+      const xml = await response.text()
+      if (xml) {
+        return xml
+      }
+    } catch {
+      // Error de red o CORS (Reddit no permite pedidos directos desde el navegador): se prueba el siguiente
     }
   }
 
@@ -128,16 +140,29 @@ const fetchRssXml = async (url: string) => {
 }
 
 export const fetchRedditPostsRss = async (limit = 10): Promise<RedditPost[]> => {
-  const localPosts = await fetchLocalPosts(limit)
-  if (localPosts.length) {
-    return localPosts
+  const sources = [() => fetchLocalPosts(limit), () => fetchViaRss2Json(limit), () => fetchViaRssXml(limit)]
+  let anySourceAnswered = false
+
+  // Si una fuente se cae (red, CORS o proxy), se prueba la siguiente en vez de cortar todo
+  for (const load of sources) {
+    try {
+      const posts = (await load()).filter((post) => isRedditUrl(post.url))
+      if (posts.length) {
+        return posts
+      }
+      anySourceAnswered = true
+    } catch {
+      // Fuente no disponible: sigue con la próxima
+    }
   }
 
-  const rss2jsonPosts = await fetchViaRss2Json(limit)
-  if (rss2jsonPosts.length) {
-    return rss2jsonPosts
+  if (anySourceAnswered) {
+    return []
   }
+  throw new Error("No se pudo obtener el feed RSS de Reddit.")
+}
 
+const fetchViaRssXml = async (limit: number): Promise<RedditPost[]> => {
   const xml = await fetchRssXml(REDDIT_RSS_URL)
   const feed = new DOMParser().parseFromString(xml, "application/xml")
 
@@ -180,7 +205,7 @@ export const fetchRedditPostsRss = async (limit = 10): Promise<RedditPost[]> => 
       "reddit"
 
     const createdAtRaw = isAtom ? getText(node, "updated") || getText(node, "published") : getText(node, "pubDate")
-    const createdAt = createdAtRaw ? new Date(createdAtRaw).toISOString() : new Date().toISOString()
+    const createdAt = toIsoDate(createdAtRaw)
 
     return {
       id: getText(node, "id") || getText(node, "guid") || url || `${title}-${createdAt}`,

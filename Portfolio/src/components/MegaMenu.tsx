@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type FocusEvent, type ReactElement } from "react"
-import { useLocation } from "react-router-dom"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
 import MegaMenuCard from "./MegaMenuCard"
@@ -61,7 +60,6 @@ const SoonIcon = () => (
 
 const MegaMenu = () => {
   const { language } = useLanguage()
-  const location = useLocation()
   const t = translations[language].more
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement | null>(null)
@@ -69,11 +67,6 @@ const MegaMenu = () => {
 
   const close = useCallback(() => setOpen(false), [])
   const toggle = useCallback(() => setOpen((prev) => !prev), [])
-
-  // Cierra el panel al navegar (cambio de ruta).
-  useEffect(() => {
-    close()
-  }, [location.pathname, close])
 
   // Cierra al hacer click/tap fuera del trigger o del panel.
   useEffect(() => {

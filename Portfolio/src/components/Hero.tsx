@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import { fadeUp, fadeLeft, fadeRight, staggerContainer } from "../utils/animations"
 import { useLanguage } from "../context/LanguageContext"
 import { translations } from "../translations/translations"
+import { CONTACT } from "../utils/contactInfo"
+import { LinkedInIcon } from "./ContactIcons"
 
 // NOTA: foto/carrusel del hero deshabilitados temporalmente a la espera
 // de la reestructuración visual (ver comentarios más abajo).
@@ -15,12 +17,6 @@ import { translations } from "../translations/translations"
 const GitHubIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
     <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.19-3.37-1.19-.45-1.18-1.11-1.49-1.11-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.35 1.12 2.93.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.24 9.24 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" />
-  </svg>
-)
-
-const LinkedInIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-    <path d="M6.94 8.5H3.56V20.5H6.94V8.5ZM5.25 3.5A1.97 1.97 0 1 0 5.25 7.44 1.97 1.97 0 0 0 5.25 3.5ZM20.44 20.5H17.06V14.75c0-1.37-.03-3.13-1.91-3.13-1.92 0-2.21 1.5-2.21 3.04V20.5H9.56V8.5h3.24v1.64h.05c.45-.85 1.56-1.75 3.21-1.75 3.43 0 4.06 2.26 4.06 5.19V20.5Z" />
   </svg>
 )
 
@@ -36,20 +32,20 @@ const DownloadIcon = () => (
 // Efecto "máquina de escribir": tipea el texto letra a letra y deja
 // un cursor parpadeante al final, de forma sutil.
 const useTypewriter = (text: string, speed = 28) => {
-  const [displayed, setDisplayed] = useState("")
+  // El progreso guarda a qué texto pertenece: si cambia el texto (idioma), arranca de cero sin un setState extra
+  const [typed, setTyped] = useState({ text, count: 0 })
 
   useEffect(() => {
-    setDisplayed("")
-    let i = 0
+    let count = 0
     const interval = window.setInterval(() => {
-      i += 1
-      setDisplayed(text.slice(0, i))
-      if (i >= text.length) window.clearInterval(interval)
+      count += 1
+      setTyped({ text, count })
+      if (count >= text.length) window.clearInterval(interval)
     }, speed)
     return () => window.clearInterval(interval)
   }, [text, speed])
 
-  return displayed
+  return typed.text === text ? text.slice(0, typed.count) : ""
 }
 
 const Hero = () => {
@@ -140,7 +136,7 @@ const Hero = () => {
               {[
                 { href: "https://github.com/FranCalvoDev", label: "GitHub", ariaLabel: "GitHub", icon: <GitHubIcon /> },
                 { href: cvFile, label: t.cvLabel, ariaLabel: t.downloadCV, icon: <DownloadIcon />, download: true },
-                { href: "https://www.linkedin.com/in/francisco-calvo-5445582ba/", label: "LinkedIn", ariaLabel: "LinkedIn", icon: <LinkedInIcon /> },
+                { href: CONTACT.linkedin, label: "LinkedIn", ariaLabel: "LinkedIn", icon: <LinkedInIcon /> },
               ].map(({ href, label, ariaLabel, icon, download }, i) => (
                 <a
                   key={label}

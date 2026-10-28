@@ -6,11 +6,14 @@ import { fetchRedditPostsRss, type RedditPost } from "../utils/redditRss"
 import { UsernameLink } from "./SocialIcons"
 
 const formatDate = (value: string, language: "es" | "en") => {
+  // Una fecha inválida haría que Intl lance una excepción y se caiga toda la página
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return ""
   return new Intl.DateTimeFormat(language === "es" ? "es-AR" : "en-US", {
     day: "2-digit",
     month: "short",
     year: "numeric",
-  }).format(new Date(value))
+  }).format(date)
 }
 
 const BlogReddit = () => {
@@ -33,9 +36,10 @@ const BlogReddit = () => {
         if (!cancelled) {
           setPosts(data)
         }
-      } catch (err) {
+      } catch {
+        // Mensaje traducido para el visitante, no el error técnico del navegador ("Failed to fetch")
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : t.error)
+          setError(t.error)
         }
       } finally {
         if (!cancelled) {
