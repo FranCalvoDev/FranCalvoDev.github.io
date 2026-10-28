@@ -25,6 +25,9 @@ const ScrollIndicator = () => {
     const schedule = () => {
       if (!frame) frame = window.requestAnimationFrame(checkScrollable)
     }
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(checkScrollable)
+    }
 
     // Al cambiar de página el alto del documento cambia; recalculamos tras el render.
     const timeout = window.setTimeout(schedule, 50)
